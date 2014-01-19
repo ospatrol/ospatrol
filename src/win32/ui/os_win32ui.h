@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/win32/ui/os_win32ui.h, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -9,8 +6,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -26,15 +22,15 @@
 
 
 /* Default values */
-#define CONFIG          "ossec.conf"
-#define NEWCONFIG       "new-ossec.conf"
-#define LASTCONFIG      "last-ossec.conf"
+#define CONFIG          "ospatrol.conf"
+#define NEWCONFIG       "new-ospatrol.conf"
+#define LASTCONFIG      "last-ospatrol.conf"
 #define VERSION_FILE    "VERSION.txt"
-#define OSSECLOGS       "ossec.log"
+#define OSPATROLLOGS       "ospatrol.log"
 #define HELPTXT         "help.txt"
 #define AUTH_FILE       "client.keys"
 #define SENDER_FILE     "rids\\sender_counter"
-#define DEFDIR          "C:\\Program Files\\ossec-agent"
+#define DEFDIR          "C:\\Program Files\\ospatrol-agent"
 
 
 /* Status messages */
@@ -45,10 +41,10 @@
 #define ST_NOTSET           "0"
 #define ST_MISSING_IMPORT   "Require import of authentication key.\r\n" \
                             "            - Not Running..."
-#define ST_MISSING_SERVER   "Require OSSEC Server IP address.\r\n" \
+#define ST_MISSING_SERVER   "Require OSPatrol Server IP address.\r\n" \
                             "            - Not Running..."
 #define ST_MISSING_ALL      "Require import of authentication key.\r\n" \
-                            "            Missing OSSEC Server IP address.\r\n" \
+                            "            Missing OSPatrol Server IP address.\r\n" \
                             "            - Not Running..."
 
 
@@ -65,8 +61,8 @@ char *decode_base64(const char *src);
 char *encode_base64(int size, char *src);
 
 
-/* Global ossec config structure */
-typedef struct _ossec_config
+/* Global ospatrol config structure */
+typedef struct _ospatrol_config
 {
     unsigned short int server_type;
     unsigned short int admin_access;
@@ -83,7 +79,7 @@ typedef struct _ossec_config
     char *version;
     char *install_date;
     char *status;
-}ossec_config;
+}ospatrol_config;
 
 
 /** Global variables **/
@@ -92,15 +88,15 @@ typedef struct _ossec_config
 char ui_server_info[2048 +1];
 
 /* Configuration */
-ossec_config config_inst;
+ospatrol_config config_inst;
 
 /* Status bar */
 HWND hStatus;
 
 
 
-/* Ossec icon */
-#define IDI_OSSECICON  201
+/* OSPatrol icon */
+#define IDI_OSPATROLICON  201
 #define UI_MANIFEST_ID 202
 
 /* User input */
@@ -144,17 +140,17 @@ char *cat_file(char *file, FILE *fp2);
 /* is_file present */
 int is_file(char *file);
 
-/* Reads ossec config */
+/* Reads ospatrol config */
 int config_read(HWND hwnd);
 
 /* Initializes the config */
 void init_config();
 
-/* Set OSSEC Server IP */
-int set_ossec_server(char *ip, HWND hwnd);
+/* Set OSPatrol Server IP */
+int set_ospatrol_server(char *ip, HWND hwnd);
 
-/* Get OSSEC Server IP */
-int get_ossec_server();
+/* Get OSPatrol Server IP */
+int get_ospatrol_server();
 
 
 #endif

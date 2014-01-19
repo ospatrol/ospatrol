@@ -15,14 +15,14 @@
 #include "os_xml/os_xml.h"
 #include "os_xml/os_xml_writer.h"
 
-#define OSSEC_CONFIG_TMP  ".tmp.ossec.conf"
+#define OSPATROL_CONFIG_TMP  ".tmp.ospatrol.conf"
 
 
 /* Enable Syscheck.*/
 int main(int argc, char **argv)
 {
     char *status;
-    char *(xml_syscheck_status[])={"ossec_config","syscheck","disabled", NULL};
+    char *(xml_syscheck_status[])={"ospatrol_config","syscheck","disabled", NULL};
 
     if(argc < 3)
     {
@@ -39,10 +39,10 @@ int main(int argc, char **argv)
     }
 
 
-    /* Checking if ossec was installed already */
-    if(!fileexist(OSSECCONF))
+    /* Checking if ospatrol was installed already */
+    if(!fileexist(OSPATROLCCONF))
     {
-        printf("%s: OSSEC not installed yet. Exiting.\n", argv[0]);
+        printf("%s: OSPatrol not installed yet. Exiting.\n", argv[0]);
         return(0);
     }
 
@@ -59,7 +59,7 @@ int main(int argc, char **argv)
 
 
     /* Writing to the XML. */
-    if(OS_WriteXML(OSSECCONF, OSSEC_CONFIG_TMP, xml_syscheck_status,
+    if(OS_WriteXML(OSPATROLCONF, OSPATROL_CONFIG_TMP, xml_syscheck_status,
                    NULL, "no", status, 0) != 0)
     {
         printf("%s: Error writing to the Config file. Exiting.\n", argv[0]);
@@ -67,9 +67,9 @@ int main(int argc, char **argv)
     }
 
     /* Renaming config files */
-    unlink(OSSECLAST);
-    rename(OSSECCONF, OSSECLAST);
-    rename(OSSEC_CONFIG_TMP, OSSECCONF);
+    unlink(OSPATROLLAST);
+    rename(OSPATROLCONF, OSPATROLLAST);
+    rename(OSPATROL_CONFIG_TMP, OSPATROLCONF);
 
     return(0);
 }

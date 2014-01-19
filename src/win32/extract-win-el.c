@@ -19,11 +19,11 @@
 #include <windows.h>
 
 #define BUFFER_SIZE 2048*64
-#define DEFAULT_FILE 	"C:\\ossec-extracted-evt.log"
+#define DEFAULT_FILE 	"C:\\ospatrol-extracted-evt.log"
 
 FILE *fp;
 char *file = DEFAULT_FILE;
-char *name = "ossec-extract-evtlog.exe";
+char *name = "ospatrol-extract-evtlog.exe";
 
 /* Event logging local structure */
 typedef struct _os_el
@@ -390,7 +390,7 @@ void win_startel(char *evt_log)
 
 void help()
 {
-   printf(" OSSEC HIDS - Windows event log extract\n");	
+   printf(" OSPatrol - Windows event log extract\n");	
    printf("%s -h		Shows this help message\n", name);	
    printf("%s -e		Extract logs to '%s'\n", name, DEFAULT_FILE);
    printf("%s -f	<file>	Extract logs to the file specified\n", name);	

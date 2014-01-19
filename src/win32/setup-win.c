@@ -24,20 +24,20 @@ int main(int argc, char **argv)
         return(0);
     }
 
-    /* Trying to chdir to ossec directory. */
+    /* Trying to chdir to ospatrol directory. */
     if(chdir(argv[1]) != 0)
     {
         printf("%s: Invalid directory: '%s'.\n", argv[0], argv[1]);
         return(0);
     }
 
-    /* Checking if ossec was installed already (upgrade) */
-    if(!fileexist(OSSECCONF))
+    /* Checking if ospatrol was installed already (upgrade) */
+    if(!fileexist(OSPATROLCONF))
     {
         char cmd[OS_MAXSTR +1];
 
-        /* Copy default config to ossec.conf */
-        snprintf(cmd, OS_MAXSTR, "copy %s %s", OSSECDEF, OSSECCONF);
+        /* Copy default config to ospatrol.conf */
+        snprintf(cmd, OS_MAXSTR, "copy %s %s", OSPATROLDEF, OSPATROLCONF);
         system(cmd);
     }
 
@@ -47,8 +47,8 @@ int main(int argc, char **argv)
     system("add-localfile.exe \"C:\\Documents and Settings\\All Users\\Application Data\\Symantec\\Symantec AntiVirus Corporate Edition\\7.5\\Logs\\\%m\%d20\%y.log\" --quiet");
 
 
-    /* Configure ossec for automatic startup */
-    system("sc config OssecSvc start= auto");
+    /* Configure OSPatrol for automatic startup */
+    system("sc config OSPatrolSvc start= auto");
 
 
     /* Changing permissions. */

@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -25,7 +24,7 @@
 #include "os_crypto/md5/md5_op.h"
 
 #ifndef ARGV0
-#define ARGV0 "ossec-agent"
+#define ARGV0 "ospatrol-agent"
 #endif
 
 time_t __win32_curr_time = 0;
@@ -43,7 +42,7 @@ void send_win32_info(time_t curr_time);
 /* Help message */
 void agent_help()
 {
-    printf("\nOSSEC HIDS %s %s .\n", ARGV0, __version);
+    printf("\nOSPatrol %s %s .\n", ARGV0, __version);
     printf("Available options:\n");
     printf("\t-h                This help message.\n");
     printf("\thelp              This help message.\n");
@@ -301,7 +300,7 @@ int local_start()
 
     /* Sending integrity message for agent configs */
     intcheck_file(cfg, "");
-    intcheck_file(OSSEC_DEFINES, "");
+    intcheck_file(OSPATROL_DEFINES, "");
 
 
     /* Starting receiver thread */

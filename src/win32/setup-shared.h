@@ -22,9 +22,9 @@
 #include "os_regex/os_regex.h"
 #include "headers/file_op.h"
 
-#define OSSECCONF   "ossec.conf"
-#define OSSECDEF    "default-ossec.conf"
-#define OSSECLAST   "ossec.conf.bak"
+#define OSPATROLCONF   "ospatrol.conf"
+#define OSPATROLDEF    "default-ospatrol.conf"
+#define OSPATROLLAST   "ospatrol.conf.bak"
 #define CLIENTKEYS  "client.keys"
 #define OS_MAXSTR   1024
 

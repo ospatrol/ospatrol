@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/win32/win_service.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -9,8 +6,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -21,22 +17,22 @@
 #include <winsvc.h>
 
 #ifndef ARGV0
-#define ARGV0 "ossec-agent"
+#define ARGV0 "ospatrol-agent"
 #endif
 
-static LPTSTR g_lpszServiceName        = "OssecSvc";
-static LPTSTR g_lpszServiceDisplayName = "OSSEC HIDS";
-static LPTSTR g_lpszServiceDescription = "OSSEC HIDS Windows Agent";
+static LPTSTR g_lpszServiceName        = "OSPatrolSvc";
+static LPTSTR g_lpszServiceDisplayName = "OSPatrol";
+static LPTSTR g_lpszServiceDescription = "OSPatrol  Windows Agent";
 
-static SERVICE_STATUS          ossecServiceStatus;
-static SERVICE_STATUS_HANDLE   ossecServiceStatusHandle;
+static SERVICE_STATUS          ospatrolServiceStatus;
+static SERVICE_STATUS_HANDLE   ospatrolServiceStatusHandle;
 
 /* ServiceStart */
-void WINAPI OssecServiceStart (DWORD argc, LPTSTR *argv);
+void WINAPI OSPatrolServiceStart (DWORD argc, LPTSTR *argv);
 
 
 
-/* os_start_service: Starts ossec service */
+/* os_start_service: Starts ospatrol service */
 int os_start_service()
 {
     int rc = 0;
@@ -74,7 +70,7 @@ int os_start_service()
 }
 
 
-/* os_start_service: Starts ossec service */
+/* os_start_service: Starts ospatrol service */
 int os_stop_service()
 {
     int rc = 0;
@@ -143,7 +139,7 @@ int CheckServiceRunning()
 
 
 /* int InstallService()
- * Install the OSSEC HIDS agent service.
+ * Install the OSPatrol agent service.
  */
 int InstallService(char *path)
 {
@@ -226,7 +222,7 @@ int InstallService(char *path)
 
 
 /* int UninstallService()
- * Uninstall the OSSEC HIDS agent service.
+ * Uninstall the OSPatrol agent service.
  */
 int UninstallService()
 {
@@ -263,21 +259,21 @@ int UninstallService()
 
 
 
-/** VOID WINAPI OssecServiceCtrlHandler (DWORD dwOpcode)
+/** VOID WINAPI OSPatrolServiceCtrlHandler (DWORD dwOpcode)
  * "Signal" handler
  */
-VOID WINAPI OssecServiceCtrlHandler(DWORD dwOpcode)
+VOID WINAPI OSPatrolServiceCtrlHandler(DWORD dwOpcode)
 {
     switch(dwOpcode)
     {
         case SERVICE_CONTROL_STOP:
-            ossecServiceStatus.dwCurrentState           = SERVICE_STOPPED;
-            ossecServiceStatus.dwWin32ExitCode          = 0;
-            ossecServiceStatus.dwCheckPoint             = 0;
-            ossecServiceStatus.dwWaitHint               = 0;
+            ospatrolServiceStatus.dwCurrentState           = SERVICE_STOPPED;
+            ospatrolServiceStatus.dwWin32ExitCode          = 0;
+            ospatrolServiceStatus.dwCheckPoint             = 0;
+            ospatrolServiceStatus.dwWaitHint               = 0;
 
             verbose("%s: Received exit signal.", ARGV0);
-            SetServiceStatus (ossecServiceStatusHandle, &ossecServiceStatus);
+            SetServiceStatus (ospatrolServiceStatusHandle, &ospatrolServiceStatus);
             verbose("%s: Exiting...", ARGV0);
             return;
         default:
@@ -292,18 +288,18 @@ VOID WINAPI OssecServiceCtrlHandler(DWORD dwOpcode)
  */
 void WinSetError()
 {
-    OssecServiceCtrlHandler(SERVICE_CONTROL_STOP);
+    OSPatrolServiceCtrlHandler(SERVICE_CONTROL_STOP);
 }
 
 
 /** int os_WinMain(int argc, char **argv)
- * Initializes OSSEC dispatcher
+ * Initializes OSPatrol dispatcher
  */
 int os_WinMain(int argc, char **argv)
 {
     SERVICE_TABLE_ENTRY   steDispatchTable[] =
     {
-        { g_lpszServiceName, OssecServiceStart },
+        { g_lpszServiceName, OSPatrolServiceStart },
         { NULL,       NULL                     }
     };
 
@@ -317,41 +313,41 @@ int os_WinMain(int argc, char **argv)
 }
 
 
-/** void WINAPI OssecServiceStart (DWORD argc, LPTSTR *argv)
- * Starts OSSEC service
+/** void WINAPI OSPatrolServiceStart (DWORD argc, LPTSTR *argv)
+ * Starts OSPatrol service
  */
-void WINAPI OssecServiceStart (DWORD argc, LPTSTR *argv)
+void WINAPI OSPatrolServiceStart (DWORD argc, LPTSTR *argv)
 {
-    ossecServiceStatus.dwServiceType            = SERVICE_WIN32;
-    ossecServiceStatus.dwCurrentState           = SERVICE_START_PENDING;
-    ossecServiceStatus.dwControlsAccepted       = SERVICE_ACCEPT_STOP;
-    ossecServiceStatus.dwWin32ExitCode          = 0;
-    ossecServiceStatus.dwServiceSpecificExitCode= 0;
-    ossecServiceStatus.dwCheckPoint             = 0;
-    ossecServiceStatus.dwWaitHint               = 0;
+    ospatrolServiceStatus.dwServiceType            = SERVICE_WIN32;
+    ospatrolServiceStatus.dwCurrentState           = SERVICE_START_PENDING;
+    ospatrolServiceStatus.dwControlsAccepted       = SERVICE_ACCEPT_STOP;
+    ospatrolServiceStatus.dwWin32ExitCode          = 0;
+    ospatrolServiceStatus.dwServiceSpecificExitCode= 0;
+    ospatrolServiceStatus.dwCheckPoint             = 0;
+    ospatrolServiceStatus.dwWaitHint               = 0;
 
-    ossecServiceStatusHandle =
+    ospatrolServiceStatusHandle =
         RegisterServiceCtrlHandler(g_lpszServiceName,
-                                   OssecServiceCtrlHandler);
+                                   OSPatrolServiceCtrlHandler);
 
-    if (ossecServiceStatusHandle == (SERVICE_STATUS_HANDLE)0)
+    if (ospatrolServiceStatusHandle == (SERVICE_STATUS_HANDLE)0)
     {
         merror("%s: RegisterServiceCtrlHandler failed.", ARGV0);
         return;
     }
 
-    ossecServiceStatus.dwCurrentState = SERVICE_RUNNING;
-    ossecServiceStatus.dwCheckPoint = 0;
-    ossecServiceStatus.dwWaitHint = 0;
+    ospatrolServiceStatus.dwCurrentState = SERVICE_RUNNING;
+    ospatrolServiceStatus.dwCheckPoint = 0;
+    ospatrolServiceStatus.dwWaitHint = 0;
 
-    if (!SetServiceStatus(ossecServiceStatusHandle, &ossecServiceStatus))
+    if (!SetServiceStatus(ospatrolServiceStatusHandle, &ospatrolServiceStatus))
     {
         merror("%s: SetServiceStatus error.", ARGV0);
         return;
     }
 
 
-    #ifdef OSSECHIDS
+    #ifdef OSPATROL
     /* Starting process */
     local_start();
     #endif

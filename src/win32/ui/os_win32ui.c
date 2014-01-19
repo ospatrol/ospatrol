@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -20,7 +19,7 @@
 #include "os_win.h"
 
 
-/* Dialog -- About OSSEC */
+/* Dialog -- About OSPatrol */
 BOOL CALLBACK AboutDlgProc(HWND hwnd, UINT Message,
                            WPARAM wParam, LPARAM lParam)
 {
@@ -73,8 +72,8 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
             /* Creating management menu */
             hSubMenu = CreatePopupMenu();
-            AppendMenu(hSubMenu, menuflags, UI_MENU_MANAGE_START,"&Start OSSEC");
-            AppendMenu(hSubMenu, menuflags, UI_MENU_MANAGE_STOP,"&Stop OSSEC");
+            AppendMenu(hSubMenu, menuflags, UI_MENU_MANAGE_START,"&Start OSPatrol");
+            AppendMenu(hSubMenu, menuflags, UI_MENU_MANAGE_STOP,"&Stop OSPatrol");
             AppendMenu(hSubMenu, MF_SEPARATOR, UI_MENU_NONE,"");
             AppendMenu(hSubMenu, menuflags, UI_MENU_MANAGE_RESTART,"&Restart");
             AppendMenu(hSubMenu, menuflags, UI_MENU_MANAGE_STATUS,"&Status");
@@ -107,7 +106,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
             SendMessage(hStatus, SB_SETPARTS,
                     sizeof(statwidths)/sizeof(int),
                     (LPARAM)statwidths);
-            SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"http://www.ossec.net");
+            SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"http://ospatrol.com");
 
 	
 
@@ -119,10 +118,10 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
             /* Setting the icons */
             SendMessage(hwnd, WM_SETICON, ICON_SMALL,
                     (LPARAM)LoadIcon(GetModuleHandle(NULL),
-                                     MAKEINTRESOURCE(IDI_OSSECICON)));
+                                     MAKEINTRESOURCE(IDI_OSPATROLICON)));
             SendMessage(hwnd, WM_SETICON, ICON_BIG,
                     (LPARAM)LoadIcon(GetModuleHandle(NULL),
-                                     MAKEINTRESOURCE(IDI_OSSECICON)));
+                                     MAKEINTRESOURCE(IDI_OSPATROLICON)));
 
             if(config_inst.admin_access == 0)
             {
@@ -176,7 +175,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                     /* If auth key changed, set it */
                     if(strcmp(buf, config_inst.server) != 0)
                     {
-                        if(set_ossec_server(buf, hwnd))
+                        if(set_ospatrol_server(buf, hwnd))
                         {
                             chd = 1;
                         }
@@ -334,7 +333,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                 break;
 
             case UI_MENU_VIEW_LOGS:
-                _spawnlp( _P_NOWAIT, "notepad", "notepad " OSSECLOGS, NULL );
+                _spawnlp( _P_NOWAIT, "notepad", "notepad " OSPATROLLOGS, NULL );
                 break;
             case UI_MENU_VIEW_CONFIG:
                 _spawnlp( _P_NOWAIT, "notepad", "notepad " CONFIG, NULL );
@@ -355,7 +354,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
             case UI_MENU_MANAGE_START:
 
-                /* Starting OSSEC  -- must have a valid config before. */
+                /* Starting OSPatrol  -- must have a valid config before. */
                 if((strcmp(config_inst.key, FL_NOKEY) != 0) &&
                    (strcmp(config_inst.server, FL_NOSERVER) != 0))
                 {
@@ -368,7 +367,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
                 if(ret_code == 0)
                 {
-                    MessageBox(hwnd, "Unable to start OSSEC (check config).",
+                    MessageBox(hwnd, "Unable to start OSPatrol (check config).",
                                      "Error -- Unable to start", MB_OK);
                 }
                 else if(ret_code == 1)
@@ -378,7 +377,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
                     SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"Started..");
 
-                    MessageBox(hwnd, "OSSEC Agent Started.",
+                    MessageBox(hwnd, "OSPatrol Agent Started.",
                                      "Started..", MB_OK);
                 }
                 else
@@ -389,7 +388,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                 break;
             case UI_MENU_MANAGE_STOP:
 
-                /* Stopping OSSEC */
+                /* Stopping OSPatrol */
                 ret_code = os_stop_service();
                 if(ret_code == 1)
                 {
@@ -397,7 +396,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                     gen_server_info(hwnd);
 
                     SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"Stopped..");
-                    MessageBox(hwnd, "OSSEC Agent Stopped.",
+                    MessageBox(hwnd, "OSPatrol Agent Stopped.",
                                      "Stopped..", MB_OK);
                 }
                 else
@@ -409,13 +408,13 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
             case UI_MENU_MANAGE_STATUS:
                 if(CheckServiceRunning())
                 {
-                    MessageBox(hwnd, "OSSEC Agent running.",
+                    MessageBox(hwnd, "OSPatrol Agent running.",
                                      "Agent running..", MB_OK);
 
                 }
                 else
                 {
-                    MessageBox(hwnd, "OSSEC Agent stopped.",
+                    MessageBox(hwnd, "OSPatrol Agent stopped.",
                                      "Agent stopped.", MB_OK);
                 }
                 break;
@@ -424,7 +423,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                 if((strcmp(config_inst.key, FL_NOKEY) == 0) ||
                    (strcmp(config_inst.server, FL_NOSERVER) == 0))
                 {
-                    MessageBox(hwnd, "Unable to restart OSSEC (check config).",
+                    MessageBox(hwnd, "Unable to restart OSPatrol (check config).",
                                      "Error -- Unable to restart", MB_OK);
                     break;
 
@@ -432,11 +431,11 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
 
                 ret_code = os_stop_service();
 
-                /* Starting OSSEC */
+                /* Starting OSPatrol */
                 ret_code = os_start_service();
                 if(ret_code == 0)
                 {
-                    MessageBox(hwnd, "Unable to restart OSSEC (check config).",
+                    MessageBox(hwnd, "Unable to restart OSPatrol (check config).",
                                      "Error -- Unable to restart", MB_OK);
                 }
                 else
@@ -445,7 +444,7 @@ BOOL CALLBACK DlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARAM lParam)
                     gen_server_info(hwnd);
 
                     SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"Restarted..");
-                    MessageBox(hwnd, "OSSEC Agent Restarted.",
+                    MessageBox(hwnd, "OSPatrol Agent Restarted.",
                                      "Restarted..", MB_OK);
                 }
                 break;
@@ -492,7 +491,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance,
             !CheckServiceRunning() &&
             (config_inst.admin_access != 0))
     {
-        ret = MessageBox(NULL, "OSSEC Agent not running. "
+        ret = MessageBox(NULL, "OSPatrol Agent not running. "
                 "Do you wish to start it?",
                 "Wish to start the agent?", MB_OKCANCEL);
         if(ret == IDOK)
