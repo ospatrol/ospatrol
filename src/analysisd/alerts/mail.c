@@ -1,5 +1,3 @@
-/*   $OSSEC, mail.c, v0.2, 2005/02/10, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

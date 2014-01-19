@@ -16,8 +16,8 @@ REM Check for public domain unix2dos.exe. It can be found here: http://www.efgh.
 IF NOT EXIST unix2dos.exe echo unix2dos.exe not found, exiting... && EXIT 1
 
 REM Generating configs
-unix2dos.exe ossec.conf 
-type ossec.conf > ossec-win.conf
+unix2dos.exe ospatrol.conf 
+type ospatrol.conf > ospatrol-win.conf
 unix2dos.exe help.txt
 type help.txt > help_win.txt
 unix2dos.exe ..\..\etc\internal_options.conf
@@ -26,8 +26,8 @@ unix2dos.exe ..\..\LICENSE
 type ..\..\LICENSE > LICENSE.txt
 unix2dos.exe ..\..\active-response\win\route-null.cmd
 type ..\..\active-response\win\route-null.cmd > route-null.cmd
-unix2dos.exe ..\..\active-response\win\restart-ossec.cmd
-type ..\..\active-response\win\restart-ossec.cmd > restart-ossec.cmd
+unix2dos.exe ..\..\active-response\win\restart-ospatrol.cmd
+type ..\..\active-response\win\restart-ospatrol.cmd > restart-ospatrol.cmd
 
 REM Going to the source dir
 cd ..

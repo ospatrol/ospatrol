@@ -20,9 +20,9 @@
 /* Setup windows after install */
 int main(int argc, char **argv)
 {
-    printf("%s: Attempting to start ossec.", argv[0]);
+    printf("%s: Attempting to start OSPatrol.", argv[0]);
 
-    system("net start OssecSvc");
+    system("net start OSPatrolSvc");
 
     system("pause");
     return(0);

@@ -21,7 +21,7 @@
 #include <windows.h>
 #include "os_regex/os_regex.h"
 
-#define OSSECCONF   "ossec.conf"
+#define OSPATROLCONF   "ospatrol.conf"
 #define OS_MAXSTR   1024
 
 

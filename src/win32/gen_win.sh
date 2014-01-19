@@ -7,12 +7,12 @@ CAT=`cat ${FILE}`
 WINPKG="win-pkg"
 
 # Generating configs
-./unix2dos.pl ossec.conf > ossec-win.conf
+./unix2dos.pl ospatrol.conf > ospatrol-win.conf
 ./unix2dos.pl help.txt > help_win.txt
 ./unix2dos.pl ../../etc/internal_options.conf > internal_options-win.conf
 ./unix2dos.pl ../../LICENSE > LICENSE.txt
 ./unix2dos.pl ../../active-response/win/route-null.cmd > route-null.cmd
-./unix2dos.pl ../../active-response/win/restart-ossec.cmd > restart-ossec.cmd
+./unix2dos.pl ../../active-response/win/restart-ospatrol.cmd > restart-ospatrol.cmd
 
 # Going to the source dir
 cd ${DIR}

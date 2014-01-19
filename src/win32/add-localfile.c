@@ -18,7 +18,7 @@
 #include <time.h>
 #include "os_regex/os_regex.h"
 
-#define OSSECCONF   "ossec.conf"
+#define OSPATROLCONF   "ospatrol.conf"
 #define OS_MAXSTR   1024
 
 int total;
@@ -104,7 +104,7 @@ int config_file(char *name, char *file, int quiet)
         return(-1);
     }
 
-    if(dogrep(OSSECCONF, file))
+    if(dogrep(OSPATROLCONF, file))
     {
         printf("%s: Log file already configured: '%s'.\n",
                     name, file);
@@ -113,7 +113,7 @@ int config_file(char *name, char *file, int quiet)
 
 
     /* Add iis config config */
-    fp = fopen(OSSECCONF, "a");
+    fp = fopen(OSPATROLCONF, "a");
     if(!fp)
     {
         printf("%s: Unable to edit configuration file.\n", name);
@@ -124,12 +124,12 @@ int config_file(char *name, char *file, int quiet)
     fprintf(fp, "\r\n"
     "\r\n"
     "<!-- Extra log file -->\r\n"
-    "<ossec_config>\r\n"
+    "<ospatrol_config>\r\n"
     "  <localfile>\r\n"
     "    <location>%s</location>\r\n"
     "    <log_format>syslog</log_format>\r\n"
     "  </localfile>\r\n"
-    "</ossec_config>\r\n\r\n", file);
+    "</ospatrol_config>\r\n\r\n", file);
 
 
     printf("%s: Action completed.\n", name);
@@ -157,10 +157,10 @@ int main(int argc, char **argv)
     }
 
 
-    /* Checking if ossec was installed already */
-    if(!fileexist(OSSECCONF))
+    /* Checking if ospatrol was installed already */
+    if(!fileexist(OSPATROLCONF))
     {
-        printf("%s: Unable to find ossec config: '%s'.\n", argv[0], OSSECCONF);
+        printf("%s: Unable to find ospatrol config: '%s'.\n", argv[0], OSPATROLCONF);
     }
 
     else
