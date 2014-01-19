@@ -61,7 +61,7 @@ lock()
         # by one and fail after MAX_ITERACTION
         if [ "$i" = "${MAX_ITERATION}" ]; then
             echo "`date` Unable to execute. Locked: $0" \
-                        >> ${PWD}/ossec-hids-responses.log
+                        >> ${PWD}/ospatrol-hids-responses.log
             
             # Unlocking and exiting
             unlock;

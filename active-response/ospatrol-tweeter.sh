@@ -1,5 +1,5 @@
 #!/bin/sh
-# Tweeter an alert - copy at /var/ossec/active-response/bin/ossec-tweeter.sh
+# Tweeter an alert - copy at /var/ospatrol/active-response/bin/ospatrol-tweeter.sh
 # Author: Daniel Cid
 
 
@@ -7,7 +7,7 @@
 TWITTERUSER=""
 TWITTERPASS=''
 DIRECTMSGUSER=""
-SOURCE="ossec2tweeter"
+SOURCE="ospatrol2tweeter"
 
 
 

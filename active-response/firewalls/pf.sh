@@ -12,8 +12,8 @@ if [ "X${PFCTL_RULES}" = "X" ]; then
     PFCTL_RULES="/etc/pf.conf"
 fi    
 
-# Checking if ossec table is configured
-PFCTL_TABLE=`cat ${PFCTL_RULES} | egrep -v "(^#|^$)" | grep ossec_fwtable | head -1 | awk '{print $2}' | sed "s/<//;s/>//"`
+# Checking if ospatrol table is configured
+PFCTL_TABLE=`cat ${PFCTL_RULES} | egrep -v "(^#|^$)" | grep ospatrol_fwtable | head -1 | awk '{print $2}' | sed "s/<//;s/>//"`
 ARG1=""
 ACTION=$1
 USER=$2
@@ -39,7 +39,7 @@ fi
 # Blocking IP
 if [ "x${ACTION}" != "xadd" -a "x${ACTION}" != "xdelete" ]; then
    echo "$0: invalid action: ${ACTION}"
-   echo "$0: invalid action: ${ACTION}" >> ${PWD}/ossec-hids-responses.log
+   echo "$0: invalid action: ${ACTION}" >> ${PWD}/ospatrol-hids-responses.log
    exit 1;
 fi
 
@@ -52,7 +52,7 @@ if [ "X${UNAME}" = "XOpenBSD" -o "X${UNAME}" = "XFreeBSD" ]; then
   ls ${PFCTL} > /dev/null 2>&1
   if [ ! $? = 0 ]; then
       echo "$0: PF not configured."
-      echo "$0: PF not configured." >> ${PWD}/ossec-hids-responses.log
+      echo "$0: PF not configured." >> ${PWD}/ospatrol-hids-responses.log
 	  exit 0;
   fi
 
@@ -62,7 +62,7 @@ if [ "X${UNAME}" = "XOpenBSD" -o "X${UNAME}" = "XFreeBSD" ]; then
 	#Checking if we got the table to add the bad guys
 	if [ "x${PFCTL_TABLE}" = "x" ]; then
         echo "$0: PF not configured."
-        echo "$0: PF not configured." >> ${PWD}/ossec-hids-responses.log
+        echo "$0: PF not configured." >> ${PWD}/ospatrol-hids-responses.log
 		exit 0;
 	else
   		if [ "x${ACTION}" = "xadd" ]; then

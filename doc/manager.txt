@@ -1,4 +1,4 @@
-OSSEC v0.9
+OSPatrol 
 Copyright (C) 2009 Trend Micro Inc.
 
 

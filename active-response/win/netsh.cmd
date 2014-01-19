@@ -21,13 +21,13 @@ GOTO Exit;
 
 :ADD
 :: Extracts last ip address from ipconfig.
-netsh ipsec static add policy description="ossec block list"
-netsh ipsec static add filter filterlist="ossecfilter" srcaddr=%3 dstaddr=me protocol=tcp mirrored=yes
-netsh ipsec static add rule policy="ossec" filterlist="ossecfilter" filteraction="block" desc="list of blocked ips"
+netsh ipsec static add policy description="ospatrol block list"
+netsh ipsec static add filter filterlist="ospatrolfilter" srcaddr=%3 dstaddr=me protocol=tcp mirrored=yes
+netsh ipsec static add rule policy="ospatrol" filterlist="ospatrolfilter" filteraction="block" desc="list of blocked ips"
 netsh ipsec static set policy assign=y
 GOTO Exit;
 
 :DEL
-netsh ipsec static delete filter filterlist="ossecfilter" srcaddr=%3 dstaddr=me protocol=tcp mirrored=yes
+netsh ipsec static delete filter filterlist="ospatrolfilter" srcaddr=%3 dstaddr=me protocol=tcp mirrored=yes
 
 :Exit

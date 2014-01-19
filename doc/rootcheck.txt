@@ -1,4 +1,4 @@
-Rootkit detection techniques used by the OSSEC HIDS
+Rootkit detection techniques used by the OSSEC HIDS and OSPatrol
 by Daniel B. Cid, daniel.cid@gmail.com
 
 

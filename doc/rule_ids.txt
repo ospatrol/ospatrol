@@ -1,6 +1,6 @@
-# ossec Rules ids.
+# OSPatrol Rules ids.
 #
-# Ossec official rules should be under some of these
+# OSPatrol official rules should be under some of these
 # assignments.
 #
 # Local rules should go from 100000 to 120000.
@@ -8,7 +8,7 @@
 # Every rule will also have a revision attribute (if modified).
 # *default revision is 0 (when first added).
 
-00000 - 00999 Internally reserved for ossec
+00000 - 00999 Internally reserved for OSPatrol
 01000 - 01999 General syslog
 02100 - 02299 NFS
 02300 - 02499 Xinetd

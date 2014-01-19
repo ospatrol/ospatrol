@@ -1,4 +1,4 @@
-:: Simple script to restart ossec agent.
+:: Simple script to restart ospatrol agent.
 @ECHO OFF
 ECHO.
 
@@ -18,8 +18,8 @@ GOTO Exit;
 
 
 :ADD
-net stop OssecSvc
-net start OssecSvc
+net stop OSPatrolSvc
+net start OSPatrolSvc
 
 GOTO Exit;
 

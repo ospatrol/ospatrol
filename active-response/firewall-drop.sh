@@ -254,7 +254,7 @@ elif [ "X${UNAME}" = "XAIX" ]; then
   fi
 
   if [ "x${ACTION}" = "xadd" ]; then
-    ARG1=" -v 4 -a D -s ${IP} -m 255.255.255.255 -d 0.0.0.0 -M 0.0.0.0 -w B -D \"Access Denied by OSSEC-HIDS\"" 
+    ARG1=" -v 4 -a D -s ${IP} -m 255.255.255.255 -d 0.0.0.0 -M 0.0.0.0 -w B -D \"Access Denied by OSPatrol\"" 
     #Add filter to rule table
     eval ${GENFILT} ${ARG1}
     
