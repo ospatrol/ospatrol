@@ -1,5 +1,3 @@
-/*   $OSSEC, os_regex_match.c, v0.3, 2005/06/09, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
