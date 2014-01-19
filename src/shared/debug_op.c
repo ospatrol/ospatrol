@@ -25,9 +25,9 @@ void WinSetError();
 /* For internal logs */
 #ifndef LOGFILE
   #ifndef WIN32
-    #define LOGFILE   "/logs/ossec.log"
+    #define LOGFILE   "/logs/ospatrol.log"
   #else
-    #define LOGFILE "ossec.log"
+    #define LOGFILE "ospatrol.log"
   #endif
 #endif
 
@@ -50,7 +50,7 @@ void _log(const char * msg,va_list args)
     va_copy(args2, args);
 
 
-    /* If under chroot, log directly to /logs/ossec.log */
+    /* If under chroot, log directly to /logs/ospatrol.log */
     if(chroot_flag == 1)
     {
         fp = fopen(LOGFILE, "a");

@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -146,7 +145,7 @@ int add_agent()
         fflush(stdout);
         /* Read the agent's name from user environment. If it is invalid
          * we should force user to provide a name from input device. */
-        _name = getenv("OSSEC_AGENT_NAME");
+        _name = getenv("OSPATROL_AGENT_NAME");
         if (_name == NULL || NameExist(_name) || !OS_IsValidName(_name))
           _name = read_from_user();
 
@@ -176,7 +175,7 @@ int add_agent()
 
       /* Read IP address from user's environment. If that IP is invalid,
        * force user to provide IP from input device */
-      _ip = getenv("OSSEC_AGENT_IP");
+      _ip = getenv("OSPATROL_AGENT_IP");
       if (_ip == NULL || !OS_IsValidIP(_ip, c_ip))
         _ip = read_from_user();
 
@@ -222,7 +221,7 @@ int add_agent()
          * get from user input. If value from environment is invalid,
          * we force user to specify an ID from the terminal. Otherwise,
          * our program goes to infinite loop. */
-        _id = getenv("OSSEC_AGENT_ID");
+        _id = getenv("OSPATROL_AGENT_ID");
         if (_id == NULL || IDExist(_id) || !OS_IsValidID(_id)) {
           _id = read_from_user();
         }
@@ -263,9 +262,9 @@ int add_agent()
       /* Confirmation by an environment variable. The valid value is y/Y.
        * If the user provide anything other string, it is considered as
        * n/N; please note that the old code only accepts y/Y/n/N. So if
-       * the variable OSSEC_ACTION_CONFIRMED is 'foobar', the program will
+       * the variable OSPATROL_ACTION_CONFIRMED is 'foobar', the program will
        * go into an infinite loop. */
-      user_input = getenv("OSSEC_ACTION_CONFIRMED");
+      user_input = getenv("OSPATROL_ACTION_CONFIRMED");
       if (user_input == NULL) user_input = read_from_user();
 
       /* If user accepts to add */
@@ -341,7 +340,7 @@ int remove_agent()
       printf(REMOVE_ID);
       fflush(stdout);
 
-      user_input = getenv("OSSEC_AGENT_ID");
+      user_input = getenv("OSPATROL_AGENT_ID");
       if (user_input == NULL || !IDExist(user_input)) {
         user_input = read_from_user();
       }
@@ -362,7 +361,7 @@ int remove_agent()
         printf(REMOVE_CONFIRM);
         fflush(stdout);
 
-        user_input = getenv("OSSEC_ACTION_CONFIRMED");
+        user_input = getenv("OSPATROL_ACTION_CONFIRMED");
         if (user_input == NULL) {
           user_input = read_from_user();
         }

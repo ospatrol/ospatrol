@@ -1,6 +1,6 @@
 # Makefile for util.
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
+# http://ospatrol.com
 
 PT=../
 NAME=util
@@ -18,8 +18,8 @@ me:
 		$(CC) $(CFLAGS) ${OS_LINK} ${SUP} agent_control.c $(OBJS) -o agent_control
 		$(CC) $(CFLAGS) ${OS_LINK} ${SUP} syscheck_control.c $(OBJS) -o syscheck_control
 		$(CC) $(CFLAGS) ${OS_LINK} ${SUP} rootcheck_control.c $(OBJS) -o rootcheck_control
-		$(CC) $(CFLAGS) ${OS_LINK} ossec-regex.c $(OBJS) -o ossec-regex 
+		$(CC) $(CFLAGS) ${OS_LINK} ospatrol-regex.c $(OBJS) -o ospatrol-regex 
 clean:
-		$(CLEAN) syscheck_update clear_stats list_agents agent_control syscheck_control rootcheck_control verify-agent-conf ossec-regex 
+		$(CLEAN) syscheck_update clear_stats list_agents agent_control syscheck_control rootcheck_control verify-agent-conf ospatrol-regex 
 build:
-		cp -pr syscheck_update clear_stats list_agents syscheck_control rootcheck_control agent_control verify-agent-conf ossec-regex ${PT}../bin
+		cp -pr syscheck_update clear_stats list_agents syscheck_control rootcheck_control agent_control verify-agent-conf ospatrol-regex ${PT}../bin

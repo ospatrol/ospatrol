@@ -22,7 +22,7 @@
 /** help **/
 void helpmsg()
 {
-    printf("\nOSSEC HIDS %s: Control remote agents.\n", ARGV0);
+    printf("\nOSPatrol %s: Control remote agents.\n", ARGV0);
     printf("Available options:\n");
     printf("\t-h          This help message.\n");
     printf("\t-l          List available (active or not) agents.\n");
@@ -198,7 +198,7 @@ int main(int argc, char **argv)
         FILE *fp;
         if(!csv_output)
         {
-            printf("\nOSSEC HIDS %s. Available active responses:\n", ARGV0);
+            printf("\nOSPatrol %s. Available active responses:\n", ARGV0);
         }
 
         fp = fopen(DEFAULTAR, "r");
@@ -229,7 +229,7 @@ int main(int argc, char **argv)
                     continue;
                 *r_timeout = '\0';
 
-                if(strcmp(r_name, "restart-ossec0") == 0)
+                if(strcmp(r_name, "restart-ossec0") == 0 || strcmp(r_name, "restart-ospatrol0") == 0)
                 {
                     continue;
                 }
@@ -253,7 +253,7 @@ int main(int argc, char **argv)
     {
         if(!csv_output)
         {
-            printf("\nOSSEC HIDS %s. List of available agents:",
+            printf("\nOSPatrol %s. List of available agents:",
                     ARGV0);
             printf("\n   ID: 000, Name: %s (server), IP: 127.0.0.1, Active/Local\n",
                     shost);
@@ -305,7 +305,7 @@ int main(int argc, char **argv)
 
 
         if(!csv_output)
-            printf("\nOSSEC HIDS %s. Agent information:", ARGV0);
+            printf("\nOSPatrol  %s. Agent information:", ARGV0);
 
         if(agt_id != -1)
         {
@@ -413,7 +413,7 @@ int main(int argc, char **argv)
         /* Sending restart message to all agents. */
         if(send_msg_to_agent(arq, HC_SK_RESTART, NULL, NULL) == 0)
         {
-            printf("\nOSSEC HIDS %s: Restarting Syscheck/Rootcheck on all agents.",
+            printf("\nOSPatrol %s: Restarting Syscheck/Rootcheck on all agents.",
                     ARGV0);
         }
         else
@@ -435,7 +435,7 @@ int main(int argc, char **argv)
         {
             os_set_restart_syscheck();
 
-            printf("\nOSSEC HIDS %s: Restarting Syscheck/Rootcheck "
+            printf("\nOSPatrol %s: Restarting Syscheck/Rootcheck "
                    "locally.\n", ARGV0);
 
             exit(0);
@@ -456,7 +456,7 @@ int main(int argc, char **argv)
 
         if(send_msg_to_agent(arq, HC_SK_RESTART, agent_id, NULL) == 0)
         {
-            printf("\nOSSEC HIDS %s: Restarting Syscheck/Rootcheck on agent: %s\n",
+            printf("\nOSPatrol %s: Restarting Syscheck/Rootcheck on agent: %s\n",
                     ARGV0, agent_id);
         }
         else
@@ -482,9 +482,9 @@ int main(int argc, char **argv)
         debug1("%s: DEBUG: Connected...", ARGV0);
 
 
-        if(send_msg_to_agent(arq, "restart-ossec0", agent_id, "null") == 0)
+        if(send_msg_to_agent(arq, "restart-ospatrol0", agent_id, "null") == 0)
         {
-            printf("\nOSSEC HIDS %s: Restarting agent: %s\n",
+            printf("\OSPatrol %s: Restarting agent: %s\n",
                     ARGV0, agent_id);
         }
         else
@@ -513,7 +513,7 @@ int main(int argc, char **argv)
 
         if(send_msg_to_agent(arq, ar, agent_id, ip_address) == 0)
         {
-            printf("\nOSSEC HIDS %s: Running active response '%s' on: %s\n",
+            printf("\nOSPatrol %s: Running active response '%s' on: %s\n",
                     ARGV0, ar, agent_id);
         }
         else

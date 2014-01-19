@@ -1,5 +1,3 @@
-/*      $OSSEC, privsep_op.h, v0.2, 2004/08/05, Daniel B. Cid$      */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -9,9 +7,6 @@
  * Foundation
  */
 
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net
- */
 
 /* Functions for privilege separation.
  */

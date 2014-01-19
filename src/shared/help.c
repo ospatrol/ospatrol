@@ -10,10 +10,6 @@
  * Foundation
  */
 
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net/hids/
- */
-
 /* Help Function
  */
 

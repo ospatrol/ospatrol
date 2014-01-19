@@ -1,6 +1,7 @@
 # Makefile
 # Daniel B. Cid <dcid@sourcefire.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
+# Jeremy Rossi <jeremy@jeremyrossi.com> 
+# http://ospatrol.com
 
 none:
 		@echo "Nothing selected ..."
@@ -12,8 +13,8 @@ none:
 		@echo "\"make clean\" to clean anything built."
 		@echo "\"make setagent\" to set agent install."
 		@echo "\"make setlocal\" to set local install."
-		@echo "\"make setclang\" to use clang for building ossec."
-		@echo "\"make unsetclang\" to use gcc for building ossec."
+		@echo "\"make setclang\" to use clang for building ospatrol."
+		@echo "\"make unsetclang\" to use gcc for building ospatrol."
 		@echo "\"make setprelude\" to enable prelude output."
 		@echo "\"make setdb\" to enable database support."
 		@echo "\"make unsetdb\" to disable database support."
@@ -22,7 +23,7 @@ none:
 
 clean:
 		@/bin/sh ./Makeall clean
-		rm -f ../bin/ossec*
+		rm -f ../bin/ospatrol*
 		rm -f ../bin/manage_agents
 
 all:

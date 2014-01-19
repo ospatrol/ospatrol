@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 /* Common API for dealing with directory trees */
@@ -58,7 +57,7 @@
 #define SQUID       8   /* Squid logs */
 #define WINDOWS     9   /* Windows logs */
 #define HOST_INFO   10  /* Host information logs (from nmap or similar) */
-#define OSSEC_RL    11  /* Ossec rules */
+#define OSPATROL_RL    11  /* OSPATROL rules */
 
 
 /* FTS allowed values */

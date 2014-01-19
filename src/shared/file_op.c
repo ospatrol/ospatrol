@@ -1210,7 +1210,7 @@ char *getuname()
     }
 
 
-    /* Adding ossec version */
+    /* Adding ospatrol version */
     snprintf(os_v, 128, " - %s %s", __name, __version);
     strncat(ret, os_v, ret_size -1);
 

@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -67,7 +66,7 @@ void GetFile_Queue(file_queue *fileq)
     else
     {
         snprintf(fileq->file_name, MAX_FQUEUE,
-                                   "%s/%d/%s/ossec-alerts-%02d.log",
+                                   "%s/%d/%s/ospatrol-alerts-%02d.log",
                                    ALERTS,
                                    fileq->year,
                                    fileq->mon,

@@ -1,6 +1,6 @@
 # Makefile -- shared functions
 # Daniel B. Cid <dcid@sourcefire.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
+# http://ospatrol.com/
 
 NAME=shared-libs
 PT=../

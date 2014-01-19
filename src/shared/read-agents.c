@@ -1188,21 +1188,21 @@ int _get_agent_os(char *agent_name, char *agent_ip, agent_info *agt_info)
     /* Getting server info. */
     if(!agent_name)
     {
-        char *ossec_version = NULL;
+        char *ospatrol_version = NULL;
         agt_info->os = getuname();
         os_strdup(__name " " __version, agt_info->version);
 
 
         /* Removing new line. */
-        ossec_version = strchr(agt_info->os, '\n');
-        if(ossec_version)
-            *ossec_version = '\0';
+        ospatrol_version = strchr(agt_info->os, '\n');
+        if(ospatrol_version)
+            *ospatrol_version = '\0';
 
 
-        ossec_version = strstr(agt_info->os, " - ");
-        if(ossec_version)
+        ospatrol_version = strstr(agt_info->os, " - ");
+        if(ospatrol_version)
         {
-            *ossec_version = '\0';
+            *ospatrol_version = '\0';
         }
 
 
@@ -1230,22 +1230,22 @@ int _get_agent_os(char *agent_name, char *agent_ip, agent_info *agt_info)
 
     if(fgets(buf, 1024, fp))
     {
-        char *ossec_version = NULL;
+        char *ospatrol_version = NULL;
 
         /* Removing new line. */
-        ossec_version = strchr(buf, '\n');
-        if(ossec_version)
-            *ossec_version = '\0';
+        ospatrol_version = strchr(buf, '\n');
+        if(ospatrol_version)
+            *ospatrol_version = '\0';
 
 
-        ossec_version = strstr(buf, " - ");
-        if(ossec_version)
+        ospatrol_version = strstr(buf, " - ");
+        if(ospatrol_version)
         {
-            *ossec_version = '\0';
-            ossec_version += 3;
+            *ospatrol_version = '\0';
+            ospatrol_version += 3;
 
             os_calloc(1024 +1, sizeof(char), agt_info->version);
-            strncpy(agt_info->version, ossec_version, 1024);
+            strncpy(agt_info->version, ospatrol_version, 1024);
         }
 
 

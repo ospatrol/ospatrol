@@ -10,8 +10,8 @@
  * Foundation
  */
 
-/* Part of the OSSEC.
- * Available at http://www.ossec.net
+/* Part of the OSPatrol 
+ * Available at http://ospatrol.com
  */
 
 
@@ -56,7 +56,7 @@ static char *_read_file(char *high_name, char *low_name, char *defines_file)
     fp = fopen(def_file, "r");
     if(!fp)
     {
-        if(strcmp(defines_file, OSSEC_LDEFINES) != 0)
+        if(strcmp(defines_file, OSPATROL_LDEFINES) != 0)
         {
             merror(FOPEN_ERROR, __local_name, def_file);
         }
@@ -216,10 +216,10 @@ int getDefine_Int(char *high_name, char *low_name, int min, int max)
 
 
     /* We first try to read from the local define file. */
-    value = _read_file(high_name, low_name, OSSEC_LDEFINES);
+    value = _read_file(high_name, low_name, OSPATROL_LDEFINES);
     if(!value)
     {
-        value = _read_file(high_name, low_name, OSSEC_DEFINES);
+        value = _read_file(high_name, low_name, OSPATROL_DEFINES);
         if(!value)
             ErrorExit(DEF_NOT_FOUND, __local_name, high_name, low_name);
     }
@@ -490,23 +490,23 @@ int OS_IsValidIP(char *ip_address, os_ip *final_ip)
 }
 
 
-/** int OS_IsonTime(char *time_str, char *ossec_time)
+/** int OS_IsonTime(char *time_str, char *ospatrol_time)
  * Must be a valid string, called after OS_IsValidTime.
  * Returns 1 on success or 0 on failure.
  */
-int OS_IsonTime(char *time_str, char *ossec_time)
+int OS_IsonTime(char *time_str, char *ospatrol_time)
 {
     int _true = 1;
 
-    if(*ossec_time == '!')
+    if(*ospatrol_time == '!')
     {
         _true = 0;
     }
-    ossec_time++;
+    ospatrol_time++;
 
     /* Comparing against min/max value */
-    if((strncmp(time_str, ossec_time, 5) >= 0)&&
-      (strncmp(time_str, ossec_time+5,5) <= 0))
+    if((strncmp(time_str, ospatrol_time, 5) >= 0)&&
+      (strncmp(time_str, ospatrol_time+5,5) <= 0))
     {
         return(_true);
     }
@@ -517,9 +517,9 @@ int OS_IsonTime(char *time_str, char *ossec_time)
 
 /** char *OS_IsValidTime(char *time_str)
  * Validates if a time is in an acceptable format
- * for ossec.
+ * for ospatrol.
  * Returns 0 if doesn't match or a valid string for
- * ossec usage in success.
+ * ospatrol usage in success.
  * ** On success this function may modify the value of date
  * Acceptable formats:
  * hh:mm - hh:mm (24 hour format)
@@ -529,7 +529,7 @@ int OS_IsonTime(char *time_str, char *ossec_time)
  * hh am - hh pm (12 hour format)
  */
 #define RM_WHITE(x)while(*x == ' ')x++;
-char *__gethour(char *str, char *ossec_hour)
+char *__gethour(char *str, char *ospatrol_hour)
 {
     int _size = 0;
     int chour = 0;
@@ -592,7 +592,7 @@ char *__gethour(char *str, char *ossec_hour)
         str++;
         if((*str == 'm') || (*str == 'M'))
         {
-            snprintf(ossec_hour, 6, "%02d:%02d", chour, cmin);
+            snprintf(ospatrol_hour, 6, "%02d:%02d", chour, cmin);
             str++;
             return(str);
         }
@@ -611,7 +611,7 @@ char *__gethour(char *str, char *ossec_hour)
                 return(NULL);
             }
 
-            snprintf(ossec_hour, 6, "%02d:%02d", chour, cmin);
+            snprintf(ospatrol_hour, 6, "%02d:%02d", chour, cmin);
             str++;
             return(str);
         }
@@ -619,7 +619,7 @@ char *__gethour(char *str, char *ossec_hour)
     }
     else
     {
-        snprintf(ossec_hour, 6, "%02d:%02d", chour, cmin);
+        snprintf(ospatrol_hour, 6, "%02d:%02d", chour, cmin);
         return(str);
     }
 
@@ -706,21 +706,21 @@ char *OS_IsValidTime(char *time_str)
 
 
 
-/** int OS_IsAfterTime(char *time_str, char *ossec_time)
+/** int OS_IsAfterTime(char *time_str, char *ospatrol_time)
  *  Checks if the current time is the same or has passed the
  *  specified one.
  */
-int OS_IsAfterTime(char *time_str, char *ossec_time)
+int OS_IsAfterTime(char *time_str, char *ospatrol_time)
 {
     /* Unique times can't have a !. */
-    if(*ossec_time == '!')
+    if(*ospatrol_time == '!')
         return(0);
 
 
-    ossec_time++;
+    ospatrol_time++;
 
     /* Comparing against min/max value */
-    if(strncmp(time_str, ossec_time, 5) >= 0)
+    if(strncmp(time_str, ospatrol_time, 5) >= 0)
     {
         return(1);
     }
@@ -749,16 +749,16 @@ char *OS_IsValidUniqueTime(char *time_str)
 
 
 
-/** int OS_IsonDay(int week_day, char *ossec_day)
+/** int OS_IsonDay(int week_day, char *ospatrol_day)
  * Checks if the specified week day is in the
  * range.
  */
-int OS_IsonDay(int week_day, char *ossec_day)
+int OS_IsonDay(int week_day, char *ospatrol_day)
 {
     int _true = 1;
 
     /* Negative */
-    if(ossec_day[7] == '!')
+    if(ospatrol_day[7] == '!')
         _true = 0;
 
     if(week_day < 0 || week_day > 7)
@@ -767,7 +767,7 @@ int OS_IsonDay(int week_day, char *ossec_day)
     }
 
     /* It is on the right day */
-    if(ossec_day[week_day] == 1)
+    if(ospatrol_day[week_day] == 1)
         return(_true);
 
     return(!_true);
@@ -777,9 +777,9 @@ int OS_IsonDay(int week_day, char *ossec_day)
 
 /** char *OS_IsValidDay(char *day_str)
  * Validates if an day is in an acceptable format
- * for ossec.
+ * for ospatrol.
  * Returns 0 if doesn't match or a valid string for
- * ossec usage in success.
+ * ospatrol usage in success.
  * ** On success this function may modify the value of date
  * Acceptable formats:
  * weekdays, weekends, monday, tuesday, thursday,..

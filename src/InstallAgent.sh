@@ -13,14 +13,14 @@ fi
 UNAME=`uname`;
 # Getting default variables
 DIR=`grep DIR ${LOCATION} | cut -f2 -d\"`
-GROUP="ossec"
-USER="ossec"
-subdirs="logs bin queue queue/ossec queue/alerts queue/syscheck queue/rids queue/diff var var/run etc etc/shared active-response active-response/bin agentless .ssh"
+GROUP="ospatrol"
+USER="ospatrol"
+subdirs="logs bin queue queue/ospatrol queue/alerts queue/syscheck queue/rids queue/diff var var/run etc etc/shared active-response active-response/bin agentless .ssh"
 
 
 # ${DIR} must be set 
 if [ "X${DIR}" = "X" ]; then
-    echo "Error building OSSEC HIDS."
+    echo "Error building OSPatrol HIDS."
     exit 1;
 fi    
 
@@ -109,17 +109,17 @@ done
 chmod -R 550 ${DIR}
 chown -R root:${GROUP} ${DIR}
 
-# To the ossec queue (default for agentd to read)
-chown -R ${USER}:${GROUP} ${DIR}/queue/ossec
-chmod -R 770 ${DIR}/queue/ossec
+# To the ospatrol queue (default for agentd to read)
+chown -R ${USER}:${GROUP} ${DIR}/queue/ospatrol
+chmod -R 770 ${DIR}/queue/ospatrol
 
 # For the logging user
 chown -R ${USER}:${GROUP} ${DIR}/logs
 chmod -R 750 ${DIR}/logs
 chmod -R 775 ${DIR}/queue/rids
-touch ${DIR}/logs/ossec.log
-chown ${USER}:${GROUP} ${DIR}/logs/ossec.log
-chmod 664 ${DIR}/logs/ossec.log
+touch ${DIR}/logs/ospatrol.log
+chown ${USER}:${GROUP} ${DIR}/logs/ospatrol.log
+chmod 664 ${DIR}/logs/ospatrol.log
 
 chown -R ${USER}:${GROUP} ${DIR}/queue/diff
 chmod -R 750 ${DIR}/queue/diff
@@ -179,7 +179,7 @@ chmod 550 ${DIR}/etc
 chmod 440 ${DIR}/etc/internal_options.conf
 chmod 440 ${DIR}/etc/local_internal_options.conf > /dev/null 2>&1
 chmod 440 ${DIR}/etc/client.keys > /dev/null 2>&1
-chmod -R 770 ${DIR}/etc/shared # ossec must be able to write to it
+chmod -R 770 ${DIR}/etc/shared # ospatrol must be able to write to it
 chmod 550 ${DIR}/agentless/*
 chmod 700 ${DIR}/.ssh
 
@@ -190,12 +190,12 @@ chown root:${GROUP} ${DIR}/var/run
 
 
 # Moving the binary files
-cp -pr client-agent/ossec-agentd ${DIR}/bin/
+cp -pr client-agent/ospatrol-agentd ${DIR}/bin/
 cp -pr os_auth/agent-auth ${DIR}/bin/
-cp -pr logcollector/ossec-logcollector ${DIR}/bin/
-cp -pr syscheckd/ossec-syscheckd ${DIR}/bin/
-cp -pr os_execd/ossec-execd ${DIR}/bin/
-cp -pr ./init/ossec-client.sh ${DIR}/bin/ossec-control
+cp -pr logcollector/ospatrol-logcollector ${DIR}/bin/
+cp -pr syscheckd/ospatrol-syscheckd ${DIR}/bin/
+cp -pr os_execd/ospatrol-execd ${DIR}/bin/
+cp -pr ./init/ospatrol-client.sh ${DIR}/bin/ospatrol-control
 cp -pr addagent/manage_agents ${DIR}/bin/
 cp -pr ../contrib/util.sh ${DIR}/bin/
 chown root:${GROUP} ${DIR}/bin/util.sh
@@ -213,20 +213,20 @@ chmod 550 ${DIR}/bin/*
 
 
 # Moving the config file
-ls ${DIR}/etc/ossec.conf > /dev/null 2>&1
+ls ${DIR}/etc/ospatrol.conf > /dev/null 2>&1
 if [ $? = 0 ]; then
     exit 0;
 fi
 
         
-ls ../etc/ossec.mc > /dev/null 2>&1
+ls ../etc/ospatrol.mc > /dev/null 2>&1
 if [ $? = 0 ]; then
-    cp -pr ../etc/ossec.mc ${DIR}/etc/ossec.conf
+    cp -pr ../etc/ospatrol.mc ${DIR}/etc/ospatrol.conf
 else    
-    cp -pr ../etc/ossec-agent.conf ${DIR}/etc/ossec.conf
+    cp -pr ../etc/ospatrol-agent.conf ${DIR}/etc/ospatrol.conf
 fi
-chown root:${GROUP} ${DIR}/etc/ossec.conf
-chmod 440 ${DIR}/etc/ossec.conf
+chown root:${GROUP} ${DIR}/etc/ospatrol.conf
+chmod 440 ${DIR}/etc/ospatrol.conf
 
 
 

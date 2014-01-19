@@ -22,7 +22,7 @@
 /** help **/
 void helpmsg()
 {
-    printf("\nOSSEC HIDS %s: Manages the policy and auditing database.\n",
+    printf("\nOSPatrol %s: Manages the policy and auditing database.\n",
            ARGV0);
     printf("Available options:\n");
     printf("\t-h          This help message.\n");
@@ -175,7 +175,7 @@ int main(int argc, char **argv)
     {
         if(!csv_output)
         {
-            printf("\nOSSEC HIDS %s. List of available agents:",
+            printf("\nOSPatrol %s. List of available agents:",
                     ARGV0);
             printf("\n   ID: 000, Name: %s (server), IP: 127.0.0.1, "
                    "Active/Local\n", shost);

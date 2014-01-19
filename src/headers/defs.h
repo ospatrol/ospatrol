@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -51,16 +50,16 @@
 
 
 /* Some Global names */
-#define __name      "OSSEC HIDS"
+#define __name      "OSPatrol"
 #define __version   "v2.7.1"
-#define __author    "Trend Micro Inc."
-#define __contact   "contact@ossec.net"
-#define __site      "http://www.ossec.net"
+#define __author    "Jeremy Rossi"
+#define __contact   "jeremy.rossi@ospatrol.com"
+#define __site      "http://ospatrol.com"
 #define __license   "\
 This program is free software; you can redistribute it and/or modify\n\
 it under the terms of the GNU General Public License (version 2) as \n\
 published by the Free Software Foundation. For more details, go to \n\
-http://www.ossec.net/main/license/\n"
+http://github.com/ospatrol/ospatrol/blob/master/LICENSE\n"
 
 /* Maximum allowed PID */
 #ifdef SOLARIS
@@ -82,28 +81,28 @@ http://www.ossec.net/main/license/\n"
 
 /* User Configuration */
 #ifndef MAILUSER
-    #define MAILUSER        "ossecm"
+    #define MAILUSER        "ospatrolm"
 #endif
 
 #ifndef USER
-    #define USER            "ossec"
+    #define USER            "ospatrol"
 #endif
 
 #ifndef REMUSER
-    #define REMUSER         "ossecr"
+    #define REMUSER         "ospatrolr"
 #endif
 
 #ifndef GROUPGLOBAL
-    #define GROUPGLOBAL     "ossec"
+    #define GROUPGLOBAL     "ospatrol"
 #endif
 
 #ifndef DEFAULTDIR		
-	#define DEFAULTDIR	"/var/ossec"
+	#define DEFAULTDIR	"/var/ospatrol"
 #endif
 
 
 /* Default queue */
-#define DEFAULTQUEUE	"/queue/ossec/queue"
+#define DEFAULTQUEUE	"/queue/ospatrol/queue"
 
 
 /* Active response files */
@@ -161,7 +160,7 @@ http://www.ossec.net/main/license/\n"
 
 /* Wait file */
 #ifndef WIN32
-    #define WAIT_FILE       "/queue/ossec/.wait"
+    #define WAIT_FILE       "/queue/ospatrol/.wait"
 #else
     #define WAIT_FILE       ".wait"
 #endif
@@ -169,7 +168,7 @@ http://www.ossec.net/main/license/\n"
 
 /* Agent information file */
 #ifndef WIN32
-    #define AGENT_INFO_FILE "/queue/ossec/.agent_info"
+    #define AGENT_INFO_FILE "/queue/ospatrol/.agent_info"
     #define AGENT_INFO_FILEP DEFAULTDIR AGENT_INFO_FILE
 #else
     #define AGENT_INFO_FILE ".agent_info"
@@ -195,11 +194,11 @@ http://www.ossec.net/main/license/\n"
 
 /* Internal definitions files */
 #ifndef WIN32
-    #define OSSEC_DEFINES   "/etc/internal_options.conf"
-    #define OSSEC_LDEFINES   "/etc/local_internal_options.conf"
+    #define OSPATROL_DEFINES   "/etc/internal_options.conf"
+    #define OSPATROL_LDEFINES   "/etc/local_internal_options.conf"
 #else
-    #define OSSEC_DEFINES   "internal_options.conf"
-    #define OSSEC_LDEFINES   "local_internal_options.conf"
+    #define OSPATROL_DEFINES   "internal_options.conf"
+    #define OSPATROL_LDEFINES   "local_internal_options.conf"
 #endif
 
 
@@ -243,11 +242,11 @@ http://www.ossec.net/main/license/\n"
 #define DEFAULTQPATH	DEFAULTDIR DEFAULTQUEUE
 
 #ifndef WIN32
-#define OSSECCONF       "/etc/ossec.conf"
-#define DEFAULTCPATH    DEFAULTDIR OSSECCONF
+#define OSPATROLCONF       "/etc/ospatrol.conf"
+#define DEFAULTCPATH    DEFAULTDIR ospatrolCONF
 #else
-#define OSSECCONF       "ossec.conf"
-#define DEFAULTCPATH "ossec.conf"
+#define OSPATROLCONF       "ospatrol.conf"
+#define DEFAULTCPATH "ospatrol.conf"
 #endif
 
 #ifndef WIN32

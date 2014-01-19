@@ -8,10 +8,8 @@
  * and/or modify it under the terms of the GNU General Public
  * License (version 2) as published by the FSF - Free Software
  * Foundation
- */
-
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net/hids/
+ *
+ * License details at the LICENSE file included with OSPatrol
  */
 
 /* Functions to handle operation with files

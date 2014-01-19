@@ -101,7 +101,7 @@ int OS_IsAllowedDynamicID(keystore *keys, char *id, char *srcip);
 char *ReadSecMSG(keystore *keys, char *buffer, char *cleartext,
                  int id, int buffer_size);
 
-/* Creates an ossec message (encrypts and compress) */
+/* Creates an ospatrol message (encrypts and compress) */
 int CreateSecMSG(keystore *keys, char *msg, char *msg_encrypted, int id);
 
 

@@ -11,10 +11,6 @@
  */
 
 
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net
- */
-
 /* Functions to generate debug/verbose/err reports.
  * Right now, we have two debug levels: 1,2,
  * a verbose mode and a error (merror) function.

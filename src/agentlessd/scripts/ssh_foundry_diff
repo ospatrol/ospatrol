@@ -19,7 +19,7 @@ if {$argc < 1} {
 }
 
 
-# NOTE: this script must be called from within /var/ossec for it to work.
+# NOTE: this script must be called from within /var/ospatrol for it to work.
 set passlist "agentless/.passlist"
 set hostname [lindex $argv 0]
 set commands [lrange $argv 1 end]

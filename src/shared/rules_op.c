@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -532,9 +531,15 @@ int OS_ReadXMLRules(char *rulefile,
                     {
                         config_ruleinfo->category = WINDOWS;
                     }
+                    // This is left in for now so that currnet config will not break. 
+                    // This should be handled as part of the upgrade at some point 
                     else if(strcmp(rule_opt[k]->content,"ossec") == 0)
                     {
-                        config_ruleinfo->category = OSSEC_RL;
+                        config_ruleinfo->category = OSPATROL_RL;
+                    }
+                    else if(strcmp(rule_opt[k]->content,"ospatrol") == 0)
+                    {
+                        config_ruleinfo->category = OSPATROL_RL;
                     }
                     else
                     {
