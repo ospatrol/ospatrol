@@ -1,5 +1,3 @@
-/*   $OSSEC, rootcheck.h, v0.1, 2005/10/03, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

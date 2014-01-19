@@ -1,9 +1,9 @@
 # Makefile for the configuration check.
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net
+# http://ospatrol.com
 
 PT=../
-NAME=ossec-config
+NAME=ospatrol-config
 
 include ../Config.Make
 

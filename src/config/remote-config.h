@@ -1,5 +1,3 @@
-/*   $OSSEC, remote-config.h, v0.3, 2005/02/09, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

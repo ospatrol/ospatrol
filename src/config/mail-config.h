@@ -1,5 +1,3 @@
-/*   $OSSEC, mail-config.h, v0.1, 2006/04/06, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

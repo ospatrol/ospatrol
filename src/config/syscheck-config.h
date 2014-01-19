@@ -55,7 +55,7 @@ typedef struct _config
 
     int *opts;             /* attributes set in the <directories> tag element */
 
-    char *workdir;         /* set to the DEFAULTDIR (/var/ossec) */
+    char *workdir;         /* set to the DEFAULTDIR (/var/ospatrol) */
     char *remote_db;
     char *db;
 

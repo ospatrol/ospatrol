@@ -1,6 +1,6 @@
 #!/bin/sh
-# ossec-control        This shell script takes care of starting
-#                      or stopping ossec-hids
+# ospatrol-control        This shell script takes care of starting
+#                      or stopping ospatrol-hids
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
 
@@ -21,10 +21,10 @@ if [ $? = 0 ]; then
 fi
 
 
-NAME="OSSEC HIDS"
+NAME="OSPatrol"
 VERSION="v2.7.1"
-AUTHOR="Trend Micro Inc."
-DAEMONS="ossec-monitord ossec-logcollector ossec-remoted ossec-syscheckd ossec-analysisd ossec-maild ossec-execd ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
+AUTHOR="Jeremy Rossi"
+DAEMONS="ospatrol-monitord ospatrol-logcollector ospatrol-remoted ospatrol-syscheckd ospatrol-analysisd ospatrol-maild ospatrol-execd ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
 
 
 ## Locking for the start/stop
@@ -44,7 +44,7 @@ checkpid()
 {
     for i in ${DAEMONS}; do
         for j in `cat ${DIR}/var/run/${i}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
                 echo "Deleting PID file '${DIR}/var/run/${i}-${j}.pid' not used..."
                 rm ${DIR}/var/run/${i}-${j}.pid
@@ -121,11 +121,11 @@ enable()
     fi
     
     if [ "X$2" = "Xdatabase" ]; then
-        echo "DB_DAEMON=ossec-dbd" >> ${PLIST};
+        echo "DB_DAEMON=ospatrol-dbd" >> ${PLIST};
     elif [ "X$2" = "Xclient-syslog" ]; then
-        echo "CSYSLOG_DAEMON=ossec-csyslogd" >> ${PLIST};
+        echo "CSYSLOG_DAEMON=ospatrol-csyslogd" >> ${PLIST};
     elif [ "X$2" = "Xagentless" ]; then
-        echo "AGENTLESS_DAEMON=ossec-agentlessd" >> ${PLIST};    
+        echo "AGENTLESS_DAEMON=ospatrol-agentlessd" >> ${PLIST};    
     elif [ "X$2" = "Xdebug" ]; then 
         echo "DEBUG_CLI=\"-d\"" >> ${PLIST}; 
     else
@@ -206,12 +206,12 @@ testconfig()
 # Start function
 start()
 {
-    SDAEMONS="${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON} ossec-maild ossec-execd ossec-analysisd ossec-logcollector ossec-remoted ossec-syscheckd ossec-monitord"
+    SDAEMONS="${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON} ospatrol-maild ospatrol-execd ospatrol-analysisd ospatrol-logcollector ospatrol-remoted ospatrol-syscheckd ospatrol-monitord"
     
     echo "Starting $NAME $VERSION (by $AUTHOR)..."
-    echo | ${DIR}/bin/ossec-logtest > /dev/null 2>&1;
+    echo | ${DIR}/bin/ospatrol-logtest > /dev/null 2>&1;
     if [ ! $? = 0 ]; then
-        echo "OSSEC analysisd: Testing rules failed. Configuration error. Exiting."
+        echo "ospatrol analysisd: Testing rules failed. Configuration error. Exiting."
         exit 1;
     fi    
     lock;
@@ -256,9 +256,9 @@ pstatus()
     ls ${DIR}/var/run/${pfile}*.pid > /dev/null 2>&1
     if [ $? = 0 ]; then
         for j in `cat ${DIR}/var/run/${pfile}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
-                echo "${pfile}: Process $j not used by ossec, removing .."
+                echo "${pfile}: Process $j not used by ospatrol, removing .."
                 rm -f ${DIR}/var/run/${pfile}-$j.pid
                 continue;
             fi
@@ -315,7 +315,7 @@ case "$1" in
 	start
 	;;
   reload)
-        DAEMONS="ossec-monitord ossec-logcollector ossec-remoted ossec-syscheckd ossec-analysisd ossec-maild ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
+        DAEMONS="ospatrol-monitord ospatrol-logcollector ospatrol-remoted ospatrol-syscheckd ospatrol-analysisd ospatrol-maild ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
 	stopa
 	start
         ;;

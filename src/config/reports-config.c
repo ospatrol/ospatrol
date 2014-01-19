@@ -236,7 +236,7 @@ int Read_CReports(XML_NODE node, void *config, void *config2)
 
     if(!mon_config->reports[s]->title)
     {
-        os_strdup("OSSEC Report (unnamed)", mon_config->reports[s]->title);
+        os_strdup("OSPatrol Report (unnamed)", mon_config->reports[s]->title);
     }
     mon_config->reports[s]->r_filter.report_name = mon_config->reports[s]->title;
 

@@ -1,5 +1,3 @@
-/*   $OSSEC, localfile-config.h, v0.3, 2005/11/11, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

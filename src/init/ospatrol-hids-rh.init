@@ -1,10 +1,10 @@
 #!/bin/sh
-# OSSEC	        Controls OSSEC HIDS on Redhat-based systems
+# ospatrol	        Controls OSPatrol on Redhat-based systems
 # Author:       Kayvan A. Sylvan <kayvan@sylvan.com>
 # Author:       Daniel B. Cid <dcid@ossec.net>
 #
 # chkconfig: 2345 99 15
-# description: Starts and stops OSSEC HIDS (Host Intrusion Detection System)
+# description: Starts and stops OSPatrol
 #
 # This will work on Redhat systems (maybe others too)
 
@@ -12,15 +12,15 @@
 export LANG=C
 
 . /etc/init.d/functions
-. /etc/ossec-init.conf
+. /etc/ospatrol-init.conf
 
 if [ "X${DIRECTORY}" = "X" ]; then
-    DIRECTORY="/var/ossec"
+    DIRECTORY="/var/ospatrol"
 fi
 
 start() {
-	echo -n "Starting OSSEC: "
-	${DIRECTORY}/bin/ossec-control start > /dev/null
+	echo -n "Starting OSPatrol: "
+	${DIRECTORY}/bin/ospatrol-control start > /dev/null
 	RETVAL=$?
 	if [ $RETVAL -eq 0 ]; then
 		success
@@ -32,8 +32,8 @@ start() {
 }
 
 stop() {
-	echo -n "Stopping OSSEC: "
-	${DIRECTORY}/bin/ossec-control stop > /dev/null
+	echo -n "Stopping OSPatrol: "
+	${DIRECTORY}/bin/ospatrol-control stop > /dev/null
 	RETVAL=$?
 	if [ $RETVAL -eq 0 ]; then
 		success
@@ -45,7 +45,7 @@ stop() {
 }
 
 status() {
-	${DIRECTORY}/bin/ossec-control status
+	${DIRECTORY}/bin/ospatrol-control status
 	RETVAL=$?
 	return $RETVAL
 }
@@ -66,7 +66,7 @@ case "$1" in
     status
 	;;
   *)
-	echo "*** Usage: ossec {start|stop|restart|status}"
+	echo "*** Usage: ospatrol {start|stop|restart|status}"
 	exit 1
 esac
 

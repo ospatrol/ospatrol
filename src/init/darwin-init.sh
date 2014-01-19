@@ -2,25 +2,25 @@
 # Darwin init script.
 # by Lorenzo Costanzia di Costigliole <mummie@tin.it>
 
-mkdir -p /Library/StartupItems/OSSEC
-cat <<EOF >/Library/StartupItems/OSSEC/StartupParameters.plist
+mkdir -p /Library/StartupItems/OSPatrol
+cat <<EOF >/Library/StartupItems/OSPatrol/StartupParameters.plist
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://
 www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
        <key>Description</key>
-       <string>OSSEC Host-based Intrusion Detection System</string>
+       <string>OSPatrol Host-based Intrusion Detection System</string>
        <key>Messages</key>
        <dict>
                <key>start</key>
-               <string>Starting OSSEC</string>
+               <string>Starting OSPatrol</string>
                <key>stop</key>
-               <string>Stopping OSSEC</string>
+               <string>Stopping OSPatrol</string>
        </dict>
        <key>Provides</key>
        <array>
-               <string>OSSEC</string>
+               <string>OSPatrol</string>
        </array>
        <key>Requires</key>
        <array>
@@ -30,33 +30,33 @@ www.apple.com/DTDs/PropertyList-1.0.dtd">
 </plist>
 EOF
 
-cat <<EOF >/Library/StartupItems/OSSEC/OSSEC
+cat <<EOF >/Library/StartupItems/OSPatrol/OSPatrol
 #!/bin/sh
 
 . /etc/rc.common
-. /etc/ossec-init.conf
+. /etc/ospatrol-init.conf
 if [ "X\${DIRECTORY}" = "X" ]; then
-    DIRECTORY="/var/ossec"
+    DIRECTORY="/var/ospatrol"
 fi
 
 
 StartService ()
 {
-        \${DIRECTORY}/bin/ossec-control start
+        \${DIRECTORY}/bin/ospatrol-control start
 }
 
 StopService ()
 {
-        \${DIRECTORY}/bin/ossec-control stop
+        \${DIRECTORY}/bin/ospatrol-control stop
 }
 
 RestartService ()
 {
-        \${DIRECTORY}/bin/ossec-control restart
+        \${DIRECTORY}/bin/ospatrol-control restart
 }
 
 RunService "\$1"
 EOF
-chmod 755 /Library/StartupItems/OSSEC
-chmod 644 /Library/StartupItems/OSSEC/StartupParameters.plist
-chmod 755 /Library/StartupItems/OSSEC/OSSEC
+chmod 755 /Library/StartupItems/OSPatrol
+chmod 644 /Library/StartupItems/OSPatrol/StartupParameters.plist
+chmod 755 /Library/StartupItems/OSPatrol/OSPatrol

@@ -63,13 +63,13 @@ int ReadActiveResponses(XML_NODE node, void *d1, void *d2)
     struct group *os_group;
     if((os_group = getgrnam(USER)) == NULL)
     {
-      merror("Could not get ossec gid.");
+      merror("Could not get ospatrol gid.");
       return(-1);
     }
 
     if((chown(DEFAULTARPATH, -1, os_group->gr_gid)) == -1)
     {
-      merror("Could not change the group to ossec: %d", errno);
+      merror("Could not change the group to ospatrol: %d", errno);
       return(-1);
     }
 #endif

@@ -1,0 +1,29 @@
+#!/bin/ksh
+#
+# name: ospatrol
+# purpose: Init script for ospatrol
+# Aug. 07 2008 Chris Cuevas
+#
+
+case "$1" in
+start )
+  if [ -f /var/ospatrol/bin/ospatrol-control ]; then
+     echo "Starting OSPatrol"
+     /var/ospatrol/bin/ospatrol-control start
+  fi
+       ;;
+stop )
+  if [ -f /var/ospatrol/bin/ospatrol-control ]; then
+     echo "Stopping OSPatrol"
+     /var/ospatrol/bin/ospatrol-control stop
+  fi
+       ;;
+status )
+  if [ -f /var/ospatrol/bin/ospatrol-control ]; then
+     /var/ospatrol/bin/ospatrol-control status
+  fi
+       ;;
+* )
+       echo "Usage: $0 (start | stop | status)"
+       exit 1
+esac

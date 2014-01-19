@@ -1,19 +1,29 @@
 #!/bin/sh
-# ossec-control        This shell script takes care of starting
-#                      or stopping ossec-hids
+# ospatrol-control        This shell script takes care of starting or stopping ospatrol-hids
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
 
+# Getting where we are installed
 LOCAL=`dirname $0`;
 cd ${LOCAL}
 PWD=`pwd`
 DIR=`dirname $PWD`;
+PLIST=${DIR}/bin/.process_list;
+
 
 ###  Do not modify bellow here ###
-NAME="OSSEC HIDS"
+
+# Getting additional processes
+ls -la ${PLIST} > /dev/null 2>&1
+if [ $? = 0 ]; then
+. ${PLIST};
+fi
+
+
+NAME="OSPatrol"
 VERSION="v2.7.1"
-AUTHOR="Trend Micro Inc."
-DAEMONS="ossec-logcollector ossec-syscheckd ossec-agentd ossec-execd"
+AUTHOR="Jeremy Rossi"
+DAEMONS="ospatrol-monitord ospatrol-logcollector ospatrol-syscheckd ospatrol-analysisd ospatrol-maild ospatrol-execd ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
 
 
 ## Locking for the start/stop
@@ -33,7 +43,7 @@ checkpid()
 {
     for i in ${DAEMONS}; do
         for j in `cat ${DIR}/var/run/${i}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
                 echo "Deleting PID file '${DIR}/var/run/${i}-${j}.pid' not used..."
                 rm ${DIR}/var/run/${i}-${j}.pid
@@ -93,29 +103,97 @@ unlock()
 help()
 {
     # Help message
-    echo "Usage: $0 {start|stop|restart|status}";
+    echo ""
+    echo "Usage: $0 {start|stop|restart|status|enable|disable}";
     exit 1;
 }
+
+
+# Enables/disables additional daemons
+enable()
+{
+    if [ "X$2" = "X" ]; then
+        echo ""
+        echo "Enable options: database, client-syslog, agentless, debug"
+        echo "Usage: $0 enable [database|client-syslog|agentless|debug]"
+        exit 1;
+    fi
+    
+    if [ "X$2" = "Xdatabase" ]; then
+        echo "DB_DAEMON=ospatrol-dbd" >> ${PLIST};
+    elif [ "X$2" = "Xclient-syslog" ]; then
+        echo "CSYSLOG_DAEMON=ospatrol-csyslogd" >> ${PLIST};
+    elif [ "X$2" = "Xagentless" ]; then
+        echo "AGENTLESS_DAEMON=ospatrol-agentlessd" >> ${PLIST};    
+    elif [ "X$2" = "Xdebug" ]; then 
+        echo "DEBUG_CLI=\"-d\"" >> ${PLIST}; 
+    else
+        echo ""
+        echo "Invalid enable option."
+        echo ""
+        echo "Enable options: database, client-syslog, agentless, debug"
+        echo "Usage: $0 enable [database|client-syslog|agentless|debug]"
+        exit 1;
+    fi         
+
+    
+}
+
+
+
+# Enables/disables additional daemons
+disable()
+{
+    if [ "X$2" = "X" ]; then
+        echo ""
+        echo "Disable options: database, client-syslog, agentless, debug"
+        echo "Usage: $0 disable [database|client-syslog|agentless,debug]"
+        exit 1;
+    fi
+    
+    if [ "X$2" = "Xdatabase" ]; then
+        echo "DB_DAEMON=\"\"" >> ${PLIST};
+    elif [ "X$2" = "Xclient-syslog" ]; then
+        echo "CSYSLOG_DAEMON=\"\"" >> ${PLIST};
+    elif [ "X$2" = "Xagentless" ]; then
+        echo "AGENTLESS_DAEMON=\"\"" >> ${PLIST};    
+    elif [ "X$2" = "Xdebug" ]; then 
+        echo "DEBUG_CLI=\"\"" >> ${PLIST}; 
+    else
+        echo ""
+        echo "Invalid disable option."
+        echo ""
+        echo "Disable options: database, client-syslog, agentless, debug"
+        echo "Usage: $0 disable [database|client-syslog|agentless|debug]"
+        exit 1;
+    fi         
+
+    
+}
+
 
 
 # Status function
 status()
 {
+    RETVAL=0
     for i in ${DAEMONS}; do
         pstatus ${i};
         if [ $? = 0 ]; then
+            RETVAL=1
             echo "${i} not running..."
         else
             echo "${i} is running..."
         fi
-    done             
+    done
+    exit $RETVAL
 }
 
 testconfig()
 {
     # We first loop to check the config. 
     for i in ${SDAEMONS}; do
-        ${DIR}/bin/${i} -t;
+        ${DIR}/bin/${i} -t ${DEBUG_CLI};
         if [ $? != 0 ]; then
             echo "${i}: Configuration error. Exiting"
             unlock;
@@ -124,12 +202,19 @@ testconfig()
     done
 }
 
+
 # Start function
 start()
 {
-    SDAEMONS="ossec-execd ossec-agentd ossec-logcollector ossec-syscheckd"
+    SDAEMONS="${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON} ospatrol-maild ospatrol-execd ospatrol-analysisd ospatrol-logcollector ospatrol-syscheckd ospatrol-monitord"
     
     echo "Starting $NAME $VERSION (by $AUTHOR)..."
+    echo | ${DIR}/bin/ospatrol-logtest > /dev/null 2>&1;
+    if [ ! $? = 0 ]; then
+        echo "ospatrol-analysisd: Configuration error. Exiting."
+        exit 1;
+    fi    
+
     lock;
     checkpid;
 
@@ -138,9 +223,9 @@ start()
     for i in ${SDAEMONS}; do
         pstatus ${i};
         if [ $? = 0 ]; then
-            ${DIR}/bin/${i};
+            ${DIR}/bin/${i} ${DEBUG_CLI};
             if [ $? != 0 ]; then
-		echo "${i} did not start";
+		echo "${i} did not start correctly.";
                 unlock;
                 exit 1;
             fi 
@@ -156,6 +241,14 @@ start()
     # to internally create their PID files.
     sleep 2;
     unlock;
+
+    ls -la "${DIR}/ospatrol-agent/" >/dev/null 2>&1
+    if [ $? = 0 ]; then
+        echo ""
+        echo "Starting sub agent directory (for hybrid mode)"
+        ${DIR}/ospatrol-agent/bin/ospatrol-control start
+    fi
+    
     echo "Completed."
 }
 
@@ -172,9 +265,9 @@ pstatus()
     ls ${DIR}/var/run/${pfile}*.pid > /dev/null 2>&1
     if [ $? = 0 ]; then
         for j in `cat ${DIR}/var/run/${pfile}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
-                echo "${pfile}: Process $j not used by ossec, removing .."
+                echo "${pfile}: Process $j not used by ospatrol, removing .."
                 rm -f ${DIR}/var/run/${pfile}-$j.pid
                 continue;
             fi
@@ -210,6 +303,13 @@ stopa()
      done    
     
     unlock;
+
+    ls -la "${DIR}/ospatrol-agent/" >/dev/null 2>&1
+    if [ $? = 0 ]; then
+        echo ""
+        echo "Stopping sub agent directory (for hybrid mode)"
+        ${DIR}/ospatrol-agent/bin/ospatrol-control stop
+    fi
     echo "$NAME $VERSION Stopped"
 }
 
@@ -230,18 +330,18 @@ case "$1" in
         sleep 1;
 	start
 	;;
-  reload)
-	DAEMONS="ossec-logcollector ossec-syscheckd ossec-agentd"
-	stopa
-	start
-	;;
   status)
     status
 	;;
   help)  
     help
     ;;
+  enable)
+    enable $1 $2;
+    ;;  
+  disable)
+    disable $1 $2;
+    ;;  
   *)
     help
 esac
-

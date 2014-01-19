@@ -6,7 +6,7 @@
 # -Added some sanity checks
 # -Added routine to find the first 3 contiguous UIDs above 100,
 #  starting at 600 puts this in user space
-# -Added lines to append the ossec users to the group ossec
+# -Added lines to append the ospatrol users to the group ospatrol
 #  so the the list GroupMembership works properly
 
 #####
@@ -69,60 +69,60 @@ if [[ ${new_uid} != ${new_gid} ]]
 
 
 # Creating the groups.
-sudo ${DSCL} localhost -create /Local/Default/Groups/ossec
-check_errm "Error creating group ossec" "67"
-sudo ${DSCL} localhost -createprop /Local/Default/Groups/ossec PrimaryGroupID ${new_gid}
-sudo ${DSCL} localhost -createprop /Local/Default/Groups/ossec RealName ossec
-sudo ${DSCL} localhost -createprop /Local/Default/Groups/ossec RecordName ossec
-sudo ${DSCL} localhost -createprop /Local/Default/Groups/ossec RecordType: dsRecTypeStandard:Groups
-sudo ${DSCL} localhost -createprop /Local/Default/Groups/ossec Password "*"
+sudo ${DSCL} localhost -create /Local/Default/Groups/ospatrol
+check_errm "Error creating group ospatrol" "67"
+sudo ${DSCL} localhost -createprop /Local/Default/Groups/ospatrol PrimaryGroupID ${new_gid}
+sudo ${DSCL} localhost -createprop /Local/Default/Groups/ospatrol RealName ospatrol
+sudo ${DSCL} localhost -createprop /Local/Default/Groups/ospatrol RecordName ospatrol
+sudo ${DSCL} localhost -createprop /Local/Default/Groups/ospatrol RecordType: dsRecTypeStandard:Groups
+sudo ${DSCL} localhost -createprop /Local/Default/Groups/ospatrol Password "*"
 
 
 # Creating the users.
 
-if [[ $(dscl . -read /Users/ossecm) ]]
+if [[ $(dscl . -read /Users/ospatrolm) ]]
    then
-   echo "ossecm already exists";
+   echo "ospatrolm already exists";
 else
-   sudo ${DSCL} localhost -create /Local/Default/Users/ossecm
-   check_errm "Error creating user ossecm" "87"
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecm RecordName ossecm
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecm RealName "ossecmacct"
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecm NFSHomeDirectory /var/ossec
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecm UniqueID ${j}
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecm PrimaryGroupID ${new_gid}
-   sudo ${DSCL} localhost -append /Local/Default/Groups/ossec GroupMembership ossecm
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecm Password "*"
+   sudo ${DSCL} localhost -create /Local/Default/Users/ospatrolm
+   check_errm "Error creating user ospatrolm" "87"
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolm RecordName ospatrolm
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolm RealName "ospatrolmacct"
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolm NFSHomeDirectory /var/ospatrol
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolm UniqueID ${j}
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolm PrimaryGroupID ${new_gid}
+   sudo ${DSCL} localhost -append /Local/Default/Groups/ospatrol GroupMembership ospatrolm
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolm Password "*"
 fi
 
-if [[ $(dscl . -read /Users/ossecr) ]]
+if [[ $(dscl . -read /Users/ospatrolr) ]]
    then
-   echo "ossecr already exists";
+   echo "ospatrolr already exists";
 else
-   sudo ${DSCL} localhost -create /Local/Default/Users/ossecr
-   check_errm "Error creating user ossecr" "97"
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecr RecordName ossecr
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecr RealName "ossecracct"
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecr NFSHomeDirectory /var/ossec
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecr UniqueID ${k}
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecr PrimaryGroupID ${new_gid}
-   sudo ${DSCL} localhost -append /Local/Default/Groups/ossec GroupMembership ossecr
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossecr Password "*"
+   sudo ${DSCL} localhost -create /Local/Default/Users/ospatrolr
+   check_errm "Error creating user ospatrolr" "97"
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolr RecordName ospatrolr
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolr RealName "ospatrolracct"
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolr NFSHomeDirectory /var/ospatrol
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolr UniqueID ${k}
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolr PrimaryGroupID ${new_gid}
+   sudo ${DSCL} localhost -append /Local/Default/Groups/ospatrol GroupMembership ospatrolr
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrolr Password "*"
 fi
 
-if [[ $(dscl . -read /Users/ossec) ]]
+if [[ $(dscl . -read /Users/ospatrol) ]]
    then
-   echo "ossec already exists";
+   echo "ospatrol already exists";
 else
-   sudo ${DSCL} localhost -create /Local/Default/Users/ossec
-   check_errm "Error creating user ossec" "77"
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossec RecordName ossec
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossec RealName "ossecacct"
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossec NFSHomeDirectory /var/ossec
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossec UniqueID ${new_uid}
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossec PrimaryGroupID ${new_gid}
-   sudo ${DSCL} localhost -append /Local/Default/Groups/ossec GroupMembership ossec
-   sudo ${DSCL} localhost -createprop /Local/Default/Users/ossec Password "*"
+   sudo ${DSCL} localhost -create /Local/Default/Users/ospatrol
+   check_errm "Error creating user ospatrol" "77"
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrol RecordName ospatrol
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrol RealName "ospatrolacct"
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrol NFSHomeDirectory /var/ospatrol
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrol UniqueID ${new_uid}
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrol PrimaryGroupID ${new_gid}
+   sudo ${DSCL} localhost -append /Local/Default/Groups/ospatrol GroupMembership ospatrol
+   sudo ${DSCL} localhost -createprop /Local/Default/Users/ospatrol Password "*"
 fi
 
 

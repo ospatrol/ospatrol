@@ -1,16 +1,16 @@
 #!/bin/sh
 # Author: Scott Knauss scott@knauss.com
 #
-# /etc/init.d/ossec
+# /etc/init.d/ospatrol
 #
 #
 ### BEGIN INIT INFO
-# Provides:       ossec
+# Provides:       ospatrol
 # Required-Start: $syslog
 # Required-Stop:
 # Default-Start:  2 3 5
 # Default-Stop:
-# Description:    Start the ossec HIDS daemon
+# Description:    Start the ospatrol daemon
 ### END INIT INFO
 
 # Shell functions sourced from /etc/rc.status:
@@ -43,18 +43,18 @@ rc_reset
 # considered a success.
 
 
-# Reading ossec init conf.
-if [ -f /etc/ossec-init.conf ]; then
-    . /etc/ossec-init.conf
+# Reading ospatrol init conf.
+if [ -f /etc/ospatrol-init.conf ]; then
+    . /etc/ospatrol-init.conf
 fi
     
 if [ "X${DIRECTORY}" = "X" ]; then
-    DIRECTORY="/var/ossec"
+    DIRECTORY="/var/ospatrol"
 fi
 
 
-#Just to make sure ossec is installed ...
-CONTROL="$DIRECTORY/bin/ossec-control"
+#Just to make sure ospatrol is installed ...
+CONTROL="$DIRECTORY/bin/ospatrol-control"
 
 test -x $CONTROL || { echo "$CONTROL not installed"; 
     if [ "$1" = "stop" ]; then exit 0;
@@ -62,15 +62,15 @@ test -x $CONTROL || { echo "$CONTROL not installed";
     
     
 start() {
-	${DIRECTORY}/bin/ossec-control start
+	${DIRECTORY}/bin/ospatrol-control start
 }
 
 stop() {
-	${DIRECTORY}/bin/ossec-control stop
+	${DIRECTORY}/bin/ospatrol-control stop
 }
 
 status() {
-	${DIRECTORY}/bin/ossec-control status
+	${DIRECTORY}/bin/ospatrol-control status
 }
 
 

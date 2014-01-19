@@ -23,13 +23,13 @@ else
     ME=`whoami 2>/dev/null`    
 fi    
 
-OSSEC_INIT="/etc/ossec-init.conf"
+OSPATROL_INIT="/etc/ospatrol-init.conf"
 HOST=`hostname`
 NAMESERVERS=`cat /etc/resolv.conf | grep "^nameserver" | cut -d " " -sf 2`
 NAMESERVERS2=`cat /etc/resolv.conf | grep "^nameserver" | cut -sf 2`
 HOST_CMD=`which host`
 CC=""
-NAME="OSSEC HIDS"
+NAME="OSPatrol"
 INSTYPE="server"
 DEFAULT_DIR=`grep DIR ${LOCATION} | cut -f2 -d\"`
 INSTALLDIR="$DEFAULT_DIR";
@@ -37,7 +37,7 @@ WORKDIR="$INSTALLDIR"
 CEXTRA=""
 
 # Internal definitions
-NEWCONFIG="./etc/ossec.mc"
+NEWCONFIG="./etc/ospatrol.mc"
 PRECONFIG="./etc/PRECONFIG"
 
 ## Templates

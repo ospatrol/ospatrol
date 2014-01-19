@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/client-agent/agentd.h, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -8,10 +5,6 @@
  * and/or modify it under the terms of the GNU General Public
  * License (version 2) as published by the FSF - Free Software
  * Foundation
- */
-
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net/hids/
  */
 
 
