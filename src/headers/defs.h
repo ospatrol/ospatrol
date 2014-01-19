@@ -243,7 +243,7 @@ http://github.com/ospatrol/ospatrol/blob/master/LICENSE\n"
 
 #ifndef WIN32
 #define OSPATROLCONF       "/etc/ospatrol.conf"
-#define DEFAULTCPATH    DEFAULTDIR ospatrolCONF
+#define DEFAULTCPATH    DEFAULTDIR OSPATROLCONF
 #else
 #define OSPATROLCONF       "ospatrol.conf"
 #define DEFAULTCPATH "ospatrol.conf"
