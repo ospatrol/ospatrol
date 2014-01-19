@@ -85,7 +85,7 @@ void HostinfoInit()
     /* Zeroing decoder */
     os_calloc(1, sizeof(OSDecoderInfo), hostinfo_dec);
     hostinfo_dec->id = getDecoderfromlist(HOSTINFO_MOD);
-    hostinfo_dec->type = OSSEC_RL;
+    hostinfo_dec->type = OSPATROL_RL;
     hostinfo_dec->name = HOSTINFO_MOD;
     hostinfo_dec->fts = 0;
     id_new = getDecoderfromlist(HOSTINFO_NEW);

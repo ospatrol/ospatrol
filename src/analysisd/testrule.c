@@ -9,23 +9,18 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
-/* Part of the OSSEC
- * Available at http://www.ossec.net
- */
 
-
-/* ossec-analysisd.
+/* ospatrol-analysisd.
  * Responsible for correlation and log decoding.
  */
 
 #ifdef ARGV0
    #undef ARGV0
-   #define ARGV0 "ossec-testrule"
+   #define ARGV0 "ospatrol-testrule"
 #endif
 
 
@@ -106,7 +101,7 @@ void logtest_help(const char *prog)
     print_out("    -v          Verbose (full) output/rule debugging");
     print_out("    -d          Execute in debug mode");
     print_out("    -h          This help message");
-    print_out("    -U <rule:alert:decoder>   Unit test. Refer to contrib/ossec-testing/runtests.py");
+    print_out("    -U <rule:alert:decoder>   Unit test. Refer to contrib/ospatrol-testing/runtests.py");
     print_out("    -u <user>   Run as 'user'");
     print_out("    -g <group>  Run as 'group'");
     print_out("    -c <config> Read the 'config' file");
@@ -212,7 +207,7 @@ int main(int argc, char **argv)
     memset(__shost, '\0', 512);
     if(gethostname(__shost, 512 -1) != 0)
     {
-        strncpy(__shost, OSSEC_SERVER, 512 -1);
+        strncpy(__shost, OSPATROL_SERVER, 512 -1);
     }
     else
     {
@@ -263,7 +258,7 @@ int main(int argc, char **argv)
                 }
             }
             else
-            { /* New loaded based on file speified in ossec.conf */
+            { /* New loaded based on file speified in ospatrol.conf */
                 char **decodersfiles;
                 decodersfiles = Config.decoders;
                 while( decodersfiles && *decodersfiles)
@@ -535,7 +530,7 @@ void OS_ReadMSG(int m_queue, char *ut_str)
 
             do
             {
-                if(lf->decoder_info->type == OSSEC_ALERT)
+                if(lf->decoder_info->type == OSPATROL_ALERT)
                 {
                     if(!lf->generated_rule)
                     {

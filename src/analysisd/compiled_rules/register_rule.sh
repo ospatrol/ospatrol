@@ -40,20 +40,20 @@ if [ "x$1" = "xlist" ]; then
 
 elif [ "x$1" = "xsave" ]; then
 
-    ls -la /etc/ossec-init.conf > /dev/null 2>&1
+    ls -la /etc/ospatrol-init.conf > /dev/null 2>&1
     if [ ! $? = 0 ]; then
-        echo "ERROR: Unable to save rules. You must have OSSEC installed to do so."
+        echo "ERROR: Unable to save rules. You must have ospatrol installed to do so."
         exit 1;
     fi
 
-    cat /etc/ossec-init.conf > /dev/null 2>&1
+    cat /etc/ospatrol-init.conf > /dev/null 2>&1
     if [ ! $? = 0 ]; then
         echo "ERROR: Unable to save rules. You must be root to do so."
         exit 1;
     fi
     
     
-    . /etc/ossec-init.conf
+    . /etc/ospatrol-init.conf
     
     
     ls ${DIRECTORY}/compiled_rules > /dev/null 2>&1
@@ -82,20 +82,20 @@ elif [ "x$1" = "xsave" ]; then
 
 elif [ "x$1" = "xrestore" ]; then
 
-    ls -la /etc/ossec-init.conf > /dev/null 2>&1
+    ls -la /etc/ospatrol-init.conf > /dev/null 2>&1
     if [ ! $? = 0 ]; then
-        echo "ERROR: Unable to restore rules. You must have OSSEC installed to do so."
+        echo "ERROR: Unable to restore rules. You must have ospatrol installed to do so."
         exit 1;
     fi
 
-    cat /etc/ossec-init.conf > /dev/null 2>&1
+    cat /etc/ospatrol-init.conf > /dev/null 2>&1
     if [ ! $? = 0 ]; then
         echo "ERROR: Unable to restore rules. You must be root to do so."
         exit 1;
     fi
     
     
-    . /etc/ossec-init.conf
+    . /etc/ospatrol-init.conf
     
     
     ls ${DIRECTORY}/compiled_rules/function_list > /dev/null 2>&1

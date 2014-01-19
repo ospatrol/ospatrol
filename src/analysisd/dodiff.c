@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/analysisd/dodiff.c, 2012/07/23 dcid Exp $
- */
-
 /* Copyright (C) 2010 Trend Micro Inc.
  * All rights reserved.
  *
@@ -9,8 +6,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 

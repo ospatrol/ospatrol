@@ -2,7 +2,7 @@
 # Daniel B. Cid <dcid@ossec.net>
 
 PT=../
-NAME=ossec-maild
+NAME=ospatrol-maild
 
 include ../Config.Make
 

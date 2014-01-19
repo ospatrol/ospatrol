@@ -2,7 +2,7 @@
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
 
 PT=../
-NAME=ossec-execd
+NAME=ospatrol-execd
 
 include ../Config.Make
 

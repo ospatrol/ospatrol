@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/main/license/ .
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -351,7 +350,7 @@ int pt_check_negate(char *pattern)
  * Checks if the specific pattern is present on str.
  * A pattern can be preceeded by:
  *                                =: (for equal) - default - strcasecmp
- *                                r: (for ossec regexes)
+ *                                r: (for ospatrol regexes)
  *                                >: (for strcmp greater)
  *                                <: (for strcmp  lower)
  *

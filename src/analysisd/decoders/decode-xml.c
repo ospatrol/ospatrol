@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -510,7 +509,9 @@ int ReadDecodeXML(char *file)
                 else if(strcmp(elements[j]->content, "host-information") == 0)
                     pi->type = HOST_INFO;
                 else if(strcmp(elements[j]->content, "ossec") == 0)
-                    pi->type = OSSEC_RL;
+                    pi->type = OSPATROL_RL;
+                else if(strcmp(elements[j]->content, "ospatrol") == 0)
+                    pi->type = OSPATROL_RL;
                 else
                 {
                     merror("%s: Invalid decoder type '%s'.",

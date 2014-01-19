@@ -148,11 +148,11 @@ char CustomAlertTokenName[CUSTOM_ALERT_TOKEN_LAST][15] =
  */
 void OS_Store(Eventinfo *lf)
 {
-    if(strcmp(lf->location, "ossec-keepalive") == 0)
+    if(strcmp(lf->location, "ospatrol-keepalive") == 0)
     {
         return;
     }
-    if(strstr(lf->location, "->ossec-keepalive") != NULL)
+    if(strstr(lf->location, "->ospatrol-keepalive") != NULL)
     {
         return;
     }

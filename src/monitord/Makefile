@@ -2,7 +2,7 @@
 # Daniel B. Cid <dcid@ossec.net>
 
 PT=../
-NAME=ossec-monitord
+NAME=ospatrol-monitord
 
 include ../Config.Make
 
@@ -12,10 +12,10 @@ OBJS = ${OS_CONFIG} ${OS_SHARED} ${OS_NET} ${OS_REGEX} ${OS_XML} ${OS_CRYPTO} ${
 
 mmonitor:
 		${CC} ${CFLAGS} ${OS_LINK} ${LOCAL} ${OBJS} -o ${NAME}
-		${CC} ${CFLAGS} ${OS_LINK} -UARGV0 -DARGV0=\"ossec-reportd\" report.c ${OBJS} -o ossec-reportd
+		${CC} ${CFLAGS} ${OS_LINK} -UARGV0 -DARGV0=\"ospatrol-reportd\" report.c ${OBJS} -o ospatrol-reportd
 clean:
 		${CLEAN}
-		rm -f ossec-reportd
+		rm -f ospatrol-reportd
 build:
 		${BUILD}
-		cp -pr ossec-reportd ${PT}../bin
+		cp -pr ospatrol-reportd ${PT}../bin

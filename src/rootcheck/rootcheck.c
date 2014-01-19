@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/rootcheck/rootcheck.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -13,7 +10,6 @@
 /*
  * Rootcheck v 0.3
  * Copyright (C) 2003 Daniel B. Cid <daniel@underlinux.com.br>
- * http://www.ossec.net/rootcheck/
  *
  */
 
@@ -35,13 +31,13 @@
 int Read_Rootcheck_Config(char * cfgfile, rkconfig *cfg);
 
 
-#ifndef OSSECHIDS
+#ifndef OSPATROL
 
 void rootcheck_help()
 {
     printf("\n");
     printf("Rootcheck v0.8 (Mar/12/2008):\n");
-    printf("http://www.ossec.net/rootcheck/\n");
+    printf("http://ospatrol.com/rootcheck/\n");
     printf("Available options:\n");
     printf("\t\t-h\t  This Help message\n");
     printf("\t\t-c <file> Configuration file\n");
@@ -69,7 +65,7 @@ int rootcheck_init(int test_config)
 
 #endif
 
-    #ifdef OSSECHIDS
+    #ifdef OSPATROL
     char *cfg = DEFAULTCPATH;
     #else
     char *cfg = "./rootcheck.conf";
@@ -124,7 +120,7 @@ int rootcheck_init(int test_config)
     }
 
 
-    #ifndef OSSECHIDS
+    #ifndef OSPATROL
     rootcheck.notify = SYSLOG;
     rootcheck.daemon = 0;
     while((c = getopt(argc, argv, "VstrdhD:c:")) != -1)
@@ -179,7 +175,7 @@ int rootcheck_init(int test_config)
     #endif
 
 
-    #endif /* OSSECHIDS */
+    #endif /* OSPATROL */
 
 
     /* Staring message */
@@ -228,12 +224,12 @@ int rootcheck_init(int test_config)
         rootcheck.workdir = DEFAULTDIR;
 
 
-    #ifdef OSSECHIDS
+    #ifdef OSPATROL
 
 
     /* Start up message */
     #ifdef WIN32
-    verbose(STARTUP_MSG, "ossec-rootcheck", getpid());
+    verbose(STARTUP_MSG, "ospatrol-rootcheck", getpid());
     #else
 
 
@@ -262,7 +258,7 @@ int rootcheck_init(int test_config)
 
     #endif /* Not win32 */
 
-    #endif /* ossec hids */
+    #endif /* ospatrol hids */
 
 
     /* Initializing rk list */
@@ -276,7 +272,7 @@ int rootcheck_init(int test_config)
     rk_sys_file[0] = NULL;
 
 
-    #ifndef OSSECHIDS
+    #ifndef OSPATROL
 
     #ifndef WIN32
     /* Start the signal handling */

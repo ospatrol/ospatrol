@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -28,17 +27,17 @@
  /* Maximum body size */
 #define BODY_SIZE           OS_MAXSTR + OS_SIZE_1024
 
-#define SMS_SUBJECT         "OSSEC %d - %d - %s"
-#define MAIL_SUBJECT        "OSSEC Notification - %s - Alert level %d"
-#define MAIL_SUBJECT_FULL   "OSSEC Alert - %s - Level %d - %s"
+#define SMS_SUBJECT         "OSPatrol %d - %d - %s"
+#define MAIL_SUBJECT        "OSPatrol Notification - %s - Alert level %d"
+#define MAIL_SUBJECT_FULL   "OSPatrol Alert - %s - Level %d - %s"
 
-/* Full subject without ossec in the name */
+/* Full subject without ospatrol in the name */
 #ifdef CLEANFULL
 #define MAIL_SUBJECT_FULL2   "%d - %s - %s"
 #endif
 
 #ifdef GEOIP
-#define MAIL_BODY           "\r\nOSSEC HIDS Notification.\r\n" \
+#define MAIL_BODY           "\r\nOSPatrol Notification.\r\n" \
                             "%s\r\n\r\n" \
                             "Received From: %s\r\n" \
                             "Rule: %d fired (level %d) -> \"%s\"\r\n" \
@@ -47,7 +46,7 @@
                             "Portion of the log(s):\r\n\r\n%s\r\n" \
                             "\r\n\r\n --END OF NOTIFICATION\r\n\r\n\r\n"
 #else
-#define MAIL_BODY           "\r\nOSSEC HIDS Notification.\r\n" \
+#define MAIL_BODY           "\r\nOSPatrol Notification.\r\n" \
                             "%s\r\n\r\n" \
                             "Received From: %s\r\n" \
                             "Rule: %d fired (level %d) -> \"%s\"\r\n" \

@@ -11,7 +11,7 @@
  */
 
 
-#ifndef OSSECHIDS
+#ifndef OSPATROL
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -109,7 +109,7 @@ int Read_Rootcheck_Config(char * cfgfile)
     rootcheck.daemon = eval_bool2(OS_GetOneContentforElement(&xml,xml_daemon), rootcheck.daemon);
 
     /* time  */
-    #ifdef OSSECHIDS
+    #ifdef OSPATROL
     str = OS_GetOneContentforElement(&xml,xml_time);
     if(str)
     {

@@ -1,5 +1,3 @@
-/* @(#) $Id: ./src/analysisd/rules.c, 2011/09/08 dcid Exp $
- */
 
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
@@ -9,8 +7,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -861,7 +858,11 @@ int Rules_OP_ReadRules(char * rulefile)
                         }
                         else if(strcmp(rule_opt[k]->content,"ossec") == 0)
                         {
-                            config_ruleinfo->category = OSSEC_RL;
+                            config_ruleinfo->category = OSPATROL_RL;
+                        }
+                        else if(strcmp(rule_opt[k]->content,"ospatrol") == 0)
+                        {
+                            config_ruleinfo->category = OSPATROL_RL;
                         }
                         else
                         {

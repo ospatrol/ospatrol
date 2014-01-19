@@ -1,5 +1,3 @@
-/*      $OSSEC, os_crypto/md5_op.c, v0.2, 2005/09/17, Daniel B. Cid$      */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/analysisd/makelists.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2010 Trend Micro Inc.
  * All rights reserved.
  *
@@ -9,22 +6,14 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
-/* Part of the OSSEC
- * Available at http://www.ossec.net
- */
 
-
-/* ossec-analysisd.
- * Responsible for correlation and log decoding.
- */
 #ifdef ARGV0
     #undef ARGV0
-    #define ARGV0 "ossec-testrule"
+    #define ARGV0 "ospatrol-testrule"
 #endif
 
 #include "shared.h"

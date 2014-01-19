@@ -131,13 +131,13 @@ void test_ports(int proto, int *_errors, int *_total)
             {
                 continue;
 
-                #ifdef OSSECHIDS
+                #ifdef OSPATROL
                 sleep(2);
                 #endif
             }
 
-            /* If we are being run by the ossec hids, sleep here (no rush) */
-            #ifdef OSSECHIDS
+            /* If we are being run by the ospatrol hids, sleep here (no rush) */
+            #ifdef OSPATROL
             sleep(2);
             #endif
 

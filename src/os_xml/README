@@ -1,4 +1,4 @@
-== OSSEC, os_xml "library" ==
+== OSPatrol, os_xml "library" ==
 Copyright (C) 2009 Trend Micro Inc.
 
 This "library" is a set of very simple functions to read
@@ -11,7 +11,7 @@ Any question, comment or suggestion, please contact me
 at dcid@ossec.net or daniel@underlinux.com.br.
 
 The latest version of this library is available at
-http://www.ossec.net/
+http://ospatrol.com
 
 == Examples ==
 

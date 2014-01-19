@@ -42,7 +42,7 @@ int notify_rk(int rk_type, char *msg)
     if(rk_type <= ALERT_SYSTEM_ERROR)
         return(0);
 
-    #ifdef OSSECHIDS
+    #ifdef OSPATROL
     if(SendMSG(rootcheck.queue, msg, ROOTCHECK, ROOTCHECK_MQ) < 0)
     {
         merror(QUEUE_SEND, ARGV0);
@@ -122,9 +122,7 @@ void run_rk_check()
     if(rootcheck.notify != QUEUE)
     {
         printf("\n");
-        printf("** Starting Rootcheck v0.9 by Daniel B. Cid        **\n");
-        printf("** http://www.ossec.net/en/about.html#dev-team     **\n");
-        printf("** http://www.ossec.net/rootcheck/                 **\n\n");
+        printf("** Starting Rootcheck v0.9 by Daniel B. Cid        **\n\n");
         printf("Be patient, it may take a few minutes to complete...\n");
         printf("\n");
     }

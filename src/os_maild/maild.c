@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -19,7 +18,7 @@
 #endif
 
 #ifndef ARGV0
-   #define ARGV0 "ossec-maild"
+   #define ARGV0 "ospatrol-maild"
 #endif
 
 #include "shared.h"

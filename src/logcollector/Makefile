@@ -1,9 +1,9 @@
 # Makefile for logcollector
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
+# http://ospatrol.com
 
 PT=../
-NAME=ossec-logcollector
+NAME=ospatrol-logcollector
 
 include ../Config.Make
 

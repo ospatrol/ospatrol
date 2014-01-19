@@ -1,5 +1,3 @@
-/*      $OSSEC, os_crypto/bf_op.h, v0.1, 2004/08/09, Daniel B. Cid$      */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

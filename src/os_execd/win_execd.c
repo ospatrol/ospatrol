@@ -25,7 +25,7 @@
    #undef ARGV0
 #endif
 
-#define ARGV0 "ossec-execd"
+#define ARGV0 "ospatrol-execd"
 
 
 

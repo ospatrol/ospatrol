@@ -64,14 +64,14 @@ void manage_files(int cday, int cmon, int cyear)
 
 
     /* Event logfile */
-    snprintf(elogfile, OS_FLSIZE, "%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(elogfile, OS_FLSIZE, "%s/%d/%s/ospatrol-%s-%02d.log",
             EVENTS,
             cyear,
             months[cmon],
             "archive",
             cday);
     /* Event log file old */
-    snprintf(elogfile_old, OS_FLSIZE, "%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(elogfile_old, OS_FLSIZE, "%s/%d/%s/ospatrol-%s-%02d.log",
             EVENTS,
             pp_old->tm_year+1900,
             months[pp_old->tm_mon],
@@ -83,14 +83,14 @@ void manage_files(int cday, int cmon, int cyear)
 
 
     /* alert logfile  */
-    snprintf(alogfile, OS_FLSIZE, "%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(alogfile, OS_FLSIZE, "%s/%d/%s/ospatrol-%s-%02d.log",
             ALERTS,
             cyear,
             months[cmon],
             "alerts",
             cday);
     /* alert logfile old  */
-    snprintf(alogfile_old, OS_FLSIZE, "%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(alogfile_old, OS_FLSIZE, "%s/%d/%s/ospatrol-%s-%02d.log",
             ALERTS,
             pp_old->tm_year+1900,
             months[pp_old->tm_mon],
@@ -101,14 +101,14 @@ void manage_files(int cday, int cmon, int cyear)
 
 
     /* firewall events */
-    snprintf(flogfile, OS_FLSIZE, "%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(flogfile, OS_FLSIZE, "%s/%d/%s/ospatrol-%s-%02d.log",
             FWLOGS,
             cyear,
             months[cmon],
             "firewall",
             cday);
     /* firewall events old */
-    snprintf(flogfile_old, OS_FLSIZE, "%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(flogfile_old, OS_FLSIZE, "%s/%d/%s/ospatrol-%s-%02d.log",
             FWLOGS,
             pp_old->tm_year+1900,
             months[pp_old->tm_mon],

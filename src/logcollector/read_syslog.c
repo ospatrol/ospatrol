@@ -103,7 +103,7 @@ void *read_syslog(int pos, int *rc, int drop_it)
         if(__ms)
         {
             // strlen(str) >= (OS_MAXSTR - OS_LOG_HEADER - 2)
-            // truncate str before logging to ossec.log
+            // truncate str before logging to ospatrol.log
 #define OUTSIZE 4096
             char buf[OUTSIZE + 1];
             buf[OUTSIZE] = '\0';

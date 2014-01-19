@@ -43,5 +43,5 @@ char __shost[512];
 void *NULL_Decoder;
 
 
-#define OSSEC_SERVER    "ossec-server"
+#define ospatrol_SERVER    "ospatrol-server"
 #endif

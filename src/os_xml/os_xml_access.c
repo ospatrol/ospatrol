@@ -1,5 +1,3 @@
-/*   $OSSEC, os_xml_access.c, v0.3, 2005/02/11, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *

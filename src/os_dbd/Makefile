@@ -2,7 +2,7 @@
 # Daniel B. Cid <dcid@ossec.net>
 
 PT=../
-NAME=ossec-dbd
+NAME=ospatrol-dbd
 
 # Uncomment the following if you know what you are doing.
 #DBFLAGS=-I/usr/local/include/mysql -L/usr/local/lib/mysql -lmysqlclient

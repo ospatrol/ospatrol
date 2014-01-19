@@ -116,8 +116,8 @@ int alert_only;
 #define SQUID       8   /* Squid logs */
 #define WINDOWS     9   /* Windows logs */
 #define HOST_INFO   10  /* Host information logs (from nmap or similar) */
-#define OSSEC_RL    11  /* Ossec rules */
-#define OSSEC_ALERT 12  /* Ossec Alerts */
+#define OSPATROL_RL    11  /* ospatrol rules */
+#define OSPATROL_ALERT 12  /* ospatrol Alerts */
 
 
 /* FTS allowed values */
