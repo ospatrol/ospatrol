@@ -23,11 +23,11 @@
   <aatr4>lala-abc</aatr4>
 </test2>
 
-<ossec_config>
+<ospatrol_config>
   <active_response>
     <disabled>yes please \< lala</disabled>
   </active_response>
-</ossec_config>
+</ospatrol_config>
 
 <myxml1 name="name1" value="abc">
   <element1 name="mytestname" value ='element1value'>content1</element1>

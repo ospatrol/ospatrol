@@ -84,7 +84,7 @@ void print_totals()
 
 
     /* Creating the logfile name */
-    snprintf(logfile,OS_FLSIZE,"%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(logfile,OS_FLSIZE,"%s/%d/%s/ospatrol-%s-%02d.log",
             STATSAVED,
             prev_year,
             prev_month,

@@ -1,5 +1,3 @@
-/*   $OSSEC, client-config.h, v0.2, 2005/11/09, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *

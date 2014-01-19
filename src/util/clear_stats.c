@@ -22,7 +22,7 @@
 /** help **/
 void helpmsg()
 {
-    printf("\nOSSEC HIDS %s: Clear the events stats (averages).\n", ARGV0);
+    printf("\nOSPatrol %s: Clear the events stats (averages).\n", ARGV0);
     printf("Available options:\n");
     printf("\t-h       This help message.\n");
     printf("\t-a       Clear all the stats (averages).\n");

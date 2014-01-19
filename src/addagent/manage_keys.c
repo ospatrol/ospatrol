@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -63,7 +62,7 @@ int k_import(char *cmdimport)
     {
         printf(IMPORT_KEY);
 
-        user_input = getenv("OSSEC_AGENT_KEY");
+        user_input = getenv("OSPATROL_AGENT_KEY");
         if (user_input == NULL) {
           user_input = read_from_user();
         }
@@ -115,7 +114,7 @@ int k_import(char *cmdimport)
                 printf(ADD_CONFIRM);
                 fflush(stdout);
 
-                user_input = getenv("OSSEC_ACTION_CONFIRMED");
+                user_input = getenv("OSPATROL_ACTION_CONFIRMED");
                 if (user_input == NULL) {
                   user_input = read_from_user();
                 }

@@ -1,6 +1,5 @@
 # Makefile for os_zlib tests.
 # Daniel B. Cid <dcid@ossec.net>
-# http://www.ossec.net
 
 PT=../
 include $(PT)Config.Make

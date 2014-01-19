@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/util/ossec-regex.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -16,13 +13,13 @@
 #include "shared.h"
 
 #undef ARGV0
-#define ARGV0 "ossec-regex"
+#define ARGV0 "ospatrol-regex"
 
 
 /** help **/
 void helpmsg()
 {
-    printf("\nOSSEC HIDS %s: ossec-regex pattern\n", ARGV0);
+    printf("\OSPatrol %s: ospatrol-regex pattern\n", ARGV0);
     exit(1);
 }
 

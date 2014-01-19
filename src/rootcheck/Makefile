@@ -1,10 +1,8 @@
-# Makefile for OSSEC rootcheck
+# Makefile for rootcheck
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
-# http://www.ossec.net/rootcheck/
 
 PT=../
-NAME=ossec-rootcheck
+NAME=ospatrol-rootcheck
 
 include ../Config.Make
 
@@ -18,7 +16,7 @@ rootcheck:
 		ranlib rootcheck_lib.a
         
 binary:        
-		$(CC) $(CFLAGS) ${OS_LINK} ${OBJS} rootcheck-config.c ${OBJS2} -UOSSECHIDS -D_GNU_SOURCE -o ${NAME}
+		$(CC) $(CFLAGS) ${OS_LINK} ${OBJS} rootcheck-config.c ${OBJS2} -UOSPATROL -D_GNU_SOURCE -o ${NAME}
 clean:
 		${CLEAN} rootcheck_lib.a
 build:        

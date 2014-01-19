@@ -609,7 +609,7 @@ void readel(os_el *el, int printit)
 
 
         /* Send message about cleared */
-        snprintf(msg_alert, 512, "ossec: Event log cleared: '%s'", el->name);
+        snprintf(msg_alert, 512, "ospatrol: Event log cleared: '%s'", el->name);
         SendMSG(logr_queue, msg_alert, "WinEvtLog", LOCALFILE_MQ);
 
 

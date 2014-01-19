@@ -1,11 +1,8 @@
-# @(#) $Id: ./src/rootcheck/db/system_audit_rcl.txt, 2012/02/13 dcid Exp $
-
 #
 # OSSEC Linux Audit - (C) 2007 Daniel B. Cid - dcid@ossec.net
 #
-# Released under the same license as OSSEC.
-# More details at the LICENSE file included with OSSEC or online
-# at: http://www.ossec.net/en/licensing.html
+# Released under the same license as OSPatrol
+# License details at the LICENSE file included with OSPatrol
 #
 # [Application name] [any or all] [reference]
 # type:<entry name>;
@@ -21,7 +18,7 @@
 # For files, use "->" to look for a specific value in the file.
 #
 # Values can be preceeded by: =: (for equal) - default
-#                             r: (for ossec regexes)
+#                             r: (for ospatrol regexes)
 #                             >: (for strcmp greater)
 #                             <: (for strcmp  lower)
 # Multiple patterns can be specified by using " && " between them.

@@ -1,9 +1,8 @@
 # Makefile for analysisd
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
 
 PT=../
-NAME=ossec-analysisd
+NAME=ospatrol-analysisd
 
 include ../Config.Make
 
@@ -29,11 +28,11 @@ logtest:
 	    cd ./cdb; make
 		cd ./decoders; make logtest
 		cd ./compiled_rules; make;
-		$(CC) $(CFLAGS) ${OS_LINK} -DTESTRULE -I./ testrule.c ${loga_OBJS} -o ossec-logtest 
+		$(CC) $(CFLAGS) ${OS_LINK} -DTESTRULE -I./ testrule.c ${loga_OBJS} -o ospatrol-logtest 
 
 makelists:
 		cd ./cdb; make
-		$(CC) $(CFLAGS) ${OS_LINK} -DTESTRULE -I./ makelists.c ${lists_OBJS}  -o ossec-makelists
+		$(CC) $(CFLAGS) ${OS_LINK} -DTESTRULE -I./ makelists.c ${lists_OBJS}  -o ospatrol-makelists
 
 clean:
 	    cd ./cdb; make clean
@@ -44,5 +43,5 @@ clean:
 
 build:
 		${BUILD}
-		cp -pr ossec-logtest ${PT}../bin
-		cp -pr ossec-makelists ${PT}../bin
+		cp -pr ospatrol-logtest ${PT}../bin
+		cp -pr ospatrol-makelists ${PT}../bin

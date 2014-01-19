@@ -1,5 +1,5 @@
 #!/bin/sh
-# Restarts ossec.
+# Restarts ospatrol.
 # Requirements: none
 # Author: Daniel B. Cid
 
@@ -21,7 +21,7 @@ echo "`date` $0 $1 $2 $3 $4 $5" >> ${PWD}/../logs/active-responses.log
 
 # Adding the ip to hosts.deny
 if [ "x${ACTION}" = "xadd" ]; then
-   ${PWD}/../bin/ossec-control restart
+   ${PWD}/../bin/ospatrol-control restart
    exit 0;
 
 

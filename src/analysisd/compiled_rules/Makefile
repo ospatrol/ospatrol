@@ -3,7 +3,7 @@
 # http://www.ossec.net
 
 PT=../../
-NAME=ossec-analysisd
+NAME=ospatrol-analysisd
 
 include ../../Config.Make
 

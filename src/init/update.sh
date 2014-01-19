@@ -1,7 +1,6 @@
 #!/bin/sh
-# Shell script update functions for the OSSEC HIDS
+# Shell script update functions for the OSPatrol
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
-# Last modification: May 24, 2006
 
 
 FALSE="false"
@@ -13,9 +12,9 @@ TRUE="true"
 ##########
 isUpdate()
 {
-    ls -la ${OSSEC_INIT} > /dev/null 2>&1
+    ls -la ${OSPATROL_INIT} > /dev/null 2>&1
     if [ $? = 0 ]; then
-        . ${OSSEC_INIT}
+        . ${OSPATROL_INIT}
         if [ "X$DIRECTORY" = "X" ]; then
             echo "# ($FUNCNAME) ERROR: The variable DIRECTORY wasn't set" 1>&2
             echo "${FALSE}"
@@ -37,7 +36,7 @@ isUpdate()
 ##########
 doUpdatecleanup()
 {
-    . ${OSSEC_INIT}
+    . ${OSPATROL_INIT}
 
     if [ "X$DIRECTORY" = "X" ]; then
         echo "# ($FUNCNAME) ERROR: The variable DIRECTORY wasn't set." 1>&2
@@ -61,16 +60,16 @@ doUpdatecleanup()
 ##########
 getPreinstalled()
 {
-    . ${OSSEC_INIT}
+    . ${OSPATROL_INIT}
 
     # agent
-    cat $DIRECTORY/etc/ossec.conf | grep "<client>" > /dev/null 2>&1
+    cat $DIRECTORY/etc/ospatrol.conf | grep "<client>" > /dev/null 2>&1
     if [ $? = 0 ]; then
         echo "agent"
         return 0;
     fi
 
-    cat $DIRECTORY/etc/ossec.conf | grep "<remote>" > /dev/null 2>&1
+    cat $DIRECTORY/etc/ospatrol.conf | grep "<remote>" > /dev/null 2>&1
     if [ $? = 0 ]; then
         echo "server"
         return 0;
@@ -86,31 +85,31 @@ getPreinstalled()
 ##########
 getPreinstalledDir()
 {
-    . ${OSSEC_INIT}
+    . ${OSPATROL_INIT}
     echo "$DIRECTORY"
     return 0;
 }
 
 
 ##########
-# UpdateStartOSSEC
+# UpdateStartOSPatrol
 ##########
-UpdateStartOSSEC()
+UpdateStartOSPatrol()
 {
-   . ${OSSEC_INIT}
+   . ${OSPATROL_INIT}
 
-   $DIRECTORY/bin/ossec-control start
+   $DIRECTORY/bin/ospatrol-control start
 }
 
 
 ##########
-# UpdateStopOSSEC
+# UpdateStopOSPatrol
 ##########
-UpdateStopOSSEC()
+UpdateStopOSPatrol()
 {
-   . ${OSSEC_INIT}
+   . ${OSPATROL_INIT}
 
-   $DIRECTORY/bin/ossec-control stop
+   $DIRECTORY/bin/ospatrol-control stop
 
    # We also need to remove all syscheck queue file (format changed)
    if [ "X$VERSION" = "X0.9-3" ]; then
@@ -121,37 +120,37 @@ UpdateStopOSSEC()
 }
 
 ##########
-# UpdateOSSECRules
+# UpdateOSPatrolRules
 ##########
-UpdateOSSECRules()
+UpdateOSPatrolRules()
 {
-    . ${OSSEC_INIT}
+    . ${OSPATROL_INIT}
 
-    OSSEC_CONF_FILE="$DIRECTORY/etc/ossec.conf"
+    OSPATROL_CONF_FILE="$DIRECTORY/etc/ospatrol.conf"
 
     # Backing up the old config
-    cp -pr ${OSSEC_CONF_FILE} "${OSSEC_CONF_FILE}.$$.bak"
+    cp -pr ${OSPATROL_CONF_FILE} "${OSPATROL_CONF_FILE}.$$.bak"
 
     # Getting rid of old rules entries
-    grep -Ev "</*rules>|<include>|<list>|<decoder>|<decoder_dir|<rule_dir>|rules global entry" ${OSSEC_CONF_FILE} > "${OSSEC_CONF_FILE}.$$.tmp"
+    grep -Ev "</*rules>|<include>|<list>|<decoder>|<decoder_dir|<rule_dir>|rules global entry" ${OSPATROL_CONF_FILE} > "${OSPATROL_CONF_FILE}.$$.tmp"
 
     # Customer decoder, decoder_dir, rule_dir are carried over during upgrade
-    grep -E '<decoder>|<decoder_dir|<rule_dir>' ${OSSEC_CONF_FILE} | grep -v '<!--' >> "${OSSEC_CONF_FILE}.$$.tmp2"
+    grep -E '<decoder>|<decoder_dir|<rule_dir>' ${OSPATROL_CONF_FILE} | grep -v '<!--' >> "${OSPATROL_CONF_FILE}.$$.tmp2"
 
     # Check for custom files that may have been added in <rules> element
-    for i in `grep -E '<include>|<list>' ${OSSEC_CONF_FILE} | grep -v '<!--'`
+    for i in `grep -E '<include>|<list>' ${OSPATROL_CONF_FILE} | grep -v '<!--'`
     do
-      grep "$i" ${RULES_TEMPLATE}>/dev/null || echo "    $i" >> "${OSSEC_CONF_FILE}.$$.tmp2"
+      grep "$i" ${RULES_TEMPLATE}>/dev/null || echo "    $i" >> "${OSPATROL_CONF_FILE}.$$.tmp2"
     done
 
     # Putting everything back together
-    cat "${OSSEC_CONF_FILE}.$$.tmp" > ${OSSEC_CONF_FILE}
-    rm "${OSSEC_CONF_FILE}.$$.tmp"
-    echo "" >> ${OSSEC_CONF_FILE}
-    echo "<ossec_config>  <!-- rules global entry -->" >> ${OSSEC_CONF_FILE}
-    grep -v '</rules>' ${RULES_TEMPLATE} >> ${OSSEC_CONF_FILE}
-    cat "${OSSEC_CONF_FILE}.$$.tmp2" >> ${OSSEC_CONF_FILE}
-    echo "</rules>" >> ${OSSEC_CONF_FILE}
-    echo "</ossec_config>  <!-- rules global entry -->" >> ${OSSEC_CONF_FILE}
-    rm "${OSSEC_CONF_FILE}.$$.tmp2"
+    cat "${OSPATROL_CONF_FILE}.$$.tmp" > ${OSPATROL_CONF_FILE}
+    rm "${OSPATROL_CONF_FILE}.$$.tmp"
+    echo "" >> ${OSPATROL_CONF_FILE}
+    echo "<ospatrol_config>  <!-- rules global entry -->" >> ${OSPATROL_CONF_FILE}
+    grep -v '</rules>' ${RULES_TEMPLATE} >> ${OSPATROL_CONF_FILE}
+    cat "${OSPATROL_CONF_FILE}.$$.tmp2" >> ${OSPATROL_CONF_FILE}
+    echo "</rules>" >> ${OSPATROL_CONF_FILE}
+    echo "</ospatrol_config>  <!-- rules global entry -->" >> ${OSPATROL_CONF_FILE}
+    rm "${OSPATROL_CONF_FILE}.$$.tmp2"
 }

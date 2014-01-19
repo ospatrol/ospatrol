@@ -69,7 +69,7 @@ void generate_reports(int cday, int cmon, int cyear,struct tm *p)
 
 
                 /* Opening the log file. */
-                snprintf(aname, 255, "%s/%d/%s/ossec-%s-%02d.log",
+                snprintf(aname, 255, "%s/%d/%s/ospatrol-%s-%02d.log",
                          ALERTS, cyear, monthss[cmon], "alerts", cday);
                 os_strdup(aname, mond.reports[s]->r_filter.filename);
 

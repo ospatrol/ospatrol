@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -88,7 +87,7 @@ fpos_t fp_pos;
 #define ADDED           "Added.\n"
 #define ADD_NOT         "Not Adding ..\n"
 #define PRESS_ENTER     "** Press ENTER to return to the main menu.\n"
-#define MUST_RESTART    "\n** You must restart OSSEC for your changes" \
+#define MUST_RESTART    "\n** You must restart OSPatrol for your changes" \
                         " to take effect.\n\n"
 
 /* Add errors */

@@ -200,8 +200,8 @@ void loop_all_pids(char *ps, pid_t max_pid, int *_errors, int *_total)
                 _ps0 = 1;
         }
 
-        /* If we are being run by the ossec hids, sleep here (no rush) */
-        #ifdef OSSECHIDS
+        /* If we are being run by the ospatrol, sleep here (no rush) */
+        #ifdef OSPATROL
         sleep(2);
         #endif
 

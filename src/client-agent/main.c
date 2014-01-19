@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/client-agent/main.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *
@@ -10,11 +7,6 @@
  * Foundation
  */
 
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net
- */
-
-
 /* agent daemon.
  */
 
@@ -23,7 +15,7 @@
 #include "agentd.h"
 
 #ifndef ARGV0
-   #define ARGV0 "ossec-agentd"
+   #define ARGV0 "ospatrol-agentd"
 #endif
 
 

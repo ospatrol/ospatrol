@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/logcollector/read_ossecalert.c, 2012/03/30 dcid Exp $
- */
-
 /* Copyright (C) 2012 Daniel B. Cid (http://dcid.me)
  * All right reserved.
  *
@@ -20,7 +17,7 @@
 
 
 /* Read syslog files/snort fast/apache files */
-void *read_ossecalert(int pos, int *rc, int drop_it)
+void *read_ospatrolalert(int pos, int *rc, int drop_it)
 {
     alert_data *al_data;
     char user_msg[256];
@@ -71,7 +68,7 @@ void *read_ossecalert(int pos, int *rc, int drop_it)
     {
         /* Building syslog message. */
         snprintf(syslog_msg, OS_SIZE_2048,
-          	"ossec: Alert Level: %d; Rule: %d - %s; "
+          	"ospatrol: Alert Level: %d; Rule: %d - %s; "
                	"Location: %s;%s%s  %s",
                	al_data->level, al_data->rule, al_data->comment,
                	al_data->location,
@@ -103,7 +100,7 @@ void *read_ossecalert(int pos, int *rc, int drop_it)
             tmp_msg[1597] = '\0';
         }
         snprintf(syslog_msg, OS_SIZE_2048,
-          	"ossec: Alert Level: %d; Rule: %d - %s; "
+          	"ospatrol: Alert Level: %d; Rule: %d - %s; "
                	"Location: %s;%s%s  %s",
                	al_data->level, al_data->rule, al_data->comment,
                	al_data->location,

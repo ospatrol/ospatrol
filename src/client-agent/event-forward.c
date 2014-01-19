@@ -10,9 +10,6 @@
  * Foundation
  */
 
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net/hids/
- */
 
 
 #include "shared.h"

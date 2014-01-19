@@ -1,5 +1,3 @@
-/*   $OSSEC, os_xml_node_variables.c, v0.3, 2005/04/12, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -9,9 +7,6 @@
  * Foundation
  */
 
-/* os_xml C Library.
- * Available at http://www.ossec.net/
- */
 
 
 #include <stdio.h>

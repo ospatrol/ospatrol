@@ -86,7 +86,7 @@ int OS_GetLogLocation(Eventinfo *lf)
 
 
     /* Creating the logfile name */
-    snprintf(__elogfile,OS_FLSIZE,"%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(__elogfile,OS_FLSIZE,"%s/%d/%s/ospatrol-%s-%02d.log",
             EVENTS,
             lf->year,
             lf->mon,
@@ -129,7 +129,7 @@ int OS_GetLogLocation(Eventinfo *lf)
 
 
     /* Creating the logfile name */
-    snprintf(__alogfile,OS_FLSIZE,"%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(__alogfile,OS_FLSIZE,"%s/%d/%s/ospatrol-%s-%02d.log",
             ALERTS,
             lf->year,
             lf->mon,
@@ -172,7 +172,7 @@ int OS_GetLogLocation(Eventinfo *lf)
 
 
     /* Creating the logfile name */
-    snprintf(__flogfile,OS_FLSIZE,"%s/%d/%s/ossec-%s-%02d.log",
+    snprintf(__flogfile,OS_FLSIZE,"%s/%d/%s/ospatrol-%s-%02d.log",
             FWLOGS,
             lf->year,
             lf->mon,

@@ -149,7 +149,7 @@ if [ "X${DOZLIB}" = "Xx" ]; then
     # Build zlib here
     echo ""
     echo " *** Making zlib (by Jean-loup Gailly and Mark Adler)  *** "
-    cd ${ZLIBV}; make; make ossec;
+    cd ${ZLIBV}; make; make ospatrol;
     cd ../../
     echo ""
 fi    
@@ -222,12 +222,12 @@ done
 
 
 if [ "X${ARGV}" = "Xrootcheck" ]; then
-    cp -pr ./rootcheck/ossec-rootcheck ../
+    cp -pr ./rootcheck/ospatrol-rootcheck ../
     cp -pr ./rootcheck/db ../
     cp -pr ./rootcheck/rootcheck.conf ../
     echo ""
     echo "Rootcheck compilation completed."
-    echo "Just run './ossec-rootcheck' to execute it."
+    echo "Just run './ospatrol-rootcheck' to execute it."
     echo ""
 fi    
 

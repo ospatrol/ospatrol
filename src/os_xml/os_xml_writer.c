@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/os_xml/os_xml_writer.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -10,9 +7,6 @@
  * Foundation
  */
 
-/* os_xml Library.
- * Available at http://www.ossec.net/
- */
 
 
 

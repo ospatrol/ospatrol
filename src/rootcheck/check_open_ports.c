@@ -117,7 +117,7 @@ void check_open_ports()
     open_ports_size = OS_SIZE_1024 - 1;
     _ports_open = 0;
 
-    #ifndef OSSECHIDS
+    #ifndef OSPATROL
     snprintf(open_ports_str, OS_SIZE_1024, "The following ports are open:");
     open_ports_size-=strlen(open_ports_str) +1;
 

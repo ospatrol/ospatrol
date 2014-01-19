@@ -1,6 +1,4 @@
 
-syntax: glob
-
 *.so
 *.o
 *.a

@@ -195,7 +195,11 @@ void LogCollectorStart()
             #ifndef WIN32
             if(strcmp("ossecalert", logff[i].logformat) == 0)
             {
-                logff[i].read = (void *)read_ossecalert;
+                logff[i].read = (void *)read_ospatrolalert;
+            }
+            if(strcmp("ospatrolalert", logff[i].logformat) == 0)
+            {
+                logff[i].read = (void *)read_ospatrolalert;
             }
             #endif
             else if(strcmp("nmapg", logff[i].logformat) == 0)
@@ -417,7 +421,7 @@ void LogCollectorStart()
         /* Send keep alive message */
 
         rand_keepalive_str(keepalive, 700);
-        SendMSG(logr_queue, keepalive, "ossec-keepalive", LOCALFILE_MQ);
+        SendMSG(logr_queue, keepalive, "ospatrol-keepalive", LOCALFILE_MQ);
 
 
         /* Zeroing f_check */
@@ -503,13 +507,13 @@ void LogCollectorStart()
                 {
                     char msg_alert[512 +1];
 
-                    snprintf(msg_alert, 512, "ossec: File rotated (inode "
+                    snprintf(msg_alert, 512, "ospatrol: File rotated (inode "
                                              "changed): '%s'.",
                                              logff[i].file);
 
                     /* Send message about log rotated  */
                     SendMSG(logr_queue, msg_alert,
-                            "ossec-logcollector", LOCALFILE_MQ);
+                            "ospatrol-logcollector", LOCALFILE_MQ);
 
                     debug1("%s: DEBUG: File inode changed. %s",
                             ARGV0, logff[i].file);
@@ -533,13 +537,13 @@ void LogCollectorStart()
                 {
                     char msg_alert[512 +1];
 
-                    snprintf(msg_alert, 512, "ossec: File size reduced "
+                    snprintf(msg_alert, 512, "ospatrol: File size reduced "
                                              "(inode remained): '%s'.",
                                              logff[i].file);
 
                     /* Send message about log rotated  */
                     SendMSG(logr_queue, msg_alert,
-                            "ossec-logcollector", LOCALFILE_MQ);
+                            "ospatrol-logcollector", LOCALFILE_MQ);
 
                     debug1("%s: DEBUG: File size reduced. %s",
                             ARGV0, logff[i].file);

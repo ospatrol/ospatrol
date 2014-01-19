@@ -1,9 +1,8 @@
 # Makefile for remoted
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
 
 PT=../
-NAME=ossec-remoted
+NAME=ospatrol-remoted
 
 include ../Config.Make
 

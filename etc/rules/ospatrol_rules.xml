@@ -1,6 +1,5 @@
-<!-- @(#) $Id: ./etc/rules/ossec_rules.xml, 2012/03/30 dcid Exp $
-
-  -  Official ossec rules for OSSEC.
+<!-- 
+  -  Official ossec rules for OSPatrol
   -
   -  Copyright (C) 2009 Trend Micro Inc.
   -  All rights reserved.
@@ -15,11 +14,11 @@
 
 
 
-<group name="ossec,">
+<group name="ospatrol,">
   <rule id="500" level="0">
-    <category>ossec</category>
-    <decoded_as>ossec</decoded_as>
-    <description>Grouping of ossec rules.</description>
+    <category>ospatrol</category>
+    <decoded_as>ospatrol</decoded_as>
+    <description>Grouping of ospatrol rules.</description>
   </rule>
   
   <rule id="501" level="3">
@@ -33,26 +32,26 @@
   <rule id="502" level="3">
     <if_sid>500</if_sid>
     <options>alert_by_email</options>
-    <match>Ossec started</match>
-    <description>Ossec server started.</description>
+    <match>OSPatrol started</match>
+    <description>OSPatrol server started.</description>
   </rule>
 
   <rule id="503" level="3">
     <if_sid>500</if_sid>
     <options>alert_by_email</options>
     <match>Agent started</match>
-    <description>Ossec agent started.</description>
+    <description>OSPatrol agent started.</description>
   </rule>
 
   <rule id="504" level="3">
     <if_sid>500</if_sid>
     <options>alert_by_email</options>
     <match>Agent disconnected</match>
-    <description>Ossec agent disconnected.</description>
+    <description>Ospatrol agent disconnected.</description>
   </rule>
   
   <rule id="509" level="0">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>rootcheck</decoded_as>
     <description>Rootcheck event.</description>
     <group>rootcheck,</group>
@@ -127,14 +126,14 @@
   <!-- Process monitoring rules -->
   <rule id="530" level="0">
     <if_sid>500</if_sid>
-    <match>^ossec: output: </match>
-    <description>OSSEC process monitoring rules.</description>
+    <match>^ospatrol: output: </match>
+    <description>OSPatrol process monitoring rules.</description>
     <group>process_monitor,</group>
   </rule>
 
   <rule id="531" level="7" ignore="7200">
     <if_sid>530</if_sid>
-    <match>ossec: output: 'df -h': /dev/</match>
+    <match>ospatrol: output: 'df -h': /dev/</match>
     <regex>100%</regex>
     <description>Partition usage reached 100% (disk space monitor).</description> 
     <group>low_diskspace,</group>
@@ -148,14 +147,14 @@
 
   <rule id="533" level="7">
     <if_sid>530</if_sid>
-    <match>ossec: output: 'netstat -tan</match>
+    <match>ospatrol: output: 'netstat -tan</match>
     <check_diff />
     <description>Listened ports status (netstat) changed (new port opened or closed).</description> 
   </rule>
 
   <rule id="534" level="1">
     <if_sid>530</if_sid>
-    <match>ossec: output: 'w'</match>
+    <match>ospatrol: output: 'w'</match>
     <check_diff />
     <options>no_log</options>
     <description>List of logged in users. It will not be alerted by default.</description> 
@@ -163,42 +162,42 @@
 
   <rule id="535" level="1">
     <if_sid>530</if_sid>
-    <match>ossec: output: 'last -n </match>
+    <match>ospatrol: output: 'last -n </match>
     <check_diff />
     <options>no_log</options>
     <description>List of the last logged in users.</description> 
   </rule>
 
   <rule id="550" level="7">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>syscheck_integrity_changed</decoded_as>
     <description>Integrity checksum changed.</description>
     <group>syscheck,</group>
   </rule>
   
   <rule id="551" level="7">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>syscheck_integrity_changed_2nd</decoded_as>
     <description>Integrity checksum changed again (2nd time).</description>
     <group>syscheck,</group>
   </rule>
   
   <rule id="552" level="7">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>syscheck_integrity_changed_3rd</decoded_as>
     <description>Integrity checksum changed again (3rd time).</description>
     <group>syscheck,</group>
   </rule>
   
   <rule id="553" level="7">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>syscheck_deleted</decoded_as>
     <description>File deleted. Unable to retrieve checksum.</description>
     <group>syscheck,</group>
   </rule>
   
   <rule id="554" level="0">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>syscheck_new_entry</decoded_as>
     <description>File added to the system.</description>
     <group>syscheck,</group>
@@ -206,21 +205,21 @@
 
   <rule id="555" level="7">
     <if_sid>500</if_sid>
-    <match>^ossec: agentless: </match>
+    <match>^ospatrol: agentless: </match>
     <description>Integrity checksum for agentless device changed.</description>
     <group>syscheck,agentless</group>
   </rule>
 
   <!-- Hostinfo rules -->  
   <rule id="580" level="8">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>hostinfo_modified</decoded_as>
     <description>Host information changed.</description>
     <group>hostinfo,</group>
   </rule>
   
   <rule id="581" level="8">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <decoded_as>hostinfo_new</decoded_as>
     <description>Host information added.</description>
     <group>hostinfo,</group>
@@ -230,26 +229,26 @@
   <!-- File rotation/reducded rules -->
   <rule id="591" level="3">
     <if_sid>500</if_sid>
-    <match>^ossec: File rotated </match>
+    <match>^ospatrol: File rotated </match>
     <description>Log file rotated.</description>
   </rule>
   
   <rule id="592" level="8">
     <if_sid>500</if_sid>
-    <match>^ossec: File size reduced</match>
+    <match>^ospatrol: File size reduced</match>
     <description>Log file size reduced.</description>
     <group>attacks,</group>
   </rule>
 
   <rule id="593" level="9">
     <if_sid>500</if_sid>
-    <match>^ossec: Event log cleared</match>
+    <match>^ospatrol: Event log cleared</match>
     <description>Microsoft Event log cleared.</description>
     <group>logs_cleared,</group>
   </rule>
 
   <rule id="594" level="5">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <if_sid>550</if_sid>
     <hostname>syscheck-registry</hostname>
     <group>syscheck,</group>
@@ -257,7 +256,7 @@
   </rule>
 
   <rule id="595" level="5">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <if_sid>551</if_sid>
     <hostname>syscheck-registry</hostname>
     <group>syscheck,</group>
@@ -265,7 +264,7 @@
   </rule>
 
   <rule id="596" level="5">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <if_sid>552</if_sid>
     <hostname>syscheck-registry</hostname>
     <group>syscheck,</group>
@@ -273,7 +272,7 @@
   </rule>
 
   <rule id="597" level="5">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <if_sid>553</if_sid>
     <hostname>syscheck-registry</hostname>
     <group>syscheck,</group>
@@ -281,7 +280,7 @@
   </rule>
 
   <rule id="598" level="5">
-    <category>ossec</category>
+    <category>ospatrol</category>
     <if_sid>554</if_sid>
     <hostname>syscheck-registry</hostname>
     <group>syscheck,</group>
@@ -290,7 +289,7 @@
 
 <!-- active response rules
 Example:
-Sat May  7 03:27:57 CDT 2011 /var/ossec/active-response/bin/firewall-drop.sh delete - 172.16.0.1 1304756247.60385 31151
+Sat May  7 03:27:57 CDT 2011 /var/ospatrol/active-response/bin/firewall-drop.sh delete - 172.16.0.1 1304756247.60385 31151
 -->
 
 <rule id="600" level="0">
@@ -347,4 +346,4 @@ Sat May  7 03:27:57 CDT 2011 /var/ossec/active-response/bin/firewall-drop.sh del
     <group>active_response,</group>
   </rule>
 
-</group> <!-- OSSEC -->
+</group> <!-- OSPatrol -->

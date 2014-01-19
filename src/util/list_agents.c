@@ -20,7 +20,7 @@
 /** help **/
 void helpmsg()
 {
-    printf("\nOSSEC HIDS %s: List available agents.\n", ARGV0);
+    printf("\nOSPatrol %s: List available agents.\n", ARGV0);
     printf("Available options:\n");
     printf("\t-h    This help message.\n");
     printf("\t-a    List all agents.\n");

@@ -168,6 +168,7 @@ int ReadConfig(int modules, char *cfgfile, void *d1, void *d2)
     /** XML definitions **/
     /* Global */
     char *xml_start_ossec = "ossec_config";
+    char *xml_start_ospatrol = "ospatrol_config";
     char *xml_start_agent = "agent_config";
 
     /* Attributes of the <agent_config> tag */
@@ -210,8 +211,12 @@ int ReadConfig(int modules, char *cfgfile, void *d1, void *d2)
             merror(XML_ELEMNULL, ARGV0);
             return(OS_INVALID);
         }
-        else if(!(modules & CAGENT_CONFIG) &&
-                (strcmp(node[i]->element, xml_start_ossec) == 0))
+        else if(!(modules & CAGENT_CONFIG) && 
+                 ( 
+                   (strcmp(node[i]->element, xml_start_ossec) == 0) || 
+                   (strcmp(node[i]->element, xml_start_ospatrol) == 0) 
+                 ) 
+               )
         {
             XML_NODE chld_node = NULL;
             chld_node = OS_GetElementsbyNode(&xml,node[i]);

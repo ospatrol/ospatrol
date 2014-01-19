@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 #######################################
-# Name:    ossec-add-ung.pl
-# Desc:    Add ossec users and groups on OSX using the NetInfo cmds.
+# Name:    ospatrol-add-ung.pl
+# Desc:    Add ospatrol users and groups on OSX using the NetInfo cmds.
 # Author:  Chuck L.
 # License: GPL
 ###
@@ -72,16 +72,16 @@ sub createUsersGroups {
     my $oUidR = $oUid + 3;
 
 	$niPid = open (NIFH, "| $SUDO $NILOAD -v group /");
-	print "Adding ossec group\n" if $debug;
-    print NIFH "ossec:*:" . $oGid . ":ossec,ossecm,ossecr\n";
+	print "Adding ospatrol group\n" if $debug;
+    print NIFH "ospatrol:*:" . $oGid . ":ospatrol,ospatrolm,ospatrolr\n";
 	close (NIFH);
 
     $fh = open (NITMP, ">$fName") or die "Unable to create temp file: $!\n";
 
-	print "Adding ossec users\n" if $debug;
-    print NITMP "ossec:*:" . $oUid . ":" . $oGid . "::0:0:ossec acct:/var/ossec:/sbin/nologin\n";
-    print NITMP "ossecm:*:" . $oUidM . ":" . $oGid . "::0:0:ossecm acct:/var/ossec:/sbin/nologin\n";
-    print NITMP "ossecr:*:" . $oUidR . ":" . $oGid . "::0:0:ossecr acct:/var/ossec:/sbin/nologin\n";
+	print "Adding ospatrol users\n" if $debug;
+    print NITMP "ospatrol:*:" . $oUid . ":" . $oGid . "::0:0:ospatrol acct:/var/ospatrol:/sbin/nologin\n";
+    print NITMP "ospatrolm:*:" . $oUidM . ":" . $oGid . "::0:0:ospatrolm acct:/var/ospatrol:/sbin/nologin\n";
+    print NITMP "ospatrolr:*:" . $oUidR . ":" . $oGid . "::0:0:ospatrolr acct:/var/ospatrol:/sbin/nologin\n";
 
 	close ($fh);
 	$rtnVal = system("$SUDO $NILOAD -v passwd / < $fName");

@@ -31,7 +31,7 @@
 /* TODO: Pulled this value out of the sky, may or may not be sane */
 int POOL_SIZE = 512;
 
-/* ossec-reportd - Runs manual reports. */
+/* ospatrol-reportd - Runs manual reports. */
 void report_help()
 {
 }
@@ -261,7 +261,7 @@ int main(int argc, char **argv)
                 if(ret > 0)
                 {
                     int parseok = 0;
-                    if(strncmp(buf, "OSSEC A:'", 9) == 0)
+                    if(strncmp(buf, "OSPatrol A:'", 9) == 0)
                     {
                         char *tmpstr = buf;
                         agentname = tmpstr + 9;
@@ -343,7 +343,7 @@ int main(int argc, char **argv)
                         }
 
 
-                        snprintf(response, 2048,"OSSEC K:'%s'\n\n", finalkey);
+                        snprintf(response, 2048,"OSPatrol K:'%s'\n\n", finalkey);
                         verbose("%s: INFO: Agent key generated for %s (requested by %s)", ARGV0, agentname, srcip);
                         ret = SSL_write(ssl, response, strlen(response));
                         if(ret < 0)

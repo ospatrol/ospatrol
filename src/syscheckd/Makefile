@@ -1,9 +1,8 @@
-# Makefile for OSSEC syscheckd
+# Makefile for OSPatrol syscheckd
 # Daniel B. Cid <dcid @ ossec.net>
-# http://www.ossec.net
 
 PT=../
-NAME=ossec-syscheckd
+NAME=ospatrol-syscheckd
 
 include ../Config.Make
 

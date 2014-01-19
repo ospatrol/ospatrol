@@ -1,6 +1,6 @@
 # Makefile for zlib.
 # Daniel B. Cid <dcid@ossec.net>
-# http://www.ossec.net
+# http://ospatrol.com
 
 NAME=zlib
 PT=../../
@@ -14,6 +14,6 @@ shared:
 clean:
 		${CLEAN} ../../headers/zlib.h ../../headers/zconf.h ../libz.a
 
-ossec:
+ospatrol:
 		cp -pr zlib.h zconf.h ../../headers/
 		cp -pr libz.a ../

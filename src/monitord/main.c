@@ -116,8 +116,8 @@ int main(int argc, char **argv)
         OS_XML xml;
         char *tmpsmtp;
 
-        char *(xml_smtp[])={"ossec_config", "global", "smtp_server", NULL};
-        char *(xml_from[])={"ossec_config", "global", "email_from", NULL};
+        char *(xml_smtp[])={"ospatrol_config", "global", "smtp_server", NULL};
+        char *(xml_from[])={"ospatrol_config", "global", "email_from", NULL};
 
         if(OS_ReadXML(cfg, &xml) < 0)
         {

@@ -1,9 +1,9 @@
 ZLIB DATA COMPRESSION LIBRARY
 
-*OSSEC note:
+*OSSEC & OSPatrol note:
 
--- Included on OSSEC to avoid problems with some old systems.
--- Not developed or changed in any way by OSSEC developers.
+-- Included on OSSEC/OSPatrol to avoid problems with some old systems.
+-- Not developed or changed in any way by OSSEC/OSPatrol developers.
 -- Copyright bellow.
 
 

@@ -15,10 +15,10 @@
 
 
 
-/* ossec-reportd - Runs manual reports. */
+/* ospatrol-reportd - Runs manual reports. */
 void report_help()
 {
-    printf("\nOSSEC HIDS %s: Generate reports (via stdin).\n", ARGV0);
+    printf("\nOSPatrol %s: Generate reports (via stdin).\n", ARGV0);
     printf("Available options:\n");
     printf("\t-h                  This help message.\n");
     printf("\t-f <filter> <value> Filter the results.\n");

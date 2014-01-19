@@ -19,15 +19,15 @@ UNAME=`uname`;
 
 # Getting default variables
 DIR=`grep DIR ${LOCATION} | cut -f2 -d\"`
-GROUP="ossec"
-USER="ossec"
-USER_MAIL="ossecm"
-USER_REM="ossecr"
-subdirs="logs logs/archives logs/alerts logs/firewall bin stats rules queue queue/alerts queue/ossec queue/fts queue/syscheck queue/rootcheck queue/diff queue/agent-info queue/agentless queue/rids tmp var var/run etc etc/shared active-response active-response/bin agentless .ssh"
+GROUP="ospatrol"
+USER="ospatrol"
+USER_MAIL="ospatrolm"
+USER_REM="ospatrolr"
+subdirs="logs logs/archives logs/alerts logs/firewall bin stats rules queue queue/alerts queue/ospatrol queue/fts queue/syscheck queue/rootcheck queue/diff queue/agent-info queue/agentless queue/rids tmp var var/run etc etc/shared active-response active-response/bin agentless .ssh"
 
 # ${DIR} must be set 
 if [ "X${DIR}" = "X" ]; then
-    echo "Error building OSSEC HIDS."
+    echo "Error building OSPatrol HIDS."
     exit 1;
 fi    
 
@@ -130,16 +130,16 @@ chown root:${GROUP} ${DIR}/*
 chown -R ${USER}:${GROUP} ${DIR}/queue/alerts
 chmod -R 770 ${DIR}/queue/alerts
 
-# To the ossec queue (default for analysisd to read)
-chown -R ${USER}:${GROUP} ${DIR}/queue/ossec
-chmod -R 770 ${DIR}/queue/ossec
+# To the ospatrol queue (default for analysisd to read)
+chown -R ${USER}:${GROUP} ${DIR}/queue/ospatrol
+chmod -R 770 ${DIR}/queue/ospatrol
 
-# To the ossec fts queue
+# To the ospatrol fts queue
 chown -R ${USER}:${GROUP} ${DIR}/queue/fts
 chmod -R 750 ${DIR}/queue/fts
 chmod 750 ${DIR}/queue/fts/* > /dev/null 2>&1
 
-# To the ossec syscheck/rootcheck queue
+# To the ospatrol syscheck/rootcheck queue
 chown -R ${USER}:${GROUP} ${DIR}/queue/syscheck
 chmod -R 750 ${DIR}/queue/syscheck
 chmod 740 ${DIR}/queue/syscheck/* > /dev/null 2>&1
@@ -172,9 +172,9 @@ chmod -R 750 ${DIR}/stats
 # For the logging user
 chown -R ${USER}:${GROUP} ${DIR}/logs
 chmod -R 750 ${DIR}/logs
-touch ${DIR}/logs/ossec.log
-chown ${USER}:${GROUP} ${DIR}/logs/ossec.log
-chmod 660 ${DIR}/logs/ossec.log
+touch ${DIR}/logs/ospatrol.log
+chown ${USER}:${GROUP} ${DIR}/logs/ospatrol.log
+chmod 660 ${DIR}/logs/ospatrol.log
 
 touch ${DIR}/logs/active-responses.log
 chown ${USER}:${GROUP} ${DIR}/logs/active-responses.log
@@ -237,19 +237,19 @@ chmod 770 ${DIR}/var/run
 chown root:${GROUP} ${DIR}/var/run
 
 # Moving the binary files
-cp -pr addagent/manage_agents agentlessd/ossec-agentlessd \
-        analysisd/ossec-analysisd logcollector/ossec-logcollector \
-        monitord/ossec-monitord monitord/ossec-reportd \
-        os_execd/ossec-execd os_maild/ossec-maild \
-        remoted/ossec-remoted syscheckd/ossec-syscheckd \
-	analysisd/ossec-logtest os_csyslogd/ossec-csyslogd \
-	os_auth/ossec-authd os_dbd/ossec-dbd analysisd/ossec-makelists \
+cp -pr addagent/manage_agents agentlessd/ospatrol-agentlessd \
+        analysisd/ospatrol-analysisd logcollector/ospatrol-logcollector \
+        monitord/ospatrol-monitord monitord/ospatrol-reportd \
+        os_execd/ospatrol-execd os_maild/ospatrol-maild \
+        remoted/ospatrol-remoted syscheckd/ospatrol-syscheckd \
+	analysisd/ospatrol-logtest os_csyslogd/ospatrol-csyslogd \
+	os_auth/ospatrol-authd os_dbd/ospatrol-dbd analysisd/ospatrol-makelists \
 	${DIR}/bin/
 
 cp -pr util/verify-agent-conf ${DIR}/bin/
 cp -pr util/clear_stats ${DIR}/bin/
 cp -pr util/list_agents ${DIR}/bin/
-cp -pr util/ossec-regex ${DIR}/bin/
+cp -pr util/ospatrol-regex ${DIR}/bin/
 cp -pr util/syscheck_update ${DIR}/bin/
 cp -pr util/agent_control ${DIR}/bin/
 cp -pr util/syscheck_control ${DIR}/bin/
@@ -260,9 +260,9 @@ chmod +x ${DIR}/bin/util.sh
 
 # Local install chosen
 if [ "X$LOCAL" = "Xlocal" ]; then
-    cp -pr ./init/ossec-local.sh ${DIR}/bin/ossec-control
+    cp -pr ./init/ospatrol-local.sh ${DIR}/bin/ospatrol-control
 else    
-    cp -pr ./init/ossec-server.sh ${DIR}/bin/ossec-control
+    cp -pr ./init/ospatrol-server.sh ${DIR}/bin/ospatrol-control
 fi
 
 # Moving the decoders/internal_conf file.
@@ -319,19 +319,19 @@ chmod 550 ${DIR}/bin/*
 
 
 # Moving the config file
-ls ${DIR}/etc/ossec.conf > /dev/null 2>&1
+ls ${DIR}/etc/ospatrol.conf > /dev/null 2>&1
 if [ $? = 0 ]; then
     exit 0;
 fi
 
-ls ../etc/ossec.mc > /dev/null 2>&1
+ls ../etc/ospatrol.mc > /dev/null 2>&1
 if [ $? = 0 ]; then
-    cp -pr ../etc/ossec.mc ${DIR}/etc/ossec.conf
+    cp -pr ../etc/ospatrol.mc ${DIR}/etc/ospatrol.conf
 else    
-    cp -pr ../etc/ossec-server.conf ${DIR}/etc/ossec.conf
+    cp -pr ../etc/ospatrol-server.conf ${DIR}/etc/ospatrol.conf
 fi
-chown root:${GROUP} ${DIR}/etc/ossec.conf
-chmod 440 ${DIR}/etc/ossec.conf
+chown root:${GROUP} ${DIR}/etc/ospatrol.conf
+chmod 440 ${DIR}/etc/ospatrol.conf
 
 
 

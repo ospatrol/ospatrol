@@ -10,7 +10,7 @@
  * Foundation
  */
 
-#ifdef OSSECHIDS
+#ifdef OSPATROL
 #include "shared.h"
 #include "rootcheck.h"
 #include "config/config.h"

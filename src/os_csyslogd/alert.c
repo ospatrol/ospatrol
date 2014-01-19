@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -129,7 +128,7 @@ int OS_Alert_SendSyslog(alert_data *al_data, SyslogConfig *syslog_config)
     {
        	/* Building syslog message. */
        	snprintf(syslog_msg, OS_SIZE_2048,
-                "<%d>%s %s ossec: Alert Level: %d; Rule: %d - %s; Location: %s;",
+                "<%d>%s %s ospatrol: Alert Level: %d; Rule: %d - %s; Location: %s;",
                	syslog_config->priority, tstamp, __shost,
                 al_data->level,
                 al_data->rule, al_data->comment,
@@ -184,12 +183,12 @@ int OS_Alert_SendSyslog(alert_data *al_data, SyslogConfig *syslog_config)
         padding = 2;
         /* Build a JSON Object for logging */
         snprintf(syslog_msg, OS_SIZE_2048 - padding,
-                "<%d>%s %s ossec: { \"crit\": %d, \"id\": %d, \"description\": \"%s\", \"component\": \"%s\",",
+                "<%d>%s %s ospatrol: { \"crit\": %d, \"id\": %d, \"description\": \"%s\", \"component\": \"%s\",",
 
                 /* syslog header */
                 syslog_config->priority, tstamp, __shost,
 
-                /* OSSEC metadata */
+                /* OSPatrol metadata */
                 al_data->level, al_data->rule, json_safe_comment,
                 al_data->location
         );
@@ -222,12 +221,12 @@ int OS_Alert_SendSyslog(alert_data *al_data, SyslogConfig *syslog_config)
     {
         /* Build a Splunk Style Key/Value string for logging */
         snprintf(syslog_msg, OS_SIZE_2048,
-                "<%d>%s %s ossec: crit=%d id=%d description=\"%s\" component=\"%s\",",
+                "<%d>%s %s ospatrol: crit=%d id=%d description=\"%s\" component=\"%s\",",
 
                 /* syslog header */
                 syslog_config->priority, tstamp, __shost,
 
-                /* OSSEC metadata */
+                /* OSPatrol metadata */
                 al_data->level, al_data->rule, json_safe_comment,
                 al_data->location
         );

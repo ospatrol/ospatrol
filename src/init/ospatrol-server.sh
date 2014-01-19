@@ -1,6 +1,6 @@
 #!/bin/sh
-# ossec-control        This shell script takes care of starting
-#                      or stopping ossec-hids
+# ospatrol-control        This shell script takes care of starting
+#                      or stopping ospatrol-hids
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
 
@@ -21,10 +21,10 @@ if [ $? = 0 ]; then
 fi
 
 
-NAME="OSSEC HIDS"
+NAME="OSPatrol"
 VERSION="v2.7.1"
-AUTHOR="Trend Micro Inc."
-DAEMONS="ossec-monitord ossec-logcollector ossec-syscheckd ossec-analysisd ossec-maild ossec-execd ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
+AUTHOR="Jeremy Rossi"
+DAEMONS="ospatrol-monitord ospatrol-logcollector ospatrol-remoted ospatrol-syscheckd ospatrol-analysisd ospatrol-maild ospatrol-execd ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
 
 
 ## Locking for the start/stop
@@ -44,7 +44,7 @@ checkpid()
 {
     for i in ${DAEMONS}; do
         for j in `cat ${DIR}/var/run/${i}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
                 echo "Deleting PID file '${DIR}/var/run/${i}-${j}.pid' not used..."
                 rm ${DIR}/var/run/${i}-${j}.pid
@@ -121,11 +121,11 @@ enable()
     fi
     
     if [ "X$2" = "Xdatabase" ]; then
-        echo "DB_DAEMON=ossec-dbd" >> ${PLIST};
+        echo "DB_DAEMON=ospatrol-dbd" >> ${PLIST};
     elif [ "X$2" = "Xclient-syslog" ]; then
-        echo "CSYSLOG_DAEMON=ossec-csyslogd" >> ${PLIST};
+        echo "CSYSLOG_DAEMON=ospatrol-csyslogd" >> ${PLIST};
     elif [ "X$2" = "Xagentless" ]; then
-        echo "AGENTLESS_DAEMON=ossec-agentlessd" >> ${PLIST};    
+        echo "AGENTLESS_DAEMON=ospatrol-agentlessd" >> ${PLIST};    
     elif [ "X$2" = "Xdebug" ]; then 
         echo "DEBUG_CLI=\"-d\"" >> ${PLIST}; 
     else
@@ -148,7 +148,7 @@ disable()
     if [ "X$2" = "X" ]; then
         echo ""
         echo "Disable options: database, client-syslog, agentless, debug"
-        echo "Usage: $0 disable [database|client-syslog|agentless,debug]"
+        echo "Usage: $0 disable [database|client-syslog|agentless|debug]"
         exit 1;
     fi
     
@@ -181,8 +181,8 @@ status()
     for i in ${DAEMONS}; do
         pstatus ${i};
         if [ $? = 0 ]; then
-            RETVAL=1
             echo "${i} not running..."
+            RETVAL=1
         else
             echo "${i} is running..."
         fi
@@ -203,19 +203,17 @@ testconfig()
     done
 }
 
-
 # Start function
 start()
 {
-    SDAEMONS="${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON} ossec-maild ossec-execd ossec-analysisd ossec-logcollector ossec-syscheckd ossec-monitord"
+    SDAEMONS="${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON} ospatrol-maild ospatrol-execd ospatrol-analysisd ospatrol-logcollector ospatrol-remoted ospatrol-syscheckd ospatrol-monitord"
     
     echo "Starting $NAME $VERSION (by $AUTHOR)..."
-    echo | ${DIR}/bin/ossec-logtest > /dev/null 2>&1;
+    echo | ${DIR}/bin/ospatrol-logtest > /dev/null 2>&1;
     if [ ! $? = 0 ]; then
-        echo "ossec-analysisd: Configuration error. Exiting."
+        echo "ospatrol analysisd: Testing rules failed. Configuration error. Exiting."
         exit 1;
     fi    
-
     lock;
     checkpid;
 
@@ -242,14 +240,6 @@ start()
     # to internally create their PID files.
     sleep 2;
     unlock;
-
-    ls -la "${DIR}/ossec-agent/" >/dev/null 2>&1
-    if [ $? = 0 ]; then
-        echo ""
-        echo "Starting sub agent directory (for hybrid mode)"
-        ${DIR}/ossec-agent/bin/ossec-control start
-    fi
-    
     echo "Completed."
 }
 
@@ -266,9 +256,9 @@ pstatus()
     ls ${DIR}/var/run/${pfile}*.pid > /dev/null 2>&1
     if [ $? = 0 ]; then
         for j in `cat ${DIR}/var/run/${pfile}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
-                echo "${pfile}: Process $j not used by ossec, removing .."
+                echo "${pfile}: Process $j not used by ospatrol, removing .."
                 rm -f ${DIR}/var/run/${pfile}-$j.pid
                 continue;
             fi
@@ -304,13 +294,6 @@ stopa()
      done    
     
     unlock;
-
-    ls -la "${DIR}/ossec-agent/" >/dev/null 2>&1
-    if [ $? = 0 ]; then
-        echo ""
-        echo "Stopping sub agent directory (for hybrid mode)"
-        ${DIR}/ossec-agent/bin/ossec-control stop
-    fi
     echo "$NAME $VERSION Stopped"
 }
 
@@ -331,6 +314,11 @@ case "$1" in
         sleep 1;
 	start
 	;;
+  reload)
+        DAEMONS="ospatrol-monitord ospatrol-logcollector ospatrol-remoted ospatrol-syscheckd ospatrol-analysisd ospatrol-maild ${DB_DAEMON} ${CSYSLOG_DAEMON} ${AGENTLESS_DAEMON}"
+	stopa
+	start
+        ;;
   status)
     status
 	;;

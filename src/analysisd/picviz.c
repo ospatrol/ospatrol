@@ -16,7 +16,7 @@
 
 static FILE *picviz_fp;
 
-static char *(ossec2picviz[])={"blue","blue","blue","blue",
+static char *(ospatrol2picviz[])={"blue","blue","blue","blue",
                                "green","green","green","green",
                                "orange", "orange", "orange", "orange",
                                "red", "red", "red", "red", "red"};
@@ -34,7 +34,7 @@ void OS_PicvizOpen(char *socket)
 
 void OS_PicvizLog(Eventinfo *lf)
 {
-	char *color = (lf->generated_rule->level > 15) ? "red" : ossec2picviz[lf->generated_rule->level];
+	char *color = (lf->generated_rule->level > 15) ? "red" : ospatrol2picviz[lf->generated_rule->level];
 
 	char *hostname;
 	char *location;

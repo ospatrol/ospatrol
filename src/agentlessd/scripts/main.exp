@@ -19,7 +19,7 @@ if {$argc <= 1} {
 }
 
 
-# NOTE: this script must be called from within /var/ossec for it to work.
+# NOTE: this script must be called from within /var/ospatrol for it to work.
 set passlist "agentless/.passlist"
 set sshsrc "agentless/ssh.exp"
 set susrc "agentless/su.exp"

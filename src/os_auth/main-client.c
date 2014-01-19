@@ -45,13 +45,13 @@ int main()
 
 void report_help()
 {
-    printf("\nOSSEC HIDS %s: Connects to the manager to extract the agent key.\n", ARGV0);
+    printf("\nOSPatrol %s: Connects to the manager to extract the agent key.\n", ARGV0);
     printf("Available options:\n");
     printf("\t-h                  This help message.\n");
     printf("\t-m <manager ip>     Manager IP Address.\n");
     printf("\t-p <port>           Manager port (default 1515).\n");
     printf("\t-A <agent name>     Agent name (default is the hostname).\n");
-    printf("\t-D <OSSEC Dir>      Location where OSSEC is installed.\n");
+    printf("\t-D <OSPatrol Dir>   Location where OSPatrol is installed.\n");
     exit(1);
 }
 
@@ -269,7 +269,7 @@ int main(int argc, char **argv)
     printf("INFO: Using agent name as: %s\n", agentname);
 
 
-    snprintf(buf, 2048, "OSSEC A:'%s'\n", agentname);
+    snprintf(buf, 2048, "OSPatrol A:'%s'\n", agentname);
     ret = SSL_write(ssl, buf, strlen(buf));
     if(ret < 0)
     {
@@ -294,7 +294,7 @@ int main(int argc, char **argv)
                     if(tmpstr) *tmpstr = '\0';
                     printf("%s (from manager)\n", buf);
                 }
-                else if(strncmp(buf, "OSSEC K:'",9) == 0)
+                else if(strncmp(buf, "OSPatrol K:'",9) == 0)
                 {
                     char *key;
                     char *tmpstr;

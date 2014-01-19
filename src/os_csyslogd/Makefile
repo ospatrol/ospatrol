@@ -2,7 +2,7 @@
 # Daniel B. Cid <dcid@ossec.net>
 
 PT=../
-NAME=ossec-csyslogd
+NAME=ospatrol-csyslogd
 
 
 include ../Config.Make

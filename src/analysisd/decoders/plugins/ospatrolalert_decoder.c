@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/analysisd/decoders/plugins/ossecalert_decoder.c, 2012/03/28 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -9,8 +6,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -21,10 +17,9 @@
 
 
 
-/* OSSECAlert decoder init */
-void *OSSECAlert_Decoder_Init()
+void *OSPatrolAlert_Decoder_Init()
 {
-    debug1("%s: Initializing OSSECAlert decoder.", ARGV0);
+    debug1("%s: Initializing OSPatrolAlert decoder.", ARGV0);
 
 
     /* There is nothing else to do over here */
@@ -35,13 +30,13 @@ void *OSSECAlert_Decoder_Init()
 
 #define oa_strchr(x,y,z) z = strchr(x,y); if(!z){ return(NULL); }
 
-/* OSSECAlert decoder
+/* 
  * Will extract the rule_id and point back to the original rule.
  * Will also extract srcip and username if available.
  * Examples:
  *
  */
-void *OSSECAlert_Decoder_Exec(Eventinfo *lf)
+void *OSPatrolAlert_Decoder_Exec(Eventinfo *lf)
 {
     char *oa_id = 0;
     char *oa_location;
@@ -51,12 +46,12 @@ void *OSSECAlert_Decoder_Exec(Eventinfo *lf)
     void *rule_pointer;
 
 
-    lf->decoder_info->type = OSSEC_ALERT;
+    lf->decoder_info->type = OSPATROL_ALERT;
 
 
     /* Checking the alert level. */
     if(strncmp("Alert Level: ", lf->log, 12) != 0 &&
-       strncmp("ossec: Alert Level:", lf->log, 18) != 0)
+       strncmp("ospatrol: Alert Level:", lf->log, 21) != 0)
     {
         return(NULL);
     }

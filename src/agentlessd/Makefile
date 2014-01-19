@@ -2,7 +2,7 @@
 # Daniel B. Cid <dcid@ossec.net>
 
 PT=../
-NAME=ossec-agentlessd
+NAME=ospatrol-agentlessd
 
 include ../Config.Make
 

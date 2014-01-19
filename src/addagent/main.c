@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/addagent/main.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -18,10 +15,10 @@
 /** help **/
 void helpmsg()
 {
-    printf("\nOSSEC HIDS %s: Manage agents.\n", ARGV0);
+    printf("\nOSPatrol %s: Manage agents.\n", ARGV0);
     printf("Available options:\n");
     printf("\t-h          This help message.\n");
-    printf("\t-V          Display OSSEC version.\n");
+    printf("\t-V          Display OSPatrol version.\n");
     printf("\t-l          List available agents.\n");
     printf("\t-e <id>     Extracts key for an agent (Manager only).\n");
     printf("\t-i <id>     Import authentication key (Agent only).\n");
@@ -202,7 +199,7 @@ int main(int argc, char **argv)
 
         /* Get ACTION from the environment. If ACTION is specified,
          * we must set leave_s = 1 to ensure that the loop will end */
-        user_msg = getenv("OSSEC_ACTION");
+        user_msg = getenv("OSPATROL_ACTION");
         if (user_msg == NULL) {
           user_msg = read_from_user();
         }

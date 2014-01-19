@@ -3,7 +3,7 @@ Agentless Daemon.
 It will use the connection type specified in the configuration to access
 a remote box and do integrity checking or log analysis.
 
-The connection types are specified at /var/ossec/agentless .
+The connection types are specified at /var/ospatrol/agentless .
 
 Example of config:
 

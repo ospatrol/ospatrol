@@ -16,7 +16,7 @@
 #define __LOGREMOTE_H
 
 #ifndef ARGV0
-#define ARGV0 "ossec-remoted"
+#define ARGV0 "ospatrol-remoted"
 #endif
 
 #include "config/remote-config.h"

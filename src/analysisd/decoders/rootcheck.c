@@ -53,7 +53,7 @@ void RootcheckInit()
     /* Zeroing decoder */
     os_calloc(1, sizeof(OSDecoderInfo), rootcheck_dec);
     rootcheck_dec->id = getDecoderfromlist(ROOTCHECK_MOD);
-    rootcheck_dec->type = OSSEC_RL;
+    rootcheck_dec->type = OSPATROL_RL;
     rootcheck_dec->name = ROOTCHECK_MOD;
     rootcheck_dec->fts = 0;
 

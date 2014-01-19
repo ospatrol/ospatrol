@@ -1,6 +1,3 @@
-/* @(#) $Id: ./src/os_xml/os_xml_node_access.c, 2011/09/08 dcid Exp $
- */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All rights reserved.
  *
@@ -11,7 +8,7 @@
  */
 
 /* os_xml C Library.
- * Available at http://www.ossec.net/
+ * Available at http://ospatrol.com
  */
 
 

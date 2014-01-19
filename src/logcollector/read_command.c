@@ -44,7 +44,7 @@ void *read_command(int pos, int *rc, int drop_it)
     }
 
 
-    snprintf(str, 256, "ossec: output: '%s': ",
+    snprintf(str, 256, "ospatrol: output: '%s': ",
              (NULL != logff[pos].alias)
              ? logff[pos].alias
              : logff[pos].command);

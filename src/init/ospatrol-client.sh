@@ -1,6 +1,6 @@
 #!/bin/sh
-# ossec-control        This shell script takes care of starting
-#                      or stopping ossec-hids
+# ospatrol-control        This shell script takes care of starting
+#                      or stopping ospatrol-hids
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 
 
@@ -10,10 +10,10 @@ PWD=`pwd`
 DIR=`dirname $PWD`;
 
 ###  Do not modify bellow here ###
-NAME="OSSEC HIDS"
+NAME="OSPatrol"
 VERSION="v2.7.1"
-AUTHOR="Trend Micro Inc."
-DAEMONS="ossec-logcollector ossec-syscheckd ossec-agentd ossec-execd"
+AUTHOR="Jeremy Rossi"
+DAEMONS="ospatrol-logcollector ospatrol-syscheckd ospatrol-agentd ospatrol-execd"
 
 
 ## Locking for the start/stop
@@ -33,7 +33,7 @@ checkpid()
 {
     for i in ${DAEMONS}; do
         for j in `cat ${DIR}/var/run/${i}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
                 echo "Deleting PID file '${DIR}/var/run/${i}-${j}.pid' not used..."
                 rm ${DIR}/var/run/${i}-${j}.pid
@@ -127,7 +127,7 @@ testconfig()
 # Start function
 start()
 {
-    SDAEMONS="ossec-execd ossec-agentd ossec-logcollector ossec-syscheckd"
+    SDAEMONS="ospatrol-execd ospatrol-agentd ospatrol-logcollector ospatrol-syscheckd"
     
     echo "Starting $NAME $VERSION (by $AUTHOR)..."
     lock;
@@ -172,9 +172,9 @@ pstatus()
     ls ${DIR}/var/run/${pfile}*.pid > /dev/null 2>&1
     if [ $? = 0 ]; then
         for j in `cat ${DIR}/var/run/${pfile}*.pid 2>/dev/null`; do
-            ps -p $j |grep ossec >/dev/null 2>&1
+            ps -p $j |grep ospatrol >/dev/null 2>&1
             if [ ! $? = 0 ]; then
-                echo "${pfile}: Process $j not used by ossec, removing .."
+                echo "${pfile}: Process $j not used by ospatrol, removing .."
                 rm -f ${DIR}/var/run/${pfile}-$j.pid
                 continue;
             fi
@@ -231,7 +231,7 @@ case "$1" in
 	start
 	;;
   reload)
-	DAEMONS="ossec-logcollector ossec-syscheckd ossec-agentd"
+	DAEMONS="ospatrol-logcollector ospatrol-syscheckd ospatrol-agentd"
 	stopa
 	start
 	;;

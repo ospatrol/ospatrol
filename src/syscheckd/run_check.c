@@ -134,7 +134,7 @@ void start_daemon()
     /*
      * SCHED_BATCH forces the kernel to assume this is a cpu intensive
      * process
-     * and gives it a lower priority. This keeps ossec-syscheckd
+     * and gives it a lower priority. This keeps ospatrol-syscheckd
      * from reducing
      * the interactity of an ssh session when checksumming large files.
      * This is available in kernel flavors >= 2.6.16

@@ -22,9 +22,9 @@
 #include "eventinfo.h"
 #include "rules.h"
 
-#define DEFAULT_ANALYZER_NAME "OSSEC"
+#define DEFAULT_ANALYZER_NAME "OSPatrol"
 #define ANALYZER_CLASS "Host IDS, File Integrity Checker, Log Analyzer"
-#define ANALYZER_MODEL "Ossec"
+#define ANALYZER_MODEL "OSPatrol"
 #define ANALYZER_MANUFACTURER __site
 #define ANALYZER_VERSION __version
 #define FILE_USER 0
@@ -32,12 +32,12 @@
 #define FILE_OTHER 2
 
 /*
- * Ossec to Prelude
+ * OSpatrol to Prelude
  */
 
 
-/** OSSEC to prelude severity mapping. **/
-char *(ossec2prelude_sev[])={"info","info","info","info",
+/** OSPatrol to prelude severity mapping. **/
+char *(ospatrol2prelude_sev[])={"info","info","info","info",
                              "low","low","low","low",
                              "medium", "medium", "medium", "medium",
                              "high", "high", "high", "high", "high"};
@@ -88,7 +88,7 @@ add_idmef_object(idmef_message_t *msg, const char *object, const char *value)
     ret = idmef_path_set(path, msg, val);
     if(ret < 0)
     {
-        merror("%s: OSSEC2Prelude: IDMEF: Cannot add object '%s': %s.",
+        merror("%s: OSPatrol2Prelude: IDMEF: Cannot add object '%s': %s.",
                ARGV0, object, prelude_strerror(ret));
     }
 
@@ -129,7 +129,7 @@ setup_analyzer(idmef_analyzer_t *analyzer)
     return 0;
 
     err:
-    merror("%s: OSSEC2Prelude: %s: IDMEF error: %s.",
+    merror("%s: OSPatrol2Prelude: %s: IDMEF error: %s.",
             ARGV0, prelude_strsource(ret), prelude_strerror(ret));
 
     return -1;
@@ -185,7 +185,7 @@ void prelude_start(char *profile, int argc, char **argv)
     }
 
 
-    /* Setting uid and gid of ossec. */
+    /* Setting uid and gid of ospatrol. */
     prelude_client_profile_set_uid(prelude_client_get_profile(prelude_client),
                                    Privsep_GetUser(USER));
     prelude_client_profile_set_gid(prelude_client_get_profile(prelude_client),
@@ -343,7 +343,7 @@ void OS_PreludeLog(Eventinfo *lf)
     /* Generate prelude alert */
     ret = idmef_message_new(&idmef);
     if ( ret < 0 ) {
-        merror("%s: OSSEC2Prelude: Cannot create IDMEF message", ARGV0);
+        merror("%s: OSPatrolPrelude: Cannot create IDMEF message", ARGV0);
         return;
     }
 
@@ -353,7 +353,7 @@ void OS_PreludeLog(Eventinfo *lf)
 
     add_idmef_object(idmef, "alert.assessment.impact.severity",
                             (lf->generated_rule->level > 15) ? "high":
-                            ossec2prelude_sev[lf->generated_rule->level]);
+                            ospatrol2prelude_sev[lf->generated_rule->level]);
 
     add_idmef_object(idmef, "alert.assessment.impact.completion", "succeeded");
 
@@ -428,7 +428,7 @@ void OS_PreludeLog(Eventinfo *lf)
             classification_counter++;
         }
 
-        /* Rule sid is used to create a link to the rule on the OSSEC wiki */
+        /* Rule sid is used to create a link to the rule on the OSPatrol wiki */
         if(lf->generated_rule->sigid)
         {
             snprintf(_prelude_section,128,"alert.classification.reference(%d).origin",
@@ -442,11 +442,11 @@ void OS_PreludeLog(Eventinfo *lf)
 
             snprintf(_prelude_section,128,"alert.classification.reference(%d).meaning",
                                            classification_counter);
-            add_idmef_object(idmef, _prelude_section, "OSSEC Rule Wiki Documentation");
+            add_idmef_object(idmef, _prelude_section, "OSPatrol Rule Wiki Documentation");
 
             snprintf(_prelude_section,128,"alert.classification.reference(%d).url",
                                            classification_counter);
-            snprintf(_prelude_data, 256,"http://www.ossec.net/wiki/Rule:%d",
+            snprintf(_prelude_data, 256,"http://ospatrol.com/wiki/Rule:%d",
                                         lf->generated_rule->sigid);
             add_idmef_object(idmef, _prelude_section, _prelude_data);
 
@@ -518,7 +518,7 @@ void OS_PreludeLog(Eventinfo *lf)
 
         /* Break ok the list of groups on the "," boundry
          * For each section create a prelude reference classification
-         * that points back to the the OSSEC wiki for more infomation.
+         * that points back to the the OSPatrol wiki for more infomation.
          */
         if(lf->generated_rule->group)
         {
@@ -539,11 +539,11 @@ void OS_PreludeLog(Eventinfo *lf)
 
                 snprintf(_prelude_section,128,"alert.classification.reference(%d).meaning",
                                                 classification_counter);
-                add_idmef_object(idmef, _prelude_section, "OSSEC Group Wiki Documenation");
+                add_idmef_object(idmef, _prelude_section, "OSPatrol Group Wiki Documenation");
 
                 snprintf(_prelude_section,128,"alert.classification.reference(%d).url",
                                                classification_counter);
-                snprintf(_prelude_data,256,"http://www.ossec.net/wiki/Group:%s",
+                snprintf(_prelude_data,256,"http://ospatrol.net/wiki/Group:%s",
                                            copy_group);
                 add_idmef_object(idmef, _prelude_section, _prelude_data);
 

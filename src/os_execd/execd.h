@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * More details at the LICENSE file included with OSSEC or
- * online at http://www.ossec.net/en/licensing.html .
+ * More details at the LICENSE file included with OSPatrol
  */
 
 
@@ -18,7 +17,7 @@
 #define _EXECD_H
 
 #ifndef ARGV0
-#define ARGV0 "ossec-execd"
+#define ARGV0 "ospatrol-execd"
 #endif
 
 

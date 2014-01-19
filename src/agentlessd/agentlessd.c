@@ -163,7 +163,7 @@ int gen_diff_alert(char *host, char *script, int alert_diff_time)
 
 
     /* Creating alert. */
-    snprintf(diff_alert, 4096 -1, "ossec: agentless: Change detected:\n%s%s",
+    snprintf(diff_alert, 4096 -1, "ospatrol: agentless: Change detected:\n%s%s",
              buf, n>=7?
              "\nMore changes..":
              "");

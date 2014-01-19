@@ -1,15 +1,17 @@
-OSSEC v2.7.1
+OSPatrol v2.7.2-beta
+
 Copyright (C) 2013 Trend Micro Inc.
 
 
-= Information about OSSEC =
 
-Visit http://www.ossec.net
+= Information about OSPatrol
+
+Visit http://ospatrol.com
 
 
 = Recommended Installation =
 
-OSSEC installation is very simple. It can be done in the
+OSPatrol installation is very simple. It can be done in the
 fast way (using the script install.sh with the default values)
 or in the customized way (by hand or by changing the default values
 in the install.sh script). I REALLY recommend EVERYONE to use the
@@ -21,12 +23,12 @@ Fast way steps:
 1- Run the script ./install.sh. It will guide you through the 
    installation process.
 
-2- The script will create everything in /var/ossec and try to
+2- The script will create everything in /var/ospatrol and try to
    create the initialization script in your system (/etc/rc.local
-   or /etc/rc.d/init.d/ossec). If the init script is not created,
+   or /etc/rc.d/init.d/ospatrol). If the init script is not created,
    make sure to follow the instructions from the install.sh to make
-   OSSEC HIDS start during the boot. To start it by hand, just run
-   /var/ossec/bin/ossec-control start
+   OSPatrol start during the boot. To start it by hand, just run
+   /var/ospatrol/bin/ospatrol-control start
 
 3- If you are running it on multiple clients, make sure to install
    the server first. Use the manage_agents tool
@@ -40,8 +42,8 @@ Fast way steps:
 
 By Hand Installation steps:
 
-1- Create the necessary directories (by default /var/ossec).
-2- Move the necessary files to the ossec directory.
+1- Create the necessary directories (by default /var/ospatrol).
+2- Move the necessary files to the ospatrol directory.
 3- Compile everything.
 4- Move the binaries to the default directory.
 5- Create the necessary users.

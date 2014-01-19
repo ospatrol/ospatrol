@@ -94,7 +94,7 @@ void SyscheckInit()
     os_calloc(1, sizeof(OSDecoderInfo), sdb.syscheck_dec);
     sdb.syscheck_dec->id = getDecoderfromlist(SYSCHECK_MOD);
     sdb.syscheck_dec->name = SYSCHECK_MOD;
-    sdb.syscheck_dec->type = OSSEC_RL;
+    sdb.syscheck_dec->type = OSPATROL_RL;
     sdb.syscheck_dec->fts = 0;
 
     sdb.id1 = getDecoderfromlist(SYSCHECK_MOD);

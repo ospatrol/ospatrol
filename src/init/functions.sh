@@ -1,5 +1,5 @@
 #!/bin/sh
-# Shell script functions for the OSSEC HIDS
+# Shell script functions for the OSPatrol
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 # Last modification: Mar 02, 2006
 

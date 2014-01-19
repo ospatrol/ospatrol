@@ -10,9 +10,6 @@
  * Foundation
  */
 
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net/hids/
- */
 
 
 #include "shared.h"
@@ -149,8 +146,8 @@ void AgentdStart(char *dir, int uid, int gid, char *user, char *group)
 
 
     /* Sending integrity message for agent configs */
-    intcheck_file(OSSECCONF, dir);
-    intcheck_file(OSSEC_DEFINES, dir);
+    intcheck_file(OSPATROLCONF, dir);
+    intcheck_file(OSPATROL_DEFINES, dir);
 
 
     /* Sending first notification */

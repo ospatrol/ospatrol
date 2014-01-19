@@ -1,9 +1,9 @@
-# Makefile for OSSEC agent
+# Makefile for OSPatrol
 # Daniel B. Cid <daniel.cid@gmail.com>||<daniel@underlinux.com.br>
-# http://www.ossec.net/hids/
+# http://ospatrol.com
 
 PT=../
-NAME=ossec-agentd
+NAME=ospatrol-agentd
 
 include ../Config.Make
 

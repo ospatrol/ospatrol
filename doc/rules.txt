@@ -1,4 +1,4 @@
-OSSEC HIDS v0.9
+OSPatrol v0.9
 Copyright (C) 2009 Trend Micro Inc.
 
 
@@ -35,7 +35,7 @@ them or after them.
      some security relevance.
 08 - First time seen - Include first time seen events. First time
      an IDS event is fired or the first time an user logged in.
-     If you just started using OSSEC HIDS these messages will
+     If you just started using OSPatrol these messages will
      probably be frequently. After a while they should go away.
      It also includes security relevant actions (like the starting
      of a sniffer or something like that).
@@ -86,5 +86,5 @@ response reasons and for correlation.
      
 == Rules Config ==
 
-http://www.ossec.net/en/manual.html#rules
+http://ospatrol.com
 

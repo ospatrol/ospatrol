@@ -10,10 +10,6 @@
  * Foundation
  */
 
-/* Part of the OSSEC HIDS
- * Available at http://www.ossec.net
- */
-
 
 #ifndef __VALIDATE_H
 
@@ -67,9 +63,9 @@ int OS_IsValidIP(char *ip_address, os_ip *final_ip);
 
 /** char *OS_IsValidTime(char *time_str)
  * Validates if a time is in an acceptable format
- * for ossec.
+ * for ospatrol.
  * Returns 0 if doesn't match or a valid string for
- * ossec usage in success.
+ * ospatrol usage in success.
  * ** On success this function may modify the value of date
  * Acceptable formats:
  * hh:mm - hh:mm (24 hour format)
@@ -85,32 +81,32 @@ char *OS_IsValidUniqueTime(char *time_str);
 
 
 
-/** int OS_IsonTime(char *time_str, char *ossec_time)
+/** int OS_IsonTime(char *time_str, char *ospatrol_time)
  * Must be a valid string, called after OS_IsValidTime.
  * Returns 1 on success or 0 on failure.
  */
-int OS_IsonTime(char *time_str, char *ossec_time);
+int OS_IsonTime(char *time_str, char *ospatrol_time);
 
 /* Same as above, but checks if time is the same or has passed a specified one. */
-int OS_IsAfterTime(char *time_str, char *ossec_time);
+int OS_IsAfterTime(char *time_str, char *ospatrol_time);
 
 
 
 /** Day validations **/
 
 
-/** int OS_IsonDay(int week_day, char *ossec_day)
+/** int OS_IsonDay(int week_day, char *ospatrol_day)
  * Checks if the specified week day is in the
  * range.
  */
-int OS_IsonDay(int week_day, char *ossec_day);
+int OS_IsonDay(int week_day, char *ospatrol_day);
 
 
 /** char *OS_IsValidDay(char *day_str)
  * Validates if an day is in an acceptable format
- * for ossec.
+ * for ospatrol.
  * Returns 0 if doesn't match or a valid string for
- * ossec usage in success.
+ * ospatrol usage in success.
  * ** On success this function may modify the value of date
  * Acceptable formats:
  * weekdays, weekends, monday, tuesday, thursday,..

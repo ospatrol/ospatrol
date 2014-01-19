@@ -1,5 +1,5 @@
 #!/bin/sh
-# Custom OSSEC block / Easily modifiable for custom responses (touch a file, insert to db, etc).
+# Custom ospatrol block / Easily modifiable for custom responses (touch a file, insert to db, etc).
 # Expect: srcip
 # Author: Daniel B. Cid
 # Last modified: Feb 16, 2013

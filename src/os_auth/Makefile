@@ -2,7 +2,7 @@
 # Daniel B. Cid <dcid@ossec.net>
 
 PT=../
-NAME=ossec-authd
+NAME=ospatrol-authd
 
 include ../Config.Make
 
@@ -15,8 +15,8 @@ auth1:
 		${CC} ${CFLAGS} ${OS_LINK} main-client.c ${LOCAL} ../addagent/validate.c ${OBJS} -o agent-auth
 clean:
 		${CLEAN}
-		rm -f ossec-authd
+		rm -f ospatrol-authd
 		rm -f agent-auth
 build:
 		${BUILD}
-		cp -pr agent-auth ossec-authd ${PT}../bin
+		cp -pr agent-auth ospatrol-authd ${PT}../bin

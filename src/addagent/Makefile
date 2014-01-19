@@ -1,6 +1,6 @@
 # Makefile for addagent /manage_agents
 # Daniel B. Cid <dcid@ossec.net>
-# http://www.ossec.net
+# http://ospatrol.com
 
 NAME=manage_agents
 PT=../

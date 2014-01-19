@@ -1,5 +1,5 @@
 #!/bin/sh
-# Init functions for the OSSEC HIDS
+# Init functions for the OSPatrol
 # v0.3
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
 # Last modification: May 04, 2006 (by Kayvan A. Sylvan <kayvan@sylvan.com>)
@@ -17,10 +17,10 @@ runInit()
         if [ -d /etc/rc.d/init.d ]; then
             echo " - ${systemis} Redhat Linux."
             echo " - ${modifiedinit}"
-            cp -pr ./src/init/ossec-hids-rh.init /etc/rc.d/init.d/ossec
-            chmod 555 /etc/rc.d/init.d/ossec
-            chown root:ossec /etc/rc.d/init.d/ossec
-            /sbin/chkconfig --add ossec > /dev/null 2>&1
+            cp -pr ./src/init/ospatrol-hids-rh.init /etc/rc.d/init.d/ospatrol
+            chmod 555 /etc/rc.d/init.d/ospatrol
+            chown root:ospatrol /etc/rc.d/init.d/ospatrol
+            /sbin/chkconfig --add ospatrol > /dev/null 2>&1
             return 0;
         fi
     fi
@@ -28,10 +28,10 @@ runInit()
     if [ -r "/etc/gentoo-release" ]; then
         echo " - ${systemis} Gentoo Linux."
         echo " - ${modifiedinit}"
-        cp -pr ./src/init/ossec-hids-gentoo.init /etc/init.d/ossec
-        chmod 555 /etc/init.d/ossec
-        chown root:ossec /etc/init.d/ossec
-        rc-update add ossec default
+        cp -pr ./src/init/ospatrol-hids-gentoo.init /etc/init.d/ospatrol
+        chmod 555 /etc/init.d/ospatrol
+        chown root:ospatrol /etc/init.d/ospatrol
+        rc-update add ospatrol default
         return 0;
     fi    
 
@@ -40,11 +40,11 @@ runInit()
         echo " - ${systemis} Suse Linux."
         echo " - ${modifiedinit}"
 
-        cp -pr ./src/init/ossec-hids-suse.init  /etc/init.d/ossec
-        chmod 555 /etc/init.d/ossec
-        chown root:ossec /etc/init.d/ossec
+        cp -pr ./src/init/ospatrol-hids-suse.init  /etc/init.d/ospatrol
+        chmod 555 /etc/init.d/ospatrol
+        chown root:ospatrol /etc/init.d/ospatrol
 
-        /sbin/chkconfig --add ossec > /dev/null 2>&1
+        /sbin/chkconfig --add ospatrol > /dev/null 2>&1
         return 0;
     fi
     
@@ -52,14 +52,14 @@ runInit()
     if [ -r "/etc/slackware-version" ]; then
         echo " - ${systemis} Slackware Linux."
         echo " - ${modifiedinit}"
-        cp -pr ./src/init/ossec-hids.init /etc/rc.d/rc.ossec
-        chmod 555 /etc/rc.d/rc.ossec
-        chown root:ossec /etc/rc.d/rc.ossec
+        cp -pr ./src/init/ospatrol-hids.init /etc/rc.d/rc.ospatrol
+        chmod 555 /etc/rc.d/rc.ospatrol
+        chown root:ospatrol /etc/rc.d/rc.ospatrol
 
-        grep ossec /etc/rc.d/rc.local > /dev/null 2>&1
+        grep ospatrol /etc/rc.d/rc.local > /dev/null 2>&1
         if [ $? != 0 ]; then
-            echo "if [ -x /etc/rc.d/rc.ossec ]; then" >> /etc/rc.d/rc.local
-            echo "      /etc/rc.d/rc.ossec start" >>/etc/rc.d/rc.local
+            echo "if [ -x /etc/rc.d/rc.ospatrol ]; then" >> /etc/rc.d/rc.local
+            echo "      /etc/rc.d/rc.ospatrol start" >>/etc/rc.d/rc.local
             echo "fi" >>/etc/rc.d/rc.local
         fi    
 
@@ -79,29 +79,29 @@ runInit()
     if [ "X${UN}" = "XSunOS" ]; then
         echo " - ${systemis} Solaris (SunOS)."
         echo " - ${modifiedinit}"
-        cp -pr ./src/init/ossec-hids-solaris.init /etc/init.d/ossec
-        chmod 755 /etc/init.d/ossec
-        ln -s /etc/init.d/ossec /etc/rc2.d/S97ossec
-        ln -s /etc/init.d/ossec /etc/rc3.d/S97ossec
+        cp -pr ./src/init/ospatrol-hids-solaris.init /etc/init.d/ospatrol
+        chmod 755 /etc/init.d/ospatrol
+        ln -s /etc/init.d/ospatrol /etc/rc2.d/S97ospatrol
+        ln -s /etc/init.d/ospatrol /etc/rc3.d/S97ospatrol
         return 0;    
     fi    
 
     if [ "X${UN}" = "XAIX" ]; then
         echo " - ${systemis} AIX."
         echo " - ${modifiedinit}"
-        cp -pr ./src/init/ossec-hids-aix.init /etc/init.d/ossec
-        chmod 755 /etc/init.d/ossec
-        ln -s /etc/init.d/ossec /etc/rc2.d/S97ossec
-        ln -s /etc/init.d/ossec /etc/rc3.d/S97ossec
+        cp -pr ./src/init/ospatrol-hids-aix.init /etc/init.d/ospatrol
+        chmod 755 /etc/init.d/ospatrol
+        ln -s /etc/init.d/ospatrol /etc/rc2.d/S97ospatrol
+        ln -s /etc/init.d/ospatrol /etc/rc3.d/S97ospatrol
         return 0;    
     fi    
 
     if [ "X${UN}" = "XOpenBSD" -o "X${UN}" = "XNetBSD" -o "X${UN}" = "XFreeBSD" -o "X${UN}" = "XDragonFly" ]; then
-        # Checking for the presence of ossec-control on rc.local
-        grep ossec-control /etc/rc.local > /dev/null 2>&1
+        # Checking for the presence of ospatrol-control on rc.local
+        grep ospatrol-control /etc/rc.local > /dev/null 2>&1
         if [ $? != 0 ]; then
             echo "echo \"${starting}\"" >> /etc/rc.local
-            echo "${INSTALLDIR}/bin/ossec-control start" >> /etc/rc.local
+            echo "${INSTALLDIR}/bin/ospatrol-control start" >> /etc/rc.local
         fi
         echo " - ${systemis} ${NUNAME}."
         echo " - ${modifiedinit}"
@@ -111,28 +111,28 @@ runInit()
             echo " - ${systemis} Linux."
             echo " - ${modifiedinit}"
 
-            grep ossec-control /etc/rc.d/rc.local > /dev/null 2>&1
+            grep ospatrol-control /etc/rc.d/rc.local > /dev/null 2>&1
             if [ $? != 0 ]; then
                 echo "echo \"${starting}\"" >> /etc/rc.d/rc.local
-                echo "${INSTALLDIR}/bin/ossec-control start" >> /etc/rc.d/rc.local
+                echo "${INSTALLDIR}/bin/ospatrol-control start" >> /etc/rc.d/rc.local
             fi
             return 0;
         elif [ -d "/etc/rc.d/init.d" ]; then
             echo " - ${systemis} Linux (SysV)."
             echo " - ${modifiedinit}"
-            cp -pr ./src/init/ossec-hids.init  /etc/rc.d/init.d/ossec
-            chmod 555 /etc/rc.d/init.d/ossec
-            chown root:ossec /etc/rc.d/init.d/ossec
+            cp -pr ./src/init/ospatrol-hids.init  /etc/rc.d/init.d/ospatrol
+            chmod 555 /etc/rc.d/init.d/ospatrol
+            chown root:ospatrol /etc/rc.d/init.d/ospatrol
             return 0;
-        # Taken from Stephen Bunn ossec howto.    
+        # Taken from Stephen Bunn ospatrol howto.    
         elif [ -d "/etc/init.d" -a -f "/usr/sbin/update-rc.d" ]; then
             echo " - ${systemis} Debian (Ubuntu or derivative)."
             echo " - ${modifiedinit}"
-            cp -pr ./src/init/ossec-hids-debian.init  /etc/init.d/ossec
-            chmod +x /etc/init.d/ossec
-            chmod go-w /etc/init.d/ossec
-            chown root:ossec /etc/init.d/ossec
-            update-rc.d ossec defaults > /dev/null 2>&1
+            cp -pr ./src/init/ospatrol-hids-debian.init  /etc/init.d/ospatrol
+            chmod +x /etc/init.d/ospatrol
+            chmod go-w /etc/init.d/ospatrol
+            chown root:ospatrol /etc/init.d/ospatrol
+            update-rc.d ospatrol defaults > /dev/null 2>&1
             return 0;    
         else
             echo " - ${noboot}"

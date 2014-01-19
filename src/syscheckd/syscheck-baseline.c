@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -24,7 +23,7 @@ void sb_help(char *argv0)
 {
     /* -s  sleep between files.
      * -c config
-     * -D workdir (where ossec is installed to read internal_options.conf)
+     * -D workdir (where ospatrol is installed to read internal_options.conf)
      * -o output_file
      * -i input_file (only used with compare)
      * -v (compare)

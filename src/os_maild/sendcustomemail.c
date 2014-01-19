@@ -27,11 +27,11 @@
 
 /* Default values use to connect */
 #define SMTP_DEFAULT_PORT	25
-#define HELOMSG 		"Helo notify.ossec.net\r\n"
+#define HELOMSG 		"Helo notify.ospatrol.com\r\n"
 #define MAILFROM		"Mail From: <%s>\r\n"
 #define RCPTTO			"Rcpt To: <%s>\r\n"
 #define DATAMSG 		"DATA\r\n"
-#define FROM			"From: OSSEC HIDS <%s>\r\n"
+#define FROM			"From: OSPatrol <%s>\r\n"
 #define TO			    "To: <%s>\r\n"
 #define CC			    "Cc: <%s>\r\n"
 #define SUBJECT			"Subject: %s\r\n"

@@ -24,7 +24,7 @@
 /** help **/
 void helpmsg()
 {
-    printf("\nOSSEC HIDS %s: Verify agent.conf syntax for errors.\n", ARGV0);
+    printf("\nOSPatrol %s: Verify agent.conf syntax for errors.\n", ARGV0);
     printf("Usage:  %s [-f <agent.conf file>]\n\n", ARGV0);
     printf("Available options:\n");
     printf("\t-h          This help message.\n");

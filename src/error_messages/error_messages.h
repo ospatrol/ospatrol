@@ -10,9 +10,6 @@
  * Foundation
  */
 
-/* Part of OSSEC HIDS ( http://www.ossec.net )
- * Error/debug messages
- */
 
 
 #ifndef _ERROR_MESSAGES__H
@@ -279,7 +276,7 @@
 #define DB_MISS_CONFIG  "%s(5205): ERROR: Missing database configuration. "\
                         "It requires host, user, pass and database."
 #define DB_CONFIGERR    "%s(5206): ERROR: Database configuration error."
-#define DB_COMPILED     "%s(5207): ERROR: OSSEC not compiled with support for '%s'."
+#define DB_COMPILED     "%s(5207): ERROR: OSPatrol not compiled with support for '%s'."
 #define DB_MAINERROR    "%s(5208): ERROR: Multiple database errors. Exiting."
 #define DB_CLOSING      "%s(5209): INFO: Closing connection to database."
 #define DB_ATTEMPT      "%s(5210): INFO: Attempting to reconnect to database."
@@ -310,10 +307,10 @@
 #define SERVER_UNAV     "%s: WARN: Server unavailable. Setting lock."
 #define SERVER_UP       "%s: INFO: Server responded. Releasing lock."
 
-/* Ossec alert messages */
-#define OS_AD_STARTED   "ossec: Ossec started."
-#define OS_AG_STARTED   "ossec: Agent started: '%s->%s'."
-#define OS_AG_DISCON    "ossec: Agent disconnected: '%s'."
+/* OSpatrol alert messages */
+#define OS_AD_STARTED   "ospatrol: OSPatrol started."
+#define OS_AG_STARTED   "ospatrol: Agent started: '%s->%s'."
+#define OS_AG_DISCON    "ospatrol: Agent disconnected: '%s'."
 
 
 #endif /* _ERROR_MESSAGES__H */
