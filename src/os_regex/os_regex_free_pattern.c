@@ -1,5 +1,3 @@
-/*   $OSSEC, os_regex_free_pattern.c, v0.1, 2006/01/02, Daniel B. Cid$   */
-
 /* Copyright (C) 2009 Trend Micro Inc.
  * All right reserved.
  *

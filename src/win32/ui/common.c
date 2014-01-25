@@ -9,8 +9,7 @@
  * License (version 2) as published by the FSF - Free Software
  * Foundation.
  *
- * License details at the LICENSE file included with OSSEC or
- * online at: http://www.ossec.net/en/licensing.html
+ * License details at the LICENSE file included with OSPatrol
  */
 
 
@@ -49,7 +48,7 @@ int gen_server_info(HWND hwnd)
     /* Initializing server ip */
     SetDlgItemText(hwnd, UI_SERVER_TEXT, config_inst.server);
 
-    SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"http://www.ossec.net");
+    SendMessage(hStatus, SB_SETTEXT, 0, (LPARAM)"http://ospatrol.com");
     return(0);
 }
 
@@ -245,7 +244,7 @@ void init_config()
 }
 
 
-/* Reads ossec config */
+/* Reads ospatrol config */
 int config_read(HWND hwnd)
 {
     char *tmp_str;
@@ -255,7 +254,7 @@ int config_read(HWND hwnd)
     config_clear();
 
 
-    /* Getting OSSEC status */
+    /* Getting OSPatrol status */
     if(CheckServiceRunning())
     {
         config_inst.status = ST_RUNNING;
@@ -356,7 +355,7 @@ int config_read(HWND hwnd)
 
 
     /* Getting server ip */
-    if(!get_ossec_server())
+    if(!get_ospatrol_server())
     {
         if(strcmp(config_inst.status, ST_MISSING_IMPORT) == 0)
         {
@@ -372,8 +371,8 @@ int config_read(HWND hwnd)
 }
 
 
-/* Get OSSEC Server IP */
-int get_ossec_server()
+/* Get OSPatrol Server IP */
+int get_ospatrol_server()
 {
     OS_XML xml;
 
@@ -381,8 +380,8 @@ int get_ossec_server()
 
 
     /* Definitions */
-    char *(xml_serverip[])={"ossec_config","client","server-ip", NULL};
-    char *(xml_serverhost[])={"ossec_config","client","server-hostname", NULL};
+    char *(xml_serverip[])={"ospatrol_config","client","server-ip", NULL};
+    char *(xml_serverhost[])={"ospatrol_config","client","server-hostname", NULL};
 
 
     /* Reading XML */
@@ -450,12 +449,12 @@ int get_ossec_server()
 }
 
 
-/* Set OSSEC Server IP */
-int set_ossec_server(char *ip, HWND hwnd)
+/* Set OSPatrol Server IP */
+int set_ospatrol_server(char *ip, HWND hwnd)
 {
     char **xml_pt = NULL;
-    char *(xml_serverip[])={"ossec_config","client","server-ip", NULL};
-    char *(xml_serverhost[])={"ossec_config","client","server-hostname", NULL};
+    char *(xml_serverip[])={"ospatrol_config","client","server-ip", NULL};
+    char *(xml_serverhost[])={"ospatrol_config","client","server-hostname", NULL};
 
 
     /* Verifying IP Address */
@@ -468,7 +467,7 @@ int set_ossec_server(char *ip, HWND hwnd)
         {
             MessageBox(hwnd, "Invalid Server IP Address.\r\n"
                              "It must be the valid Ipv4 address of the "
-                             "OSSEC server or its resolvable hostname.",
+                             "OSPatrol server or its resolvable hostname.",
                              "Invalid Server IP Address.",MB_OK);
             return(0);
         }
@@ -487,7 +486,7 @@ int set_ossec_server(char *ip, HWND hwnd)
     if(OS_WriteXML(CONFIG, NEWCONFIG, xml_pt,
                    NULL, NULL, ip, 0) != 0)
     {
-        MessageBox(hwnd, "Unable to set OSSEC Server IP Address.\r\n"
+        MessageBox(hwnd, "Unable to set OSPatrol Server IP Address.\r\n"
                    "(Internal error on the XML Write).",
                    "Unable to set Server IP Address.",MB_OK);
         return(0);

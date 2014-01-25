@@ -1,4 +1,4 @@
-OSPatrol v2.7.2-Beta
+OSPatrol v2.7.2-b2
 
 [![Build Status](https://travis-ci.org/ospatrol/ospatrol.png?branch=master)](https://travis-ci.org/ospatrol/ospatrol)
 

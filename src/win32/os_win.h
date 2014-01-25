@@ -15,13 +15,13 @@
 
 
 /** int InstallService(char *path)
- * Install the OSSEC HIDS agent service.
+ * Install the OSPatrol agent service.
  */
 int InstallService(char *path);
 
 
 /** int UninstallService()
- * Uninstall the OSSEC HIDS agent service.
+ * Uninstall the OSPatrol agent service.
  */
 int UninstallService();
 
@@ -33,11 +33,11 @@ int UninstallService();
 int CheckServiceRunning();
 
 
-/* os_start_service: Starts ossec service */
+/* os_start_service: Starts ospatrol service */
 int os_start_service();
 
 
-/* os_stop_service: Stops ossec service */
+/* os_stop_service: Stops ospatrol service */
 int os_stop_service();
 
 

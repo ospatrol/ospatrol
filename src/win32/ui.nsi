@@ -2,8 +2,8 @@
 ; my template correctly.
 
 !include "MUI.nsh"
-!define VERSION "2.7.1"
-!define NAME "OSSEC HIDS"
+!define VERSION "2.7.2"
+!define NAME "OSPatrol"
 !define /date CDATE "%b %d %Y at %H:%M:%S"
 
 
@@ -12,7 +12,7 @@ BrandingText "Copyright (C) 2013 Trend Micro Inc."
 OutFile "win32ui.exe"
 
 
-InstallDir $PROGRAMFILES\ossec-agent
+InstallDir $PROGRAMFILES\ospatrol-agent
 
 
   !define MUI_ICON favicon.ico
@@ -30,7 +30,7 @@ FunctionEnd
 
 
 
-Section "OSSEC UI - Should not be called." MainSec
+Section "OSPatrol UI - Should not be called." MainSec
 ;Required section.
 SectionIn RO
 SectionEnd

@@ -4,7 +4,7 @@
    version="1.5"
    type="win32"
    name="os_win32ui.exe"/> 
- <description>OSSEC win32 Agent UI</description> 
+ <description>OSPatrol win32 Agent UI</description> 
  <trustInfo xmlns="urn:schemas-microsoft-com:asm.v3">
    <security>
      <requestedPrivileges>

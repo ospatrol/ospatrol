@@ -1,14 +1,14 @@
-** OSSEC Windows Agent v2.7.1 **
+** OSPatrol Windows Agent v2.7.2-beta **
 ** Copyright (C) 2013 Trend Micro Inc. **
 
 
-Thanks for installing 'OSSEC Windows Agent version 2.7'. Before you continue,
-make sure that you have an instance of the OSSEC server running and configured
+Thanks for installing 'OSPatrol  Windows Agent version 2.7'. Before you continue,
+make sure that you have an instance of the OSPatrol server running and configured
 to accept this system as an agent.
 
-For more information on how to install the server version of OSSEC, look at:
-http://www.ossec.net/doc/manual/installation/index.html
-http://www.ossec.net/wiki/index.php/InstallGuides
+For more information on how to install the server version of OSPatrol, look at:
+http://ospatrol.com/go/docs
+http://ospatrol.com/go/install 
 
 
 
@@ -24,11 +24,11 @@ http://www.ossec.net/wiki/index.php/InstallGuides
 
 1- How to obtain more information
 
-You can obtain more information about OSSEC on the following links:
-http://www.ossec.net/doc/manual/index.html
-http://www.ossec.net/doc/faq/index.html (FAQ)
-http://www.ossec.net (OSSEC site)
-http://www.ossec.net/dcid/ (OSSEC blog)
+You can obtain more information about OSPatrol on the following links:
+http://ospatrol.com/go/docs
+http://ospatrol.com/go/install 
+http://ospatrol.com/go/faq 
+
 
 
 2- What this agent does
@@ -47,11 +47,11 @@ The Windows agent does the following tasks:
 3- Questions/Support
 
 Visit the following link for information on how to get help or
-support for OSSEC:
+support for OSPatrol:
 
-http://www.ossec.net/main/support/
+http://ospatrol.com/go/support
 
-For commercial support, please send an e-mail to contact@ossec.net
+For commercial support, please send an e-mail to info@ospatrol.com
 
 
 ** EOF ** 

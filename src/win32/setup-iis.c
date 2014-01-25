@@ -22,7 +22,7 @@
 #include "os_regex/os_regex.h"
 
 
-#define OSSECCONF   "ossec.conf"
+#define OSPATROLCONF   "ospatrol.conf"
 #define OS_MAXSTR   1024
 
 
@@ -106,7 +106,7 @@ int config_dir(char *name, char *dir, char *vfile)
         return(0);
     }
 
-    if(dogrep(OSSECCONF, vfile))
+    if(dogrep(OSPATROLCONF, vfile))
     {
         printf("%s: Log file already configured: '%s'.\n",
                 name, vfile);
@@ -117,11 +117,11 @@ int config_dir(char *name, char *dir, char *vfile)
     printf("%s: You may have it configured in a format different\n"
            "               than W3C Extended or you just don't have today's\n"
            "               log available.\n", name);
-    printf("%s: http://www.ossec.net/en/manual.html#iis\n\n", name);
+    printf("%s: http://ospatrol.com/go/win-iis\n\n", name);
 
 
     /* Add iis config config */
-    fp = fopen(OSSECCONF, "a");
+    fp = fopen(OSPATROLCONF, "a");
     if(!fp)
     {
         printf("%s: Unable to edit configuration file.\n", name);
@@ -131,12 +131,12 @@ int config_dir(char *name, char *dir, char *vfile)
     fprintf(fp, "\r\n"
             "\r\n"
             "<!-- IIS log file -->\r\n"
-            "<ossec_config>\r\n"
+            "<ospatrol_config>\r\n"
             "  <localfile>\r\n"
             "    <location>%s</location>\r\n"
             "    <log_format>iis</log_format>\r\n"
             "  </localfile>\r\n"
-            "</ossec_config>\r\n\r\n", vfile);
+            "</ospatrol_config>\r\n\r\n", vfile);
 
     printf("%s: Action completed.\n", name);
 
@@ -161,7 +161,7 @@ int config_iis(char *name, char *file, char *vfile)
 
     total++;
 
-    if(dogrep(OSSECCONF, vfile))
+    if(dogrep(OSPATROLCONF, vfile))
     {
         printf("%s: Log file already configured: '%s'.\n",
                 name, vfile);
@@ -172,7 +172,7 @@ int config_iis(char *name, char *file, char *vfile)
 
 
     /* Add iis config config */
-    fp = fopen(OSSECCONF, "a");
+    fp = fopen(OSPATROLCONF, "a");
     if(!fp)
     {
         printf("%s: Unable to edit configuration file.\n", name);
@@ -182,12 +182,12 @@ int config_iis(char *name, char *file, char *vfile)
     fprintf(fp, "\r\n"
             "\r\n"
             "<!-- IIS log file -->\r\n"
-            "<ossec_config>\r\n"
+            "<ospatrol_config>\r\n"
             "  <localfile>\r\n"
             "    <location>%s</location>\r\n"
             "    <log_format>iis</log_format>\r\n"
             "  </localfile>\r\n"
-            "</ossec_config>\r\n\r\n", vfile);
+            "</ospatrol_config>\r\n\r\n", vfile);
 
     printf("%s: Action completed.\n", name);
     fclose(fp);
@@ -216,10 +216,10 @@ int main(int argc, char **argv)
         }
     }
 
-    /* Checking if ossec was installed already */
-    if(!fileexist(OSSECCONF))
+    /* Checking if ospatrol was installed already */
+    if(!fileexist(OSPATROLCONF))
     {
-        printf("%s: Unable to find ossec config: '%s'", argv[0], OSSECCONF);
+        printf("%s: Unable to find ospatrol config: '%s'", argv[0], OSPATROLCONF);
         exit(0);
     }
 
@@ -231,7 +231,7 @@ int main(int argc, char **argv)
 
     printf("%s: Looking for IIS log files to monitor.\r\n",
                 argv[0]);
-    printf("%s: For more information: http://www.ossec.net/en/win.html\r\n",
+    printf("%s: For more information: http://ospatrol.com/go/iis-win\r\n",
                 argv[0]);
     printf("\r\n");
 

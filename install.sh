@@ -1,7 +1,6 @@
 #!/bin/sh
-# Installation script for the OSSEC
+# Installation script for the OSPatrol
 # Author: Daniel B. Cid <daniel.cid@gmail.com>
-# Last modification: Aug 30, 2012
 
 # Changelog 19/03/2006 - Rafael M. Capovilla <under@underlinux.com.br>
 # New function AddWhite to allow users to add more Ips in the white_list
@@ -99,9 +98,9 @@ Install()
         fi
     fi
 
-    # If update, stop ossec
+    # If update, stop ospatrol
     if [ "X${update_only}" = "Xyes" ]; then
-        UpdateStopOSSEC
+        UpdateStopOSPatrol
     fi
 
     # Making the right installation type
@@ -118,31 +117,31 @@ Install()
     cd ../
 
 
-    # Generate the /etc/ossec-init.conf
+    # Generate the /etc/ospatrol-init.conf
     VERSION_FILE="./src/VERSION"
     VERSION=`cat ${VERSION_FILE}`
-    chmod 700 ${OSSEC_INIT} > /dev/null 2>&1
-    echo "DIRECTORY=\"${INSTALLDIR}\"" > ${OSSEC_INIT}
-    echo "VERSION=\"${VERSION}\"" >> ${OSSEC_INIT}
-    echo "DATE=\"`date`\"" >> ${OSSEC_INIT}
-    echo "TYPE=\"${INSTYPE}\"" >> ${OSSEC_INIT}
-    chmod 600 ${OSSEC_INIT}
-    cp -pr ${OSSEC_INIT} ${INSTALLDIR}${OSSEC_INIT}
-    chmod 640 ${INSTALLDIR}${OSSEC_INIT}
+    chmod 700 ${OSPATROL_INIT} > /dev/null 2>&1
+    echo "DIRECTORY=\"${INSTALLDIR}\"" > ${OSPATROL_INIT}
+    echo "VERSION=\"${VERSION}\"" >> ${OSPATROL_INIT}
+    echo "DATE=\"`date`\"" >> ${OSPATROL_INIT}
+    echo "TYPE=\"${INSTYPE}\"" >> ${OSPATROL_INIT}
+    chmod 600 ${OSPATROL_INIT}
+    cp -pr ${OSPATROL_INIT} ${INSTALLDIR}${OSPATROL_INIT}
+    chmod 640 ${INSTALLDIR}${OSPATROL_INIT}
 
 
     # If update_rules is set, we need to tweak
-    # ossec.conf to read the new signatures.
+    # ospatrol.conf to read the new signatures.
     if [ "X${update_rules}" = "Xyes" ]; then
-        UpdateOSSECRules
+        UpdateOSPatrolRules
     fi
 
-    # If update, start OSSEC
+    # If update, start OSPatrol
     if [ "X${update_only}" = "Xyes" ]; then
-        UpdateStartOSSEC
+        UpdateStartOSPatrol
     fi
 
-    # Calling the init script  to start ossec hids during boot
+    # Calling the init script  to start ospatrol during boot
     if [ "X${update_only}" = "X" ]; then
         runInit
         if [ $? = 1 ]; then
@@ -248,7 +247,7 @@ SetupLogs()
         OPENDIR=`dirname $INSTALLDIR`
         echo "" >> $NEWCONFIG
         echo "  <localfile>" >> $NEWCONFIG
-        echo "    <log_format>ossecalert</log_format>" >> $NEWCONFIG
+        echo "    <log_format>ospatrolalert</log_format>" >> $NEWCONFIG
         echo "    <location>$OPENDIR/logs/alerts/alerts.log</location>" >>$NEWCONFIG
         echo "  </localfile>" >> $NEWCONFIG
         echo "" >> $NEWCONFIG
@@ -394,7 +393,7 @@ ConfigureClient()
         HNAME=${USER_AGENT_SERVER_NAME}
     fi
 
-    echo "<ossec_config>" > $NEWCONFIG
+    echo "<ospatrol_config>" > $NEWCONFIG
     echo "  <client>" >> $NEWCONFIG
     if [ "X${IP}" != "X" ]; then
         echo "    <server-ip>$IP</server-ip>" >> $NEWCONFIG
@@ -438,7 +437,7 @@ ConfigureClient()
     # Set up the log files
     SetupLogs "3.5"
 
-    echo "</ossec_config>" >> $NEWCONFIG
+    echo "</ospatrol_config>" >> $NEWCONFIG
 }
 
 
@@ -488,12 +487,12 @@ ConfigureServer()
 
             ls ${HOST_CMD} > /dev/null 2>&1
             if [ $? = 0 ]; then
-              HOSTTMP=`${HOST_CMD} -W 5 -t mx ossec.net 2>/dev/null`
+              HOSTTMP=`${HOST_CMD} -W 5 -t mx ospatrol.com 2>/dev/null`
               if [ $? = 1 ]; then
                  # Trying without the -W
-                 HOSTTMP=`${HOST_CMD} -t mx ossec.net 2>/dev/null`
+                 HOSTTMP=`${HOST_CMD} -t mx ospatrol.com 2>/dev/null`
               fi
-              echo "x$HOSTTMP" | grep "ossec.net mail is handled" > /dev/null 2>&1
+              echo "x$HOSTTMP" | grep "ospatrol.com mail is handled" > /dev/null 2>&1
               if [ $? = 0 ]; then
                  # Breaking down the user e-mail
                  EMAILHOST=`echo ${EMAIL} | cut -d "@" -f 2`
@@ -537,13 +536,13 @@ ConfigureServer()
 
 
 	# Writting global parameters
-    echo "<ossec_config>" > $NEWCONFIG
+    echo "<ospatrol_config>" > $NEWCONFIG
 	echo "  <global>" >> $NEWCONFIG
 	if [ "$EMAILNOTIFY" = "yes" ]; then
 		echo "    <email_notification>yes</email_notification>" >> $NEWCONFIG
 		echo "    <email_to>$EMAIL</email_to>" >> $NEWCONFIG
 		echo "    <smtp_server>$SMTP</smtp_server>" >> $NEWCONFIG
-		echo "    <email_from>ossecm@${HOST}</email_from>" >> $NEWCONFIG
+		echo "    <email_from>ospatrolm@${HOST}</email_from>" >> $NEWCONFIG
 	else
 		echo "    <email_notification>no</email_notification>" >> $NEWCONFIG
 	fi
@@ -725,7 +724,7 @@ ConfigureServer()
 
     # Setting up the logs
     SetupLogs "3.6"
-    echo "</ossec_config>" >> $NEWCONFIG
+    echo "</ospatrol_config>" >> $NEWCONFIG
 }
 
 
@@ -884,13 +883,13 @@ AddWhite()
 AddPFTable()
 {
     #default pf rules
-    TABLE="ossec_fwtable"
+    TABLE="ospatrol_fwtable"
 
     # Add table to the first line
     echo ""
     echo "   - ${pfmessage}:"
     echo "     ${moreinfo}"
-    echo "     http://www.ossec.net/en/manual.html#active-response-tools"
+    echo "     http://ospatrol.com/go/active-response-tools"
 
     echo ""
     echo ""
@@ -984,7 +983,7 @@ main()
 
 
     # Initial message
-    echo " $NAME $VERSION ${installscript} - http://www.ossec.net"
+    echo " $NAME $VERSION ${installscript} - http://ospatrol.net"
 
     catMsg "0x101-initial"
 
@@ -1163,12 +1162,12 @@ main()
     echo " - ${configurationdone}."
     echo ""
     echo " - ${tostart}:"
-    echo "		$INSTALLDIR/bin/ossec-control start"
+    echo "		$INSTALLDIR/bin/ospatrol-control start"
     echo ""
     echo " - ${tostop}:"
-    echo "		$INSTALLDIR/bin/ossec-control stop"
+    echo "		$INSTALLDIR/bin/ospatrol-control stop"
     echo ""
-    echo " - ${configat} $INSTALLDIR/etc/ossec.conf"
+    echo " - ${configat} $INSTALLDIR/etc/ospatrol.conf"
     echo ""
 
 
@@ -1209,7 +1208,7 @@ main()
         echo "   $INSTALLDIR/bin/manage_agents"
         echo ""
         echo "   ${moreinfo}"
-        echo "   http://www.ossec.net/en/manual.html#ma"
+        echo "   http://ospatrol.com/go/manage_agents"
         echo ""
 
     elif [ "X$INSTYPE" = "Xagent" ]; then
@@ -1217,13 +1216,13 @@ main()
         echo "   $INSTALLDIR/bin/manage_agents"
         echo ""
         echo "   ${moreinfo}"
-        echo "   http://www.ossec.net/en/manual.html#ma"
+        echo "   http://ospatrol.com/go/manage_agents"
         echo ""
     fi
 
     if [ "X$notmodified" = "Xyes" ]; then
         catMsg "0x105-noboot"
-        echo "		$INSTALLDIR/bin/ossec-control start"
+        echo "		$INSTALLDIR/bin/ospatrol-control start"
         echo ""
     fi
 }
@@ -1248,7 +1247,7 @@ if [ "x$HYBID" = "xgo" ]; then
     echo "" >> ./etc/preloaded-vars.conf
     echo 'USER_INSTALL_TYPE="agent"' >> ./etc/preloaded-vars.conf
     echo "" >> ./etc/preloaded-vars.conf
-    echo "USER_DIR=\"$INSTALLDIR/ossec-agent\"" >> ./etc/preloaded-vars.conf
+    echo "USER_DIR=\"$INSTALLDIR/ospatrol-agent\"" >> ./etc/preloaded-vars.conf
     echo "" >> ./etc/preloaded-vars.conf
     echo 'USER_ENABLE_ROOTCHECK="n"' >> ./etc/preloaded-vars.conf
     echo "" >> ./etc/preloaded-vars.conf

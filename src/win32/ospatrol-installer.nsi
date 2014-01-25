@@ -7,17 +7,17 @@
 ;General
 
 !define MUI_ICON favicon.ico
-!define MUI_UNICON ossec-uninstall.ico
-!define VERSION "2.7.1"
-!define NAME "OSSEC HIDS"
+!define MUI_UNICON ospatrol-uninstall.ico
+!define VERSION "2.7.2-beta"
+!define NAME "OSPatrol"
 !define /date CDATE "%b %d %Y at %H:%M:%S"
 
 Name "${NAME} Windows Agent v${VERSION}"
 BrandingText "Copyright (C) 2003 - 2013 Trend Micro Inc."
-OutFile "ossec-win32-agent.exe"
+OutFile "ospatrol-win32-agent.exe"
 
-InstallDir "$PROGRAMFILES\ossec-agent"
-InstallDirRegKey HKLM Software\OSSEC ""
+InstallDir "$PROGRAMFILES\ospatrol-agent"
+InstallDirRegKey HKLM Software\OSPatrol ""
 
 ;--------------------------------
 ;Interface Settings
@@ -30,7 +30,7 @@ InstallDirRegKey HKLM Software\OSSEC ""
   !define MUI_WELCOMEPAGE_TEXT "This wizard will guide you through the install of ${Name}.\r\n\r\nClick next to continue."
   !define MUI_FINISHPAGE_TITLE_3LINES
   !define MUI_FINISHPAGE_RUN "$INSTDIR\win32ui.exe"
-  !define  MUI_FINISHPAGE_RUN_TEXT "Run OSSEC Agent Manager"
+  !define  MUI_FINISHPAGE_RUN_TEXT "Run OSPatrol Agent Manager"
 
   ; Page for choosing components.
   !define MUI_COMPONENTSPAGE_TEXT_TOP "Select the options you want to be executed. Click next to continue."
@@ -57,22 +57,22 @@ InstallDirRegKey HKLM Software\OSSEC ""
   !insertmacro MUI_LANGUAGE "English"
 
 ;--------------------------------
-; Function to stop OSSEC service if running
+; Function to stop OSPatrol service if running
 
 Function .onInit
-    IfFileExists $INSTDIR\ossec.conf 0 +3
+    IfFileExists $INSTDIR\ospatrol.conf 0 +3
     MessageBox MB_OKCANCEL "${NAME} is already installed. It will be stopped before continuing." /SD IDOK IDOK NoAbort
     Abort
     NoAbort:
 
-   ;; Stopping ossec service.
-   nsExec::ExecToStack '"net" "stop" "OssecSvc"'
+   ;; Stopping ospatrol service.
+   nsExec::ExecToStack '"net" "stop" "OSPatrolSvc"'
 FunctionEnd
 
 ;--------------------------------
 ;Main install section
 
-Section "OSSEC Agent (required)" MainSec
+Section "OSPatrol Agent (required)" MainSec
 
 SectionIn RO
 SetOutPath $INSTDIR
@@ -80,11 +80,11 @@ SetOutPath $INSTDIR
 ClearErrors
 
 File \
-ossec-agent.exe \
-default-ossec.conf \
+ospatrol-agent.exe \
+default-ospatrol.conf \
 manage_agents.exe \
 os_win32ui.exe \
-ossec-rootcheck.exe \
+ospatrol-rootcheck.exe \
 internal_options.conf \
 setup-windows.exe \
 setup-syscheck.exe \
@@ -103,17 +103,17 @@ rootcheck\db\win_audit_rcl.txt \
 help.txt \
 vista_sec.csv \
 route-null.cmd \
-restart-ossec.cmd
+restart-ospatrol.cmd
 
-WriteRegStr HKLM SOFTWARE\ossec "Install_Dir" "$INSTDIR"
-WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayName" "${NAME} ${VERSION}"
-WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayVersion" "${VERSION}"
-WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "DisplayIcon" "${MUI_ICON}"
-WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "HelpLink" "http://www.ossec.net/main/support/"
-WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC" "URLInfoAbout" "http://www.ossec.net"
-WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\ossec" "UninstallString" '"$INSTDIR\uninstall.exe"'
-WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\ossec" "NoModify" 1
-WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\ossec" "NoRepair" 1
+WriteRegStr HKLM SOFTWARE\ospatrol "Install_Dir" "$INSTDIR"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "DisplayName" "${NAME} ${VERSION}"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "DisplayVersion" "${VERSION}"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "DisplayIcon" "${MUI_ICON}"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "HelpLink" "http://ospatrol.com/go/help-win"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "URLInfoAbout" "http://ospatrol.com"
+WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "UninstallString" '"$INSTDIR\uninstall.exe"'
+WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "NoModify" 1
+WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol" "NoRepair" 1
 WriteUninstaller "uninstall.exe"
 
 ; Writing version and install information
@@ -130,34 +130,34 @@ CreateDirectory "$INSTDIR\shared"
 CreateDirectory "$INSTDIR\active-response"
 CreateDirectory "$INSTDIR\active-response\bin"
 Delete "$INSTDIR\active-response\bin\route-null.cmd"
-Delete "$INSTDIR\active-response\bin\restart-ossec.cmd"
+Delete "$INSTDIR\active-response\bin\restart-ospatrol.cmd"
 Rename "$INSTDIR\rootkit_trojans.txt" "$INSTDIR\shared\rootkit_trojans.txt"
 Rename "$INSTDIR\rootkit_files.txt" "$INSTDIR\shared\rootkit_files.txt"
 Rename "$INSTDIR\win_malware_rcl.txt" "$INSTDIR\shared\win_malware_rcl.txt"
 Rename "$INSTDIR\win_audit_rcl.txt" "$INSTDIR\shared\win_audit_rcl.txt"
 Rename "$INSTDIR\win_applications_rcl.txt" "$INSTDIR\shared\win_applications_rcl.txt"
 Rename "$INSTDIR\route-null.cmd" "$INSTDIR\active-response\bin\route-null.cmd"
-Rename "$INSTDIR\restart-ossec.cmd" "$INSTDIR\active-response\bin\restart-ossec.cmd"
+Rename "$INSTDIR\restart-ospatrol.cmd" "$INSTDIR\active-response\bin\restart-ospatrol.cmd"
 Rename "$INSTDIR\os_win32ui.exe" "$INSTDIR\win32ui.exe"
-Delete "$SMPROGRAMS\OSSEC\Edit.lnk"
-Delete "$SMPROGRAMS\OSSEC\Uninstall.lnk"
-Delete "$SMPROGRAMS\OSSEC\Documentation.lnk"
-Delete "$SMPROGRAMS\OSSEC\Edit Config.lnk"
-Delete "$SMPROGRAMS\OSSEC\*.*"
+Delete "$SMPROGRAMS\OSPATROL\Edit.lnk"
+Delete "$SMPROGRAMS\OSPATROL\Uninstall.lnk"
+Delete "$SMPROGRAMS\OSPATROL\Documentation.lnk"
+Delete "$SMPROGRAMS\OSPATROL\Edit Config.lnk"
+Delete "$SMPROGRAMS\OSPATROL\*.*"
 
 ; Remove start menu entry.
-RMDir "$SMPROGRAMS\OSSEC"
+RMDir "$SMPROGRAMS\OSPATROL"
 
 ; Creating start menu directory
-CreateDirectory "$SMPROGRAMS\OSSEC"
-CreateShortCut "$SMPROGRAMS\OSSEC\Manage Agent.lnk" "$INSTDIR\win32ui.exe" "" "$INSTDIR\win32ui.exe" 0
-CreateShortCut "$SMPROGRAMS\OSSEC\Documentation.lnk" "$INSTDIR\doc.html" "" "$INSTDIR\doc.html" 0
-CreateShortCut "$SMPROGRAMS\OSSEC\Edit Config.lnk" "$INSTDIR\ossec.conf" "" "$INSTDIR\ossec.conf" 0
-CreateShortCut "$SMPROGRAMS\OSSEC\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
+CreateDirectory "$SMPROGRAMS\OSPATROL"
+CreateShortCut "$SMPROGRAMS\OSPATROL\Manage Agent.lnk" "$INSTDIR\win32ui.exe" "" "$INSTDIR\win32ui.exe" 0
+CreateShortCut "$SMPROGRAMS\OSPATROL\Documentation.lnk" "$INSTDIR\doc.html" "" "$INSTDIR\doc.html" 0
+CreateShortCut "$SMPROGRAMS\OSPATROL\Edit Config.lnk" "$INSTDIR\ospatrol.conf" "" "$INSTDIR\ospatrol.conf" 0
+CreateShortCut "$SMPROGRAMS\OSPATROL\Uninstall.lnk" "$INSTDIR\uninstall.exe" "" "$INSTDIR\uninstall.exe" 0
 
 ; Install in the services  (perhaps it would be better to use a plug-in here?)
-;nsExec::ExecToStack '"$INSTDIR\ossec-agent.exe" install-service'
-ExecWait '"$INSTDIR\ossec-agent.exe" install-service'
+;nsExec::ExecToStack '"$INSTDIR\ospatrol-agent.exe" install-service'
+ExecWait '"$INSTDIR\ospatrol-agent.exe" install-service'
 ;nsExec::ExecToStack '"$INSTDIR\setup-windows.exe" "$INSTDIR"'
 ExecWait '"$INSTDIR\setup-windows.exe" "$INSTDIR"'
 
@@ -181,20 +181,20 @@ Section "Uninstall"
 
   ;Need a step to check for a running agent manager, otherwise it and the INSTDIR directory will not be removed.
 
-  ; Stop ossec. Perhaps we should look for an exit status here. Also, may be a good place to use a plug-in.
-  nsExec::ExecToStack '"net" "stop" "OssecSvc"'
+  ; Stop ospatrol. Perhaps we should look for an exit status here. Also, may be a good place to use a plug-in.
+  nsExec::ExecToStack '"net" "stop" "OSPatrolSvc"'
 
   ; Uninstall from the services. Again, maybe use a plugin here.
-  nsExec::ExecToStack '"$INSTDIR\ossec-agent.exe" uninstall-service'
+  nsExec::ExecToStack '"$INSTDIR\ospatrol-agent.exe" uninstall-service'
 
   ; Remove registry keys
-  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSSEC"
-  DeleteRegKey HKLM SOFTWARE\OSSEC
+  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\OSPatrol"
+  DeleteRegKey HKLM SOFTWARE\OSPatrol
 
-  ; Remove files and uninstaller. There have been instances where the ossec-agent directory and executable is left. Why?
-  Delete "$INSTDIR\ossec-agent.exe"
+  ; Remove files and uninstaller. There have been instances where the ospatrol-agent directory and executable is left. Why?
+  Delete "$INSTDIR\ospatrol-agent.exe"
   Delete "$INSTDIR\manage_agents.exe"
-  Delete "$INSTDIR\ossec.conf"
+  Delete "$INSTDIR\ospatrol.conf"
   Delete "$INSTDIR\uninstall.exe"
   Delete "$INSTDIR\*"
   Delete "$INSTDIR\rids\*"
@@ -205,11 +205,11 @@ Section "Uninstall"
   Delete "$INSTDIR"
 
   ; Remove shortcuts, if any
-  Delete "$SMPROGRAMS\OSSEC\*.*"
-  Delete "$SMPROGRAMS\OSSEC\*"
+  Delete "$SMPROGRAMS\OSPATROL\*.*"
+  Delete "$SMPROGRAMS\OSPATROL\*"
 
   ; Remove directories used
-  RMDir "$SMPROGRAMS\OSSEC"
+  RMDir "$SMPROGRAMS\OSPATROL"
   RMDir "$INSTDIR\shared"
   RMDir "$INSTDIR\syscheck"
   RMDir "$INSTDIR\rids"
